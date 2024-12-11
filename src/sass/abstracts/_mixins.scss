@@ -1,35 +1,135 @@
-// MEDIA QUERY MANAGER
-/*
-0 - 600px: phone
-600-900px: tablet portrait
-900-1200px: tablet landscape
-[1200-1800]is where our normal styles apply
-1800px+: big desktop
+@mixin desktop-medium {
+	@media (max-width: 1401px) {
+		@content;
+	}
+}
 
-$breakpoint argument choises: 
-- phone
-- tab-port
-- tab-land
-- big-desktop
+@mixin desktop-small {
+	@media (max-width: 1123px) {
+		@content;
+	}
+}
 
-1em = 16px
-*/
-@mixin respond($breakpoint) {
-	@if $breakpoint == smallest-desktop {
-		@media (max-width: 82em) {
-			@content;
-		} // 1312px
+@mixin tablet {
+	@media (max-width: 849px) {
+		@content;
+	}
+}
+
+@mixin phone {
+	@media (max-width: 499px) {
+		@content;
+	}
+}
+
+@mixin page-mask($opacity: 0.4) {
+	position: absolute;
+	z-index: 20;
+	inset: 0;
+	background-color: rgba($color-bg-900, $opacity);
+	opacity: 1;
+	animation: fade-in 0.1s ease-in;
+}
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
 	}
 
-	@if $breakpoint == small-desktop {
-		@media (max-width: 92em) {
-			@content;
-		} // 1472px
+	100% {
+		opacity: 1;
+	}
+}
+
+@mixin popup {
+	position: fixed;
+	z-index: 21;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	min-width: 40rem;
+	border-radius: 1rem;
+	background-color: $color-bg-700;
+}
+
+@mixin ui-shadow {
+	box-shadow: 0 3px 6px rgba(18, 18, 18, 0.15);
+}
+
+@mixin ui-background-blur {
+	backdrop-filter: blur(6px);
+}
+
+// Material UI states
+@mixin hovered($text-color, $background-color) {
+	@media (hover: hover) {
+		&:hover {
+			background-color: mix($text-color, $background-color, 4%);
+		}
 	}
 
-	@if $breakpoint == medium-desktop {
-		@media (max-width: 102em) {
+	@media (hover: none) {
+		&:active {
+			background-color: mix($text-color, $background-color, 4%);
+		}
+	}
+}
+
+@mixin focused($text-color, $background-color) {
+	outline: 1px solid mix($text-color, $background-color, 100%);
+	background-color: mix($text-color, $background-color, 12%);
+}
+
+@mixin disabled-filled($background-color) {
+	color: $color-text-400;
+	background-color: mix($color-bg-050, $background-color, 12%);
+}
+
+@mixin disabled-outlined($text-color, $outline-color) {
+	color: $color-text-400;
+	// color: mix($color-bg-050, $text-color, 38%);
+	outline: 1px solid mix($color-bg-050, $outline-color, 12%);
+
+	& path {
+		fill: mix($color-bg-050, $text-color, 38%);
+	}
+}
+
+@mixin showTooltip {
+	.tooltip {
+		transition: opacity 0.18s 0.15s ease-in, visibility 0.2s 0.2s ease-in;
+	}
+
+	&:hover {
+		.tooltip {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
+
+	&:focus {
+		.tooltip {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
+}
+
+@mixin link {
+	color: $color-primary-200;
+	text-decoration: underline;
+}
+
+@mixin hover-touch {
+	@media (hover: hover) {
+		&:hover {
 			@content;
-		} // 102em = 1632px
+		}
+	}
+
+	@media (hover: none) {
+		&:active {
+			@content;
+		}
 	}
 }

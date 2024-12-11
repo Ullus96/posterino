@@ -1,5 +1,4 @@
 //basic resets, обнуление стилей:
-
 *,
 *::before,
 *::after {
@@ -9,40 +8,55 @@
 }
 
 // установка 1rem = 10px, но напрямую =10px - это перезаписать стандартный размер шрифта браузера, поэтому считаем, что (10px / 16px = 0.625 = 62.5%)
-html {
-	font-size: 62.5%;
-	// font-size: 56.25%;
-	// font-size: 50%;
-	@include respond(medium-desktop) {
-		font-size: 56.25%;
-	}
-	@include respond(small-desktop) {
-		font-size: 50%;
-	}
-	@include respond(smallest-desktop) {
-		font-size: 43.75%;
-	}
-}
+// html {
+// 	font-size: 62.5%;
+// }
 
-body {
-	box-sizing: border-box;
-	font-family: $rale;
-	font-weight: 400;
-	line-height: 1.2;
-	color: $color-text;
-	background-color: $color-bg;
-	min-height: 100%;
-	position: relative;
-	// padding: 4rem 0;
-}
+// body {
+// 	position: relative;
+// 	box-sizing: border-box;
+// 	background-color: $color-bg-800;
+// 	padding: 0;
+// 	min-height: 100dvh;
+// 	position: relative;
+// 	backdrop-filter: blur(10px);
 
-a,
-a:visited {
-	text-decoration: none;
-	color: inherit;
+// 	&::before {
+// 		content: '';
+// 		z-index: -2;
+// 		position: absolute;
+// 		width: 100%;
+// 		height: 100%;
+// 		bottom: -0%;
+// 		background: #580f0fb3 no-repeat fixed;
+// 		background: radial-gradient(at -200% 240%, #580f0fb3, #1e1e1e00 85%)
+// 			no-repeat fixed;
+// 	}
+
+// 	&::after {
+// 		content: '';
+// 		z-index: -1;
+// 		position: absolute;
+// 		inset: 0 0 0 0;
+// 		background: url('@/assets/noise.png') repeat;
+// 		opacity: 0.08;
+// 	}
+
+// 	overflow-x: hidden;
+// }
+
+// a,
+// a:visited {
+// 	text-decoration: none;
+// 	color: inherit;
+// }
+
+.link {
+	@include link;
 }
 
 input,
+textarea,
 .btn {
 	text-decoration: none;
 	font-family: inherit;
@@ -53,21 +67,24 @@ input,
 	border: none;
 }
 
+// input:-webkit-autofill,
+// input:-webkit-autofill:hover,
+// input:-webkit-autofill:focus {
+// 	-webkit-text-fill-color: $color-text-100;
+// 	-webkit-box-shadow: 0 0 0px 40rem $color-bg-500 inset;
+// }
+
 .btn {
 	cursor: pointer;
 }
 
-.close {
-	position: absolute;
-	top: 1rem;
-	right: 1.5rem;
-	font-size: 2rem;
+button {
+	padding: 0;
+	border: none;
+	font: inherit;
+	color: inherit;
+	background-color: transparent;
 	cursor: pointer;
-	z-index: 28;
-}
-
-.toggle {
-	color: $color-edit;
 }
 
 h1,
@@ -82,14 +99,8 @@ p {
 	font-size: inherit;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-family: $mont;
-	font-weight: 700;
+li {
+	list-style: none;
 }
 
 input::-webkit-outer-spin-button,
@@ -98,23 +109,28 @@ input::-webkit-inner-spin-button {
 	margin: 0;
 }
 
-.content {
-	// max-width: 148rem;
-	padding-top: 1rem;
-	z-index: 4;
+svg {
+	display: block;
 }
 
-.no-scroll {
-	overflow: hidden;
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+	scrollbar-width: 15px;
+	scrollbar-color: $color-text-400 transparent;
 }
 
-ul {
-	list-style: none;
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+	width: 15px;
 }
 
-// .icon {
-// 	// change color to $color-text
-// 	// https://codepen.io/sosuke/pen/Pjoqqp
-// 	filter: invert(3%) sepia(10%) saturate(100%) hue-rotate(314deg)
-// 		brightness(101%) contrast(87%);
-// }
+*::-webkit-scrollbar-track {
+	background: $color-bg-800;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: $color-text-400;
+	border-radius: 10px;
+	border: 3px none $color-text-400;
+}

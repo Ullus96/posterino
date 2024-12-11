@@ -1,15 +1,53 @@
-// colors
-$color-white: #eee;
-// $color-text: #171717;
-$color-text: #282828;
-$color-text-dark: #212121;
-$color-black: #000;
-$color-bg: #e4eff8;
-$color-brand-dark: #21173c;
-$color-brand-light: #32ccfe;
-$color-edit: #259049;
+// ======
+// Colors
+// ======
 
-//font-family: 'Montserrat', sans-serif; - titles, w - 300 400 500 700
-//font-family: 'Hind', sans-serif; - text, w - 300 400
-$mont: 'Montserrat', sans-serif;
-$rale: 'Raleway', sans-serif;
+// Primary
+$color-primary-050: rgb(195, 143, 143);
+$color-primary-100: rgb(191, 96, 96);
+$color-primary-200: rgb(175, 61, 61);
+$color-primary-300: rgb(147, 46, 46);
+$color-primary-400: rgb(123, 32, 32);
+$color-primary-500: rgb(106, 24, 24);
+$color-primary-600: rgb(98, 19, 19);
+$color-primary-700: rgb(88, 14, 14);
+$color-primary-800: rgb(65, 5, 5);
+$color-primary-900: rgb(40, 13, 13);
+
+// BG
+$color-bg-050: rgb(56, 56, 56);
+$color-bg-100: rgb(53, 53, 53);
+$color-bg-200: rgb(51, 51, 51);
+$color-bg-300: rgb(47, 47, 47);
+$color-bg-400: rgb(44, 44, 44);
+$color-bg-500: rgb(39, 39, 39);
+$color-bg-600: rgb(37, 37, 37);
+$color-bg-700: rgb(35, 35, 35);
+$color-bg-800: rgb(30, 30, 30);
+$color-bg-900: rgb(18, 18, 18);
+
+// Text
+:root {
+	--color-text-700: rgb(116, 116, 116);
+}
+$color-text-100: rgb(226, 226, 226);
+$color-text-400: rgb(165, 165, 165);
+$color-text-700: rgb(116, 116, 116);
+$color-text-900: rgb(57, 57, 57);
+
+// States
+$color-danger-200: rgb(201, 45, 55);
+$color-danger-100: rgb(255, 45, 55);
+$color-warning-200: rgb(185, 157, 58);
+$color-success-200: rgb(58, 185, 63);
+
+// ====
+
+// Typography variables
+$ui-font-size-xs: 12px;
+$ui-font-size-s: 14px;
+$ui-font-size-base: 16px;
+$ui-font-size-m: $ui-font-size-base;
+$ui-font-size-h1: 48px;
+$ui-font-size-h2: 32px;
+$ui-font-size-h3: 24px;

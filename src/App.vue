@@ -25,6 +25,7 @@
 
 		<v-main>
 			<router-view />
+			<v-btn>Текст</v-btn>
 		</v-main>
 	</v-app>
 </template>
