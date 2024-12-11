@@ -53,7 +53,7 @@
 }
 
 .link {
-  color: rgb(175, 61, 61);
+  color: rgb(112, 219, 255);
   text-decoration: underline;
 }
 
@@ -112,7 +112,7 @@ svg {
 /* Firefox */
 * {
   scrollbar-width: 15px;
-  scrollbar-color: rgb(165, 165, 165) transparent;
+  scrollbar-color: rgb(57, 57, 57) transparent;
 }
 
 /* Chrome, Edge, and Safari */
@@ -121,20 +121,20 @@ svg {
 }
 
 *::-webkit-scrollbar-track {
-  background: rgb(30, 30, 30);
+  background: rgb(187, 167, 134);
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: rgb(165, 165, 165);
+  background-color: rgb(57, 57, 57);
   border-radius: 10px;
-  border: 3px none rgb(165, 165, 165);
+  border: 3px none rgb(57, 57, 57);
 }
 
 body {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   line-height: 140%;
-  color: rgb(226, 226, 226);
+  color: rgb(18, 18, 18);
   font-size: 16px;
 }
 
@@ -215,73 +215,73 @@ h3 {
   border-radius: 8px;
 }
 .btn-primary {
-  background-color: rgb(106, 24, 24);
+  background-color: rgb(52, 203, 254);
   -webkit-backdrop-filter: blur(6px);
           backdrop-filter: blur(6px);
 }
 @media (hover: hover) {
   .btn-primary:hover {
-    background-color: #6f2020;
+    background-color: #33c4f5;
   }
 }
 @media (hover: none) {
   .btn-primary:active {
-    background-color: #6f2020;
+    background-color: #33c4f5;
   }
 }
 .btn-primary:focus {
-  outline: 1px solid #e2e2e2;
-  background-color: #783030;
+  outline: 1px solid #121212;
+  background-color: #30b5e2;
 }
 .btn-primary:disabled {
-  color: rgb(165, 165, 165);
-  background-color: #641c1c;
+  color: rgb(57, 57, 57);
+  background-color: #4cd0fc;
 }
 .btn-secondary {
-  background-color: rgb(30, 30, 30);
-  outline: 1px solid rgb(56, 56, 56);
+  background-color: rgb(187, 167, 134);
+  outline: 1px solid rgb(248, 244, 237);
   -webkit-backdrop-filter: blur(6px);
           backdrop-filter: blur(6px);
 }
 @media (hover: hover) {
   .btn-secondary:hover {
-    background-color: #262626;
+    background-color: #b4a181;
   }
 }
 @media (hover: none) {
   .btn-secondary:active {
-    background-color: #262626;
+    background-color: #b4a181;
   }
 }
 .btn-secondary:focus {
-  outline: 1px solid #e2e2e2;
-  background-color: #363636;
+  outline: 1px solid #121212;
+  background-color: #a79578;
 }
 .btn-secondary:disabled {
-  color: rgb(165, 165, 165);
-  outline: 1px solid #383838;
+  color: rgb(57, 57, 57);
+  outline: 1px solid #f8f4ed;
 }
 .btn-secondary:disabled path {
-  fill: #a1a1a1;
+  fill: #696865;
 }
 @media (hover: hover) {
   .btn-tertiary:hover {
-    background-color: #363636;
+    background-color: #dccfbc;
   }
 }
 @media (hover: none) {
   .btn-tertiary:active {
-    background-color: #363636;
+    background-color: #dccfbc;
   }
 }
 .btn-tertiary:focus {
-  outline: 1px solid #e2e2e2;
-  background-color: #444444;
+  outline: 1px solid #121212;
+  background-color: #cbbfae;
 }
 .btn-tertiary:disabled {
-  color: rgb(165, 165, 165);
-  outline: 1px solid #383838;
+  color: rgb(57, 57, 57);
+  outline: 1px solid #f8f4ed;
 }
 .btn-tertiary:disabled path {
-  fill: #a1a1a1;
+  fill: #696865;
 }/*# sourceMappingURL=main.css.map */

@@ -8,9 +8,9 @@ const posterinoLightTheme: ThemeDefinition = {
 	dark: false,
 	colors: {
 		primary: '#32ccfe',
-		'primary-darken-1': '#3700B3',
+		'primary-darken-1': '#09b3ec',
 		secondary: '#21173c',
-		'secondary-darken-1': '#018786',
+		'secondary-darken-1': '#100c1d',
 		'color-text-700': '#ccc',
 	},
 };
