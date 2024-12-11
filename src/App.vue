@@ -1,30 +1,44 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+	<v-app>
+		<v-navigation-drawer width="auto" location="right" class="bg-secondary">
+			<v-list>
+				<v-list-item>
+					<v-btn variant="text" icon="mdi-wifi" color="primary"> </v-btn>
+				</v-list-item>
+				<v-list-item>
+					<v-btn variant="text" icon="mdi-wifi" color="primary"> </v-btn>
+				</v-list-item>
+				<v-list-item>
+					<v-btn variant="text" icon="mdi-wifi" color="primary"> </v-btn>
+				</v-list-item>
+
+				<v-divider thickness="2" length="80%"></v-divider>
+
+				<v-list-item>
+					<v-btn variant="text" icon="mdi-wifi" color="color-text-700"> </v-btn>
+				</v-list-item>
+				<v-list-item>
+					<v-btn variant="text" icon="mdi-wifi" color="primary"> </v-btn>
+				</v-list-item>
+			</v-list>
+		</v-navigation-drawer>
+
+		<v-main>
+			<router-view />
+		</v-main>
+	</v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script lang="ts">
+import { defineComponent } from 'vue';
 
-nav {
-  padding: 30px;
+export default defineComponent({
+	name: 'App',
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+	data() {
+		return {
+			//
+		};
+	},
+});
+</script>

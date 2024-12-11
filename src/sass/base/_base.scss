@@ -1,0 +1,120 @@
+//basic resets, обнуление стилей:
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+}
+
+// установка 1rem = 10px, но напрямую =10px - это перезаписать стандартный размер шрифта браузера, поэтому считаем, что (10px / 16px = 0.625 = 62.5%)
+html {
+	font-size: 62.5%;
+	// font-size: 56.25%;
+	// font-size: 50%;
+	@include respond(medium-desktop) {
+		font-size: 56.25%;
+	}
+	@include respond(small-desktop) {
+		font-size: 50%;
+	}
+	@include respond(smallest-desktop) {
+		font-size: 43.75%;
+	}
+}
+
+body {
+	box-sizing: border-box;
+	font-family: $rale;
+	font-weight: 400;
+	line-height: 1.2;
+	color: $color-text;
+	background-color: $color-bg;
+	min-height: 100%;
+	position: relative;
+	// padding: 4rem 0;
+}
+
+a,
+a:visited {
+	text-decoration: none;
+	color: inherit;
+}
+
+input,
+.btn {
+	text-decoration: none;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background: transparent;
+	outline: none;
+	border: none;
+}
+
+.btn {
+	cursor: pointer;
+}
+
+.close {
+	position: absolute;
+	top: 1rem;
+	right: 1.5rem;
+	font-size: 2rem;
+	cursor: pointer;
+	z-index: 28;
+}
+
+.toggle {
+	color: $color-edit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin: 0;
+	padding: 0;
+	font-size: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $mont;
+	font-weight: 700;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.content {
+	// max-width: 148rem;
+	padding-top: 1rem;
+	z-index: 4;
+}
+
+.no-scroll {
+	overflow: hidden;
+}
+
+ul {
+	list-style: none;
+}
+
+// .icon {
+// 	// change color to $color-text
+// 	// https://codepen.io/sosuke/pen/Pjoqqp
+// 	filter: invert(3%) sepia(10%) saturate(100%) hue-rotate(314deg)
+// 		brightness(101%) contrast(87%);
+// }

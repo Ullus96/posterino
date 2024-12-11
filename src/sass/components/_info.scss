@@ -1,0 +1,80 @@
+.canvas {
+	// info
+	position: relative;
+	&__info {
+		width: 49.15rem;
+		position: absolute;
+		background: $color-white;
+		padding: 1rem;
+
+		&.bottom {
+			bottom: 2%;
+			left: calc(50% + 1.15rem);
+			transform: translateX(-50%);
+		}
+
+		&.right {
+			bottom: 2%;
+			right: 2%;
+		}
+	}
+
+	&__info-header {
+		font-size: 1.9rem;
+		text-align: center;
+		margin-bottom: 0.5rem;
+	}
+
+	&__info-link {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	&__info-links {
+		display: flex;
+		justify-content: space-around;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		&:not(:last-child) {
+			margin-bottom: 2rem;
+		}
+	}
+
+	&__info {
+		&-tel,
+		&-location {
+			text-align: center;
+		}
+	}
+}
+
+.info {
+	&__controls {
+		position: absolute;
+		top: 0.5rem;
+		left: 1rem;
+		display: flex;
+		gap: 1rem;
+	}
+
+	&__control-btn {
+		cursor: pointer;
+		background-color: rgba($color-white, 0.95);
+		border: 1px solid $color-black;
+		padding: 0.5rem 0.8rem;
+		border-radius: 0.5rem;
+
+		&:nth-child(2) {
+			padding: 0.5rem 0.7rem 0.5rem 0.9rem;
+		}
+
+		&.active {
+			background-color: rgba($color-edit, 0.95);
+		}
+	}
+
+	&__legend {
+		display: flex;
+	}
+}
