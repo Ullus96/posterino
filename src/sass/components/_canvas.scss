@@ -1,0 +1,215 @@
+.canvas {
+	width: 1600px;
+	// height: 105rem;
+	aspect-ratio: 3 / 2;
+	background: url(../assets/bg8.jpg) bottom no-repeat;
+	background-size: cover;
+	margin: 60px auto;
+	padding: 1rem 2rem 1.5rem;
+
+	&__header {
+		font-family: 'Kelly Slab', cursive;
+		font-size: 4.5rem;
+		text-align: center;
+		margin-bottom: 1rem;
+
+		// wings before and after
+		& span {
+			position: relative;
+
+			&::before,
+			&::after {
+				display: block;
+				position: absolute;
+				content: '';
+				background-color: $color-text-100;
+				height: 0.5rem;
+			}
+
+			&::before {
+				bottom: 50%;
+				width: 3rem;
+			}
+
+			&::after {
+				bottom: 35%;
+				width: 2rem;
+			}
+		}
+		& span:nth-child(1) {
+			&::before {
+				left: -4.1rem;
+			}
+			&::after {
+				left: -3.1rem;
+			}
+		}
+		& span:nth-child(2) {
+			&::before,
+			&::after {
+				left: 1.1rem;
+			}
+		}
+	}
+
+	&__content {
+		max-height: 95%;
+		max-width: 70%;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		gap: 3rem 0;
+		position: relative;
+	}
+
+	// icons
+	&__icon {
+		position: absolute;
+		right: 2rem;
+		top: 1rem;
+		display: flex;
+		gap: 1rem;
+
+		&-add {
+			color: $color-success-200;
+			cursor: pointer;
+		}
+
+		&-remove {
+			color: #ff3d00;
+			cursor: pointer;
+		}
+	}
+
+	// single item
+	&__day {
+		width: 45%;
+	}
+
+	&__date {
+		position: relative;
+		text-align: left;
+		padding: 0.5rem 2rem 0.5rem;
+		border-radius: 1rem 1rem 0 0;
+		background-color: #fff;
+		border-bottom: 1px solid black;
+
+		& input {
+			display: inline-block;
+			width: 50%;
+			background: linear-gradient(
+				to top,
+				$color-success-200 0%,
+				$color-success-200 5%,
+				transparent 5%
+			);
+			font-weight: 700;
+		}
+	}
+
+	&__day-of-week {
+		font-weight: 700;
+		display: inline-block;
+		font-size: 1.9rem;
+		text-transform: uppercase;
+
+		&::after {
+			content: '·';
+			opacity: 0.6;
+			padding: 0 1rem;
+		}
+
+		&.input {
+			width: 25%;
+			text-transform: uppercase;
+		}
+	}
+
+	&__numeric-date {
+		font-weight: 700;
+		opacity: 0.8;
+		display: inline-block;
+
+		&.input {
+			width: 60%;
+		}
+	}
+
+	// single line
+	&__item {
+		padding: 0.3rem 1rem;
+		display: grid;
+		grid-template-columns: 5.5rem 1fr 5.5rem;
+		align-items: center;
+		background-color: $color-white;
+		&:not(:last-child) {
+			border-bottom: 1px solid rgba($color-secondary-500, 0.4);
+		}
+
+		& input {
+			width: 50%;
+		}
+	}
+
+	&__time {
+		display: flex;
+		color: #ff3d00;
+	}
+
+	&__hours {
+		&::after {
+			content: ':';
+			padding: 0 2px;
+		}
+	}
+
+	&__name {
+		display: flex;
+	}
+
+	&__title {
+		font-weight: 700;
+		font-size: 2rem;
+		max-width: 80%;
+
+		& input {
+			width: 80%;
+		}
+	}
+
+	&__age,
+	&__p-card {
+		display: block;
+		font-weight: 700;
+		align-self: center;
+		margin-left: 0.8rem;
+	}
+
+	&__age {
+		font-size: 0.6em;
+
+		border: 1px solid $color-text-100;
+		border-radius: 10px;
+		color: $color-text-100;
+		padding: 0px 6px;
+
+		& input {
+			width: 20%;
+		}
+	}
+
+	&__p-card {
+		font-size: 0.75em;
+		background-color: $color-success-200;
+		color: $color-white;
+		padding: 1px 4px;
+	}
+
+	&__price {
+		text-align: center;
+
+		&::after {
+			content: ' \20BD';
+		}
+	}
+}

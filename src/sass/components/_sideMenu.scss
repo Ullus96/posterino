@@ -1,0 +1,26 @@
+#header-toggle {
+	color: $color-white;
+}
+
+#header-toggle.hidden {
+	color: $color-text-100;
+}
+
+#header-editable.toggle {
+	color: $color-success-200;
+	// background: radial-gradient(green, transparent 70%);
+}
+
+.sidemenu {
+	&__items {
+		position: absolute;
+		left: 40px;
+		top: 1.6rem;
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		align-items: center;
+		font-size: 1.9rem;
+		z-index: 30;
+	}
+}
