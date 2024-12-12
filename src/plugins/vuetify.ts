@@ -15,6 +15,7 @@ const posterinoLightTheme: ThemeDefinition = {
 		'color-text-400': 'rgb(57, 57, 57)',
 		'color-text-700': 'rgb(116, 116, 116)',
 		'color-text-900': 'rgb(165, 165, 165)',
+		'color-white': '#f5f5f5',
 		'color-bg-050': 'rgb(248, 244, 237)',
 		'color-bg-100': 'rgb(242, 234, 222)',
 		'color-bg-200': 'rgb(235, 225, 209)',
@@ -35,7 +36,6 @@ const posterinoLightTheme: ThemeDefinition = {
 		'color-primary-700': 'rgb(16, 191, 249)',
 		'color-primary-800': 'rgb(9, 179, 236)',
 		'color-primary-900': 'rgb(10, 163, 214)',
-
 		'color-secondary-050': 'rgb(68, 41, 142)',
 		'color-secondary-100': 'rgb(61, 38, 125)',
 		'color-secondary-200': 'rgb(54, 35, 108)',

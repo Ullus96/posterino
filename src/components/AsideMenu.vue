@@ -1,23 +1,50 @@
 <template>
 	<v-navigation-drawer width="auto" location="right" class="bg-secondary">
-		<v-list>
+		<v-list nav>
 			<v-list-item>
-				<v-btn variant="text" icon="mdi-wifi" color="primary"> </v-btn>
+				<v-btn
+					variant="text"
+					icon="mdi-pencil"
+					color="color-white"
+					aria-label="Переключить режим редактирования"
+				>
+				</v-btn>
+				<v-tooltip activator="parent">Режим редактирования</v-tooltip>
 			</v-list-item>
 			<v-list-item>
-				<v-btn variant="text" icon="mdi-wifi" color="primary"> </v-btn>
+				<v-btn
+					variant="text"
+					icon="mdi-keyboard"
+					color="color-white"
+					aria-label="Переключить видимость меню горячих клавиш"
+				>
+				</v-btn>
+				<v-tooltip activator="parent">Горячие клавиши</v-tooltip>
 			</v-list-item>
 			<v-list-item>
-				<v-btn variant="text" icon="mdi-wifi" color="primary"> </v-btn>
+				<v-btn
+					variant="text"
+					icon="mdi-download"
+					color="color-white"
+					aria-label="Скачать результат"
+				>
+				</v-btn>
+				<v-tooltip activator="parent">Скачать результат</v-tooltip>
 			</v-list-item>
+		</v-list>
 
-			<v-divider thickness="2" length="80%"></v-divider>
+		<v-divider width="80%"></v-divider>
 
+		<v-list nav>
 			<v-list-item>
-				<v-btn variant="text" icon="mdi-wifi" color="color-bg-050"> </v-btn>
-			</v-list-item>
-			<v-list-item>
-				<v-btn variant="text" icon="mdi-wifi" color="primary"> </v-btn>
+				<v-btn
+					variant="text"
+					icon="mdi-cog"
+					color="color-white"
+					aria-label="Открыть настройки приложения"
+				>
+				</v-btn>
+				<v-tooltip activator="parent">Настройки</v-tooltip>
 			</v-list-item>
 		</v-list>
 	</v-navigation-drawer>
@@ -33,4 +60,12 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.v-list--nav {
+	padding-inline: 0;
+}
+
+.v-divider {
+	margin: 0 auto;
+}
+</style>
