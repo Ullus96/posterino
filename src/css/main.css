@@ -18,13 +18,13 @@
 
 .slide-left-fade-enter-from,
 .slide-left-fade-leave-to {
-  transform: translateX(-10rem);
+  transform: translateX(-100px);
   opacity: 0;
 }
 
 .slide-left-fade-enter-to,
 .slide-left-fade-leave-from {
-  transform: translateX(0rem);
+  transform: translateX(0px);
   opacity: 1;
 }
 
@@ -35,13 +35,13 @@
 
 .slide-down-fade-enter-from,
 .slide-down-fade-leave-to {
-  transform: translateY(3.2rem);
+  transform: translateY(32px);
   opacity: 0;
 }
 
 .slide-down-fade-enter-to,
 .slide-down-fade-leave-from {
-  transform: translateY(0rem);
+  transform: translateY(0px);
   opacity: 1;
 }
 
@@ -298,13 +298,13 @@ h3 {
   background: url(../assets/bg8.jpg) bottom no-repeat;
   background-size: cover;
   margin: 60px auto;
-  padding: 1rem 2rem 1.5rem;
+  padding: 10px 20px 15px;
 }
 .canvas__header {
   font-family: "Kelly Slab", cursive;
-  font-size: 4.5rem;
+  font-size: 45px;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 10px;
 }
 .canvas__header span {
   position: relative;
@@ -314,24 +314,24 @@ h3 {
   position: absolute;
   content: "";
   background-color: rgb(18, 18, 18);
-  height: 0.5rem;
+  height: 5px;
 }
 .canvas__header span::before {
   bottom: 50%;
-  width: 3rem;
+  width: 30px;
 }
 .canvas__header span::after {
   bottom: 35%;
-  width: 2rem;
+  width: 20px;
 }
 .canvas__header span:nth-child(1)::before {
-  left: -4.1rem;
+  left: -41px;
 }
 .canvas__header span:nth-child(1)::after {
-  left: -3.1rem;
+  left: -31px;
 }
 .canvas__header span:nth-child(2)::before, .canvas__header span:nth-child(2)::after {
-  left: 1.1rem;
+  left: 11px;
 }
 .canvas__content {
   max-height: 95%;
@@ -339,15 +339,15 @@ h3 {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  gap: 3rem 0;
+  gap: 30px 0;
   position: relative;
 }
 .canvas__icon {
   position: absolute;
-  right: 2rem;
-  top: 1rem;
+  right: 20px;
+  top: 10px;
   display: flex;
-  gap: 1rem;
+  gap: 10px;
 }
 .canvas__icon-add {
   color: rgb(58, 185, 63);
@@ -363,8 +363,8 @@ h3 {
 .canvas__date {
   position: relative;
   text-align: left;
-  padding: 0.5rem 2rem 0.5rem;
-  border-radius: 1rem 1rem 0 0;
+  padding: 5px 20px 5px;
+  border-radius: 10px 10px 0 0;
   background-color: #fff;
   border-bottom: 1px solid black;
 }
@@ -377,13 +377,13 @@ h3 {
 .canvas__day-of-week {
   font-weight: 700;
   display: inline-block;
-  font-size: 1.9rem;
+  font-size: 19px;
   text-transform: uppercase;
 }
 .canvas__day-of-week::after {
   content: "·";
   opacity: 0.6;
-  padding: 0 1rem;
+  padding: 0 10px;
 }
 .canvas__day-of-week.input {
   width: 25%;
@@ -398,9 +398,9 @@ h3 {
   width: 60%;
 }
 .canvas__item {
-  padding: 0.3rem 1rem;
+  padding: 3px 10px;
   display: grid;
-  grid-template-columns: 5.5rem 1fr 5.5rem;
+  grid-template-columns: 55px 1fr 55px;
   align-items: center;
   background-color: rgb(245, 245, 245);
 }
@@ -423,7 +423,7 @@ h3 {
 }
 .canvas__title {
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 20px;
   max-width: 80%;
 }
 .canvas__title input {
@@ -433,7 +433,7 @@ h3 {
   display: block;
   font-weight: 700;
   align-self: center;
-  margin-left: 0.8rem;
+  margin-left: 8px;
 }
 .canvas__age {
   font-size: 0.6em;
@@ -462,14 +462,14 @@ h3 {
   position: relative;
 }
 .canvas__info {
-  width: 49.15rem;
+  width: 491.5px;
   position: absolute;
   background: rgb(245, 245, 245);
-  padding: 1rem;
+  padding: 10px;
 }
 .canvas__info.bottom {
   bottom: 2%;
-  left: calc(50% + 1.15rem);
+  left: calc(50% + 11.5px);
   transform: translateX(-50%);
 }
 .canvas__info.right {
@@ -477,23 +477,23 @@ h3 {
   right: 2%;
 }
 .canvas__info-header {
-  font-size: 1.9rem;
+  font-size: 19px;
   text-align: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 5px;
 }
 .canvas__info-link {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 5px;
 }
 .canvas__info-links {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 5px;
 }
 .canvas__info-links:not(:last-child) {
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
 }
 .canvas__info-tel, .canvas__info-location {
   text-align: center;
@@ -501,20 +501,20 @@ h3 {
 
 .info__controls {
   position: absolute;
-  top: 0.5rem;
-  left: 1rem;
+  top: 5px;
+  left: 10px;
   display: flex;
-  gap: 1rem;
+  gap: 10px;
 }
 .info__control-btn {
   cursor: pointer;
   background-color: rgba(245, 245, 245, 0.95);
   border: 1px solid rgb(18, 18, 18);
-  padding: 0.5rem 0.8rem;
-  border-radius: 0.5rem;
+  padding: 5px 8px;
+  border-radius: 5px;
 }
 .info__control-btn:nth-child(2) {
-  padding: 0.5rem 0.7rem 0.5rem 0.9rem;
+  padding: 5px 7px 5px 9px;
 }
 .info__control-btn.active {
   background-color: rgb(58, 185, 63);
@@ -538,11 +538,11 @@ body.modal {
 }
 .modal__card {
   position: relative;
-  width: 80rem;
+  width: 800px;
   background-color: rgb(245, 245, 245);
-  margin: 12rem auto;
-  padding: 2.5rem 2rem;
-  border-radius: 1rem;
+  margin: 120px auto;
+  padding: 25px 20px;
+  border-radius: 10px;
 }
 .modal__loading {
   display: flex;
@@ -556,7 +556,7 @@ body.modal {
 }
 .modal__image-link {
   text-align: center;
-  font-size: 3.6rem;
+  font-size: 36px;
 }
 
 .lds-ellipsis {
@@ -564,7 +564,7 @@ body.modal {
   position: relative;
   width: 80px;
   height: 80px;
-  margin: -2rem 0;
+  margin: -20px 0;
 }
 
 .lds-ellipsis div {
@@ -625,20 +625,20 @@ body.modal {
   position: absolute;
   background-color: rgb(245, 245, 245);
   border: 1px solid rgb(18, 18, 18);
-  width: 30rem;
-  top: 6rem;
-  right: 8rem;
+  width: 300px;
+  top: 60px;
+  right: 80px;
   z-index: 31;
-  padding: 1.5rem 1.5rem;
+  padding: 15px 15px;
   box-shadow: 0 6px 8px rgba(18, 18, 18, 0.4);
-  border-radius: 1rem;
+  border-radius: 10px;
 }
 .opt__header {
   text-align: center;
 }
 .opt__desc {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 15px;
 }
 .opt__inputs {
   display: flex;
@@ -646,8 +646,8 @@ body.modal {
 }
 .opt__inputs:not(:last-child) {
   border-bottom: 1px solid rgba(18, 18, 18, 0.4);
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.5rem;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 .opt__input {
   width: 15%;
@@ -665,9 +665,9 @@ body.modal {
 .poster__area {
   position: absolute;
   left: 70%;
-  right: 2rem;
-  top: 7.3rem;
-  bottom: 1.5rem;
+  right: 20px;
+  top: 73px;
+  bottom: 15px;
   outline: 2px dashed rgb(58, 185, 63);
 }
 .poster__restriction {
@@ -681,29 +681,29 @@ body.modal {
 }
 .poster__add-btn {
   position: absolute;
-  right: 2rem;
-  top: 2rem;
+  right: 20px;
+  top: 20px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 5px;
   cursor: pointer;
   background-color: rgb(245, 245, 245);
   border: 1px solid rgba(18, 18, 18, 0.6);
-  padding: 0.5rem 0.8rem;
-  border-radius: 0.5rem;
-  font-size: 1.4rem;
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-size: 14px;
 }
 .poster__add-btn > i:nth-child(1) {
-  font-size: 2.2rem;
+  font-size: 2.2px;
 }
 .poster__controls {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
-  right: 1rem;
+  top: 10px;
+  left: 10px;
+  right: 10px;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 5px;
 }
 .poster__control {
   background-color: rgb(245, 245, 245);
@@ -737,11 +737,11 @@ body.modal {
 .sidemenu__items {
   position: absolute;
   left: 40px;
-  top: 1.6rem;
+  top: 16px;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 20px;
   align-items: center;
-  font-size: 1.9rem;
+  font-size: 19px;
   z-index: 30;
 }/*# sourceMappingURL=main.css.map */

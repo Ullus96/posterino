@@ -5,12 +5,12 @@
 
 .slide-left-fade-enter-from,
 .slide-left-fade-leave-to {
-	transform: translateX(-10rem);
+	transform: translateX(-100px);
 	opacity: 0;
 }
 .slide-left-fade-enter-to,
 .slide-left-fade-leave-from {
-	transform: translateX(0rem);
+	transform: translateX(0px);
 	opacity: 1;
 }
 
@@ -21,11 +21,11 @@
 
 .slide-down-fade-enter-from,
 .slide-down-fade-leave-to {
-	transform: translateY(3.2rem);
+	transform: translateY(32px);
 	opacity: 0;
 }
 .slide-down-fade-enter-to,
 .slide-down-fade-leave-from {
-	transform: translateY(0rem);
+	transform: translateY(0px);
 	opacity: 1;
 }
