@@ -293,54 +293,31 @@ h3 {
 }
 
 .canvas {
-  width: 1600px;
+  width: 1236px;
   aspect-ratio: 3/2;
-  background: url(../assets/bg8.jpg) bottom no-repeat;
+  background: #fff;
   background-size: cover;
   margin: 60px auto;
-  padding: 10px 20px 15px;
-}
-.canvas__header {
-  font-family: "Kelly Slab", cursive;
-  font-size: 45px;
-  text-align: center;
-  margin-bottom: 10px;
-}
-.canvas__header span {
-  position: relative;
-}
-.canvas__header span::before, .canvas__header span::after {
-  display: block;
-  position: absolute;
-  content: "";
-  background-color: rgb(18, 18, 18);
-  height: 5px;
-}
-.canvas__header span::before {
-  bottom: 50%;
-  width: 30px;
-}
-.canvas__header span::after {
-  bottom: 35%;
-  width: 20px;
-}
-.canvas__header span:nth-child(1)::before {
-  left: -41px;
-}
-.canvas__header span:nth-child(1)::after {
-  left: -31px;
-}
-.canvas__header span:nth-child(2)::before, .canvas__header span:nth-child(2)::after {
-  left: 11px;
-}
-.canvas__content {
-  max-height: 95%;
-  max-width: 70%;
+  padding: 32px 24px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  gap: 30px 0;
-  position: relative;
+  gap: 20px 40px;
+}
+.canvas > * {
+  max-width: calc(33.333% - 26px);
+}
+.canvas__header {
+  font-size: 94px;
+  text-align: left;
+  text-transform: uppercase;
+  font-weight: 900;
+  line-height: 0.9;
+}
+.canvas__empty-col {
+  height: 100%;
+  width: 100%;
+  outline: 1px dashed rgb(10, 163, 214);
 }
 .canvas__icon {
   position: absolute;
@@ -356,9 +333,6 @@ h3 {
 .canvas__icon-remove {
   color: #ff3d00;
   cursor: pointer;
-}
-.canvas__day {
-  width: 45%;
 }
 .canvas__date {
   position: relative;

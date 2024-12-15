@@ -4,7 +4,7 @@
 	&__info {
 		width: 491.5px;
 		position: absolute;
-		background: $color-white;
+		background: $color-contrast;
 		padding: 10px;
 
 		&.bottom {
@@ -60,7 +60,7 @@
 
 	&__control-btn {
 		cursor: pointer;
-		background-color: rgba($color-white, 0.95);
+		background-color: rgba($color-contrast, 0.95);
 		border: 1px solid $color-text-100;
 		padding: 05px 08px;
 		border-radius: 05px;

@@ -15,7 +15,7 @@ const posterinoLightTheme: ThemeDefinition = {
 		'color-text-400': 'rgb(57, 57, 57)',
 		'color-text-700': 'rgb(116, 116, 116)',
 		'color-text-900': 'rgb(165, 165, 165)',
-		'color-white': '#f5f5f5',
+		'color-contrast': 'rgb(245, 245, 245)',
 		'color-bg-050': 'rgb(248, 244, 237)',
 		'color-bg-100': 'rgb(242, 234, 222)',
 		'color-bg-200': 'rgb(235, 225, 209)',

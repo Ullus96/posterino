@@ -5,7 +5,7 @@
 				<v-btn
 					variant="text"
 					icon="mdi-pencil"
-					color="color-white"
+					color="color-contrast"
 					aria-label="Переключить режим редактирования"
 				>
 				</v-btn>
@@ -15,7 +15,7 @@
 				<v-btn
 					variant="text"
 					icon="mdi-keyboard"
-					color="color-white"
+					color="color-contrast"
 					aria-label="Переключить видимость меню горячих клавиш"
 				>
 				</v-btn>
@@ -25,7 +25,7 @@
 				<v-btn
 					variant="text"
 					icon="mdi-download"
-					color="color-white"
+					color="color-contrast"
 					aria-label="Скачать результат"
 				>
 				</v-btn>
@@ -40,7 +40,7 @@
 				<v-btn
 					variant="text"
 					icon="mdi-cog"
-					color="color-white"
+					color="color-contrast"
 					aria-label="Открыть настройки приложения"
 				>
 				</v-btn>
