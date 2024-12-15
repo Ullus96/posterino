@@ -1,28 +1,55 @@
 <template>
 	<!-- single day -->
-	<div class="canvas__day">
-		<div class="canvas__date">
-			<template v-if="!isEditable">
-				<h4 class="canvas__day-of-week">
-					{{ dayAndWeekday.weekday }}
-				</h4>
-				<p class="canvas__numeric-date">
-					{{ dayAndWeekday.day }}
-				</p>
-			</template>
-			<template v-else>
-				<h4 class="canvas__day-of-week input">
-					<input type="text" v-model="dayAndWeekday.weekday" />
-				</h4>
-				<p class="canvas__numeric-date input">
-					<input type="text" v-model="dayAndWeekday.day" />
-				</p>
-				<div class="canvas__icon">
-					<span @click="count++">+</span>
-					<span @click="count == 0 ? (count = 0) : count--">-</span>
-				</div>
-			</template>
+	<div class="canvas__day" :class="{ editable: isEditable }">
+		<div class="canvas__date" v-if="!isEditable">
+			<h2 class="canvas__day-of-week text-color-secondary-200">
+				{{ dayAndWeekday.weekday }}
+			</h2>
+			<p class="canvas__numeric-date text-color-100">
+				{{ dayAndWeekday.day }}
+			</p>
 		</div>
+		<template v-else>
+			<div class="canvas__day-header" :class="{ editable: isEditable }">
+				<input
+					type="text"
+					class="canvas__day-of-week text-color-secondary-200"
+					v-model="dayAndWeekday.weekday"
+				/>
+				<input
+					type="text"
+					class="canvas__numeric-date text-color-100"
+					v-model="dayAndWeekday.day"
+				/>
+				<div class="canvas__icon">
+					<div class="canvas__btn-wrapper">
+						<v-btn
+							icon="mdi-plus"
+							color="color-secondary-400"
+							density="compact"
+							@click="count++"
+						>
+						</v-btn>
+						<v-tooltip location="top" activator="parent"
+							>Добавить строку</v-tooltip
+						>
+					</div>
+					<div class="canvas__btn-wrapper">
+						<v-btn
+							icon="mdi-minus"
+							color="color-secondary-400"
+							density="compact"
+							@click="count == 0 ? (count = 0) : count--"
+						>
+						</v-btn>
+						<v-tooltip location="top" activator="parent"
+							>Удалить строку</v-tooltip
+						>
+					</div>
+				</div>
+			</div>
+		</template>
+		<v-divider></v-divider>
 		<!-- single line -->
 		<the-film v-for="film in count" :key="film"></the-film>
 		<!-- end of single line -->
@@ -39,8 +66,8 @@ export default {
 		const startDate = inject('startDate');
 		let date = startDate.add(1, 'days');
 		let dayAndWeekday = reactive({
-			day: date.format('LL').slice(0, -8),
-			weekday: date.format('llll').substring(0, 2),
+			day: date.format('DD.MM'),
+			weekday: date.format('dddd'),
 		});
 
 		const count = ref(1);

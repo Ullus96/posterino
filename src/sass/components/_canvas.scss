@@ -9,9 +9,17 @@
 	flex-direction: column;
 	flex-wrap: wrap;
 	gap: 20px 40px;
+	color: $color-text-100;
+	line-height: 120%;
 
 	& > * {
 		max-width: calc(33.333% - 26px);
+	}
+
+	&__header-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
 	}
 
 	&__header {
@@ -22,71 +30,72 @@
 		line-height: 0.9;
 	}
 
+	&__date-period {
+		font-size: 36px;
+		line-height: 100%;
+	}
+
 	&__empty-col {
 		height: 100%;
 		width: 100%;
 		outline: 1px dashed $color-primary-900;
 	}
 
-	// icons
-	&__icon {
-		position: absolute;
-		right: 20px;
-		top: 10px;
-		display: flex;
-		gap: 10px;
-
-		&-add {
-			color: $color-success-200;
-			cursor: pointer;
-		}
-
-		&-remove {
-			color: #ff3d00;
-			cursor: pointer;
-		}
-	}
-
 	// single item
 	&__day {
-		// width: 45%;
+		width: 100%;
+
+		&.editable {
+			background: repeating-linear-gradient(
+				-45deg,
+				rgba($color-primary-500, 0.1),
+				rgba($color-primary-500, 0.1) 10px,
+				transparent 10px,
+				transparent 20px
+			);
+		}
 	}
 
 	&__date {
 		position: relative;
-		text-align: left;
-		padding: 5px 20px 5px;
-		border-radius: 10px 10px 0 0;
-		background-color: #fff;
-		border-bottom: 1px solid black;
+		margin-bottom: 2px;
+		display: flex;
+		justify-content: space-between;
+		align-items: end;
+	}
+
+	&__day-header {
+		display: grid;
+		grid-template-columns: 60% 20% 20%;
+		margin-bottom: 2px;
 
 		& input {
-			display: inline-block;
-			width: 50%;
 			background: linear-gradient(
 				to top,
-				$color-success-200 0%,
-				$color-success-200 5%,
-				transparent 5%
+				$color-primary-200 0%,
+				$color-primary-200 2px,
+				transparent 2px
 			);
-			font-weight: 700;
+			line-height: 120%;
 		}
+	}
+
+	// icons
+	&__icon {
+		display: flex;
+		align-items: center;
+		justify-content: end;
+		gap: 4px;
+		flex: 1 1 auto;
 	}
 
 	&__day-of-week {
 		font-weight: 700;
 		display: inline-block;
-		font-size: 19px;
+		font-size: 28px;
 		text-transform: uppercase;
 
-		&::after {
-			content: '·';
-			opacity: 0.6;
-			padding: 0 10px;
-		}
-
 		&.input {
-			width: 25%;
 			text-transform: uppercase;
 		}
 	}
@@ -95,10 +104,6 @@
 		font-weight: 700;
 		opacity: 0.8;
 		display: inline-block;
-
-		&.input {
-			width: 60%;
-		}
 	}
 
 	// single line

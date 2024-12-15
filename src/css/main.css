@@ -303,9 +303,16 @@ h3 {
   flex-direction: column;
   flex-wrap: wrap;
   gap: 20px 40px;
+  color: rgb(18, 18, 18);
+  line-height: 120%;
 }
 .canvas > * {
   max-width: calc(33.333% - 26px);
+}
+.canvas__header-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 .canvas__header {
   font-size: 94px;
@@ -314,62 +321,57 @@ h3 {
   font-weight: 900;
   line-height: 0.9;
 }
+.canvas__date-period {
+  font-size: 36px;
+  line-height: 100%;
+}
 .canvas__empty-col {
   height: 100%;
   width: 100%;
   outline: 1px dashed rgb(10, 163, 214);
 }
-.canvas__icon {
-  position: absolute;
-  right: 20px;
-  top: 10px;
-  display: flex;
-  gap: 10px;
+.canvas__day {
+  width: 100%;
 }
-.canvas__icon-add {
-  color: rgb(58, 185, 63);
-  cursor: pointer;
-}
-.canvas__icon-remove {
-  color: #ff3d00;
-  cursor: pointer;
+.canvas__day.editable {
+  background: repeating-linear-gradient(-45deg, rgba(52, 203, 254, 0.1), rgba(52, 203, 254, 0.1) 10px, transparent 10px, transparent 20px);
 }
 .canvas__date {
   position: relative;
-  text-align: left;
-  padding: 5px 20px 5px;
-  border-radius: 10px 10px 0 0;
-  background-color: #fff;
-  border-bottom: 1px solid black;
+  margin-bottom: 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
 }
-.canvas__date input {
-  display: inline-block;
-  width: 50%;
-  background: linear-gradient(to top, rgb(58, 185, 63) 0%, rgb(58, 185, 63) 5%, transparent 5%);
-  font-weight: 700;
+.canvas__day-header {
+  display: grid;
+  grid-template-columns: 60% 20% 20%;
+  margin-bottom: 2px;
+}
+.canvas__day-header input {
+  background: linear-gradient(to top, rgb(112, 219, 255) 0%, rgb(112, 219, 255) 2px, transparent 2px);
+  line-height: 120%;
+}
+.canvas__icon {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 4px;
+  flex: 1 1 auto;
 }
 .canvas__day-of-week {
   font-weight: 700;
   display: inline-block;
-  font-size: 19px;
+  font-size: 28px;
   text-transform: uppercase;
 }
-.canvas__day-of-week::after {
-  content: "·";
-  opacity: 0.6;
-  padding: 0 10px;
-}
 .canvas__day-of-week.input {
-  width: 25%;
   text-transform: uppercase;
 }
 .canvas__numeric-date {
   font-weight: 700;
   opacity: 0.8;
   display: inline-block;
-}
-.canvas__numeric-date.input {
-  width: 60%;
 }
 .canvas__item {
   padding: 3px 10px;
