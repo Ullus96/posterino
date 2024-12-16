@@ -33,20 +33,8 @@ export default defineComponent({
 	setup() {
 		let imageURL = ref('');
 
-		// amount of cards
-		const days = ref(7);
-		provide('days', days);
-
-		// dates
-		// const currentDate = moment("29-12-2022", "DD-MM-YYYY").locale("ru");
-		// const startDate = currentDate.subtract(1, "days");
 		const currentDate = moment().locale('ru');
 		provide('startDate', currentDate);
-		const dateTest = ref(null);
-
-		function showDateTest() {
-			console.log(dateTest.value);
-		}
 
 		// editable
 		const isEditable = ref('false');
@@ -109,15 +97,12 @@ export default defineComponent({
 		return {
 			saveScreenshot,
 			imageURL,
-			days,
 			isEditable,
 			// isScreenshotModalVisible,
 			isModalVisible,
 			closeModal,
 			hotkeys,
 			showHotkeys,
-			dateTest,
-			showDateTest,
 		};
 	},
 });

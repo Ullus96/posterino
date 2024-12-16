@@ -1,12 +1,13 @@
 import { createStore } from 'vuex';
+import moment from 'moment';
 
 export interface State {
-	test: boolean;
+	currentDate: moment.Moment;
 }
 
 export default createStore<State>({
 	state: {
-		test: false,
+		currentDate: moment().locale('ru'),
 	},
 	mutations: {},
 });

@@ -369,14 +369,14 @@ h3 {
   text-transform: uppercase;
 }
 .canvas__numeric-date {
-  font-weight: 700;
-  opacity: 0.8;
+  font-weight: 400;
+  font-size: 18px;
   display: inline-block;
 }
 .canvas__item {
   padding: 3px 10px;
   display: grid;
-  grid-template-columns: 55px 1fr 55px;
+  grid-template-columns: 6ch 1fr 5ch;
   align-items: center;
   background-color: rgb(245, 245, 245);
 }
