@@ -57,7 +57,7 @@ export default defineComponent({
 		// ]);
 
 		// TODO: подумать над структурой и в Store перенести с типизацией
-		const scheduleData = [{}, {}, {}, {}, {}, {}, {}];
+		const scheduleData = [[{}], [{}], [{}], [{}], [{}], [{}], [{}]];
 
 		const dateTextFormat: Ref<String> = ref('');
 		const nextDay = moment().add(1, 'days').locale('ru');

@@ -139,7 +139,7 @@ svg {
 body {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
-  line-height: 140%;
+  line-height: 120%;
   color: rgb(18, 18, 18);
   font-size: 16px;
 }
@@ -374,61 +374,75 @@ h3 {
   display: inline-block;
 }
 .canvas__item {
-  padding: 3px 10px;
+  padding: 2px 0;
   display: grid;
-  grid-template-columns: 6ch 1fr 5ch;
+  grid-template-columns: 6ch 1fr auto 5ch;
   align-items: center;
-  background-color: rgb(245, 245, 245);
 }
 .canvas__item:not(:last-child) {
-  border-bottom: 1px solid rgba(32, 22, 59, 0.4);
+  border-bottom: 1px solid rgba(18, 18, 18, 0.1);
 }
 .canvas__item input {
-  width: 50%;
+  width: 100%;
+  max-width: 72ch;
+}
+.canvas__item textarea {
+  width: 100%;
+}
+.canvas__item input, .canvas__item textarea {
+  border: 1px dashed rgb(165, 165, 165);
 }
 .canvas__time {
   display: flex;
-  color: #ff3d00;
+  color: rgb(18, 18, 18);
+  font-weight: 300;
 }
 .canvas__hours::after {
   content: ":";
-  padding: 0 2px;
+}
+.canvas__name-wrapper {
+  width: 100%;
+  min-width: 100%;
 }
 .canvas__name {
+  line-height: 1.2;
+  font-size: 18px;
+}
+.canvas__techincal-info {
   display: flex;
+  flex: 1 1 auto;
+  padding: 0 3px;
+  gap: 3px;
 }
-.canvas__title {
-  font-weight: 700;
-  font-size: 20px;
-  max-width: 80%;
-}
-.canvas__title input {
-  width: 80%;
-}
-.canvas__age, .canvas__p-card {
-  display: block;
-  font-weight: 700;
-  align-self: center;
-  margin-left: 8px;
+.canvas__techincal-info input {
+  max-width: 2ch;
 }
 .canvas__age {
-  font-size: 0.6em;
+  font-size: 16px;
   border: 1px solid rgb(18, 18, 18);
-  border-radius: 10px;
   color: rgb(18, 18, 18);
-  padding: 0px 6px;
+  padding-left: 4px;
+  padding-right: 3px;
+  display: flex;
+  align-items: center;
 }
-.canvas__age input {
-  width: 20%;
+.canvas__age span {
+  font-size: 0.6875em;
 }
 .canvas__p-card {
-  font-size: 0.75em;
-  background-color: rgb(58, 185, 63);
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 900;
+  padding: 0 3px;
   color: rgb(245, 245, 245);
-  padding: 1px 4px;
+  background-color: rgb(61, 38, 125);
 }
 .canvas__price {
   text-align: center;
+  font-weight: 300;
+  display: flex;
+  flex-wrap: nowrap;
 }
 .canvas__price::after {
   content: " ₽";
