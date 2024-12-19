@@ -458,6 +458,9 @@ h3 {
 .canvas__item:hover .canvas__actions-wrapper {
   scale: 1;
 }
+.canvas__item:hover .canvas__actions-wrapper button {
+  scale: 1;
+}
 .canvas__actions-wrapper {
   position: absolute;
   left: calc(100% + 2px);
@@ -471,11 +474,24 @@ h3 {
   z-index: 20;
   scale: 0;
   transform-origin: left center;
-  transition: ease-in 0.15s scale;
+  transition: ease-in 0.1s scale;
 }
 .canvas__actions-wrapper button {
   width: 36px !important;
   height: 36px !important;
+  scale: 0;
+  transform-origin: left center;
+  transition: ease-in 0.15s scale;
+  transition-delay: 0s;
+}
+.canvas__actions-wrapper .canvas__item-btn-wrapper:nth-child(1) button {
+  transition-delay: 0.05s;
+}
+.canvas__actions-wrapper .canvas__item-btn-wrapper:nth-child(2) button {
+  transition-delay: 0.1s;
+}
+.canvas__actions-wrapper .canvas__item-btn-wrapper:nth-child(3) button {
+  transition-delay: 0.15s;
 }
 
 .canvas {

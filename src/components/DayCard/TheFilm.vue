@@ -1,7 +1,7 @@
 <template>
 	<template v-if="!isEditable">
 		<div class="canvas__item">
-			<div class="canvas__time" v-if="filmData.hh != ''">
+			<div class="canvas__time" v-if="String(filmData.hh) != ''">
 				<span class="canvas__hours">{{
 					String(filmData.hh).padStart(2, '0')
 				}}</span>
@@ -22,12 +22,12 @@
 
 			<div class="canvas__techincal-info">
 				<AgeRestrictionLabel :age="filmData.age" />
-				<PushkinCardLabel :pCard="filmData.pCard" />
+				<PushkinCardLabel :pCard="Boolean(filmData.pCard)" />
 			</div>
 
 			<v-divider vertical></v-divider>
 
-			<div class="canvas__price" v-if="filmData.price != ''">
+			<div class="canvas__price" v-if="String(filmData.price) != ''">
 				{{ filmData.price }}
 			</div>
 		</div>
@@ -63,11 +63,11 @@
 					placeholder="Фильм"
 					ref="title"
 					v-model="filmData.title"
-					@keydown.alt.1="useHotkey('0')"
-					@keydown.alt.2="useHotkey('1')"
-					@keydown.alt.3="useHotkey('2')"
-					@keydown.alt.4="useHotkey('3')"
-					@keydown.alt.5="useHotkey('4')"
+					@keydown.alt.1="useHotkey(0)"
+					@keydown.alt.2="useHotkey(1)"
+					@keydown.alt.3="useHotkey(2)"
+					@keydown.alt.4="useHotkey(3)"
+					@keydown.alt.5="useHotkey(4)"
 					@input="resizeTextarea"
 				/>
 			</div>
@@ -110,7 +110,33 @@
 					>
 					</v-btn>
 					<v-tooltip location="top" activator="parent"
-						>Перенести строку</v-tooltip
+						>Создать разрыв строки</v-tooltip
+					>
+				</div>
+
+				<div class="canvas__item-btn-wrapper">
+					<v-btn
+						class="elevation-4"
+						icon="mdi-movie-off-outline"
+						color="color-primary-500"
+						density="compact"
+					>
+					</v-btn>
+					<v-tooltip location="top" activator="parent"
+						>Состояние "Нет сеансов"</v-tooltip
+					>
+				</div>
+
+				<div class="canvas__item-btn-wrapper">
+					<v-btn
+						class="elevation-4"
+						icon="mdi-table-row-remove"
+						color="color-danger-200"
+						density="compact"
+					>
+					</v-btn>
+					<v-tooltip location="top" activator="parent"
+						>Удалить строку</v-tooltip
 					>
 				</div>
 			</div>

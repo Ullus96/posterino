@@ -214,6 +214,10 @@
 
 	&__item:hover &__actions-wrapper {
 		scale: 1;
+
+		button {
+			scale: 1;
+		}
 	}
 
 	&__actions-wrapper {
@@ -231,11 +235,22 @@
 
 		scale: 0;
 		transform-origin: left center;
-		transition: ease-in 0.15s scale;
+		transition: ease-in 0.1s scale;
 
 		& button {
 			width: 36px !important;
 			height: 36px !important;
+
+			scale: 0;
+			transform-origin: left center;
+			transition: ease-in 0.15s scale;
+			transition-delay: 0s;
+		}
+
+		@for $i from 1 through 3 {
+			.canvas__item-btn-wrapper:nth-child(#{$i}) button {
+				transition-delay: $i * 0.05s;
+			}
 		}
 	}
 }
