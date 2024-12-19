@@ -2,9 +2,13 @@
 	<template v-if="!isEditable">
 		<div class="canvas__item">
 			<div class="canvas__time" v-if="filmData.hh != ''">
-				<span class="canvas__hours">{{ filmData.hh }}</span>
+				<span class="canvas__hours">{{
+					String(filmData.hh).padStart(2, '0')
+				}}</span>
 				<span>:</span>
-				<span class="canvas__minutes">{{ filmData.mm }}</span>
+				<span class="canvas__minutes">{{
+					String(filmData.mm).padStart(2, '0')
+				}}</span>
 			</div>
 			<div class="canvas__time" v-else></div>
 
