@@ -158,6 +158,12 @@ import {
 import { Hotkeys } from '@/types/hotkeys';
 import AgeRestrictionLabel from '@/components/ui/AgeRestrictionLabel.vue';
 import PushkinCardLabel from '@/components/ui/PushkinCardLabel.vue';
+import {
+	filmPool,
+	getRandomFilm,
+	randomNumInRange,
+	randomTrueOrFalse,
+} from '@/utilities/mockDataGenerators';
 
 export default defineComponent({
 	components: { AgeRestrictionLabel, PushkinCardLabel },
@@ -169,12 +175,6 @@ export default defineComponent({
 		const age: Ref<null | HTMLInputElement> = ref(null);
 		const pCard: Ref<null | HTMLInputElement> = ref(null);
 		const price: Ref<null | HTMLInputElement> = ref(null);
-		const filmPool: string[] = [
-			'Маша и медведь. Парк чудес',
-			'Операция “Преемник”',
-			'Приключения Паддингтона 3',
-			'Звезды в Сибири',
-		];
 
 		const filmData = reactive({
 			hh: randomNumInRange(10, 22),
@@ -184,18 +184,6 @@ export default defineComponent({
 			pCard: randomTrueOrFalse(),
 			price: randomNumInRange(75, 225),
 		});
-
-		function getRandomFilm(filmsArr: string[]) {
-			return filmsArr[Math.floor(Math.random() * filmsArr.length)];
-		}
-
-		function randomNumInRange(min: number, max: number) {
-			return Math.floor(Math.random() * (max - min) + min);
-		}
-
-		function randomTrueOrFalse() {
-			return Math.random() > 0.33 ? 1 : 0;
-		}
 
 		function timeInputSwitch(field: string) {
 			if (field === 'hh' && String(filmData.hh).length === 2 && mm.value) {
