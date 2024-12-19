@@ -57,13 +57,17 @@
 	<!-- end of single day -->
 </template>
 
-<script>
-import { ref, reactive, inject } from 'vue';
+<script lang="ts">
+import { defineComponent, ref, reactive, inject } from 'vue';
 import TheFilm from './TheFilm.vue';
-export default {
+
+export default defineComponent({
+	props: ['iter'],
+	components: { TheFilm },
 	setup() {
 		const isEditable = inject('isEditable');
 		const startDate = inject('startDate');
+		// @ts-expect-error
 		let date = startDate.add(1, 'days');
 		let dayAndWeekday = reactive({
 			day: date.format('DD.MM'),
@@ -91,9 +95,7 @@ export default {
 			count,
 		};
 	},
-	props: ['iter'],
-	components: { TheFilm },
-};
+});
 </script>
 
-<style></style>
+<style scoped></style>
