@@ -50,6 +50,7 @@
 				<textarea
 					class="canvas__name"
 					type="text"
+					rows="1"
 					placeholder="Фильм"
 					ref="title"
 					v-model="filmData.title"
@@ -58,6 +59,7 @@
 					@keydown.alt.3="useHotkey('2')"
 					@keydown.alt.4="useHotkey('3')"
 					@keydown.alt.5="useHotkey('4')"
+					@input="resizeTextarea"
 				/>
 			</div>
 
@@ -91,7 +93,7 @@
 </template>
 
 <script>
-import { ref, inject, reactive } from 'vue';
+import { ref, inject, reactive, watch, nextTick, onMounted } from 'vue';
 export default {
 	setup() {
 		const isEditable = inject('isEditable');
@@ -101,15 +103,25 @@ export default {
 		const age = ref(null);
 		const pCard = ref(null);
 		const price = ref(null);
+		const filmPool = [
+			'Маша и медведь. Парк чудес',
+			'Операция “Преемник”',
+			'Приключения Паддингтона 3',
+			'Звезды в Сибири',
+		];
 
 		const filmData = reactive({
 			hh: '12',
 			mm: '20',
-			title: 'Маша и медведь. Парк чудес',
+			title: getRandomFilm(filmPool),
 			age: '6',
 			pCard: '1',
 			price: '150',
 		});
+
+		function getRandomFilm(filmsArr) {
+			return filmsArr[Math.floor(Math.random() * filmsArr.length)];
+		}
 
 		function timeInputSwitch(field) {
 			if (field === 'hh' && filmData.hh.length === 2) {
@@ -143,6 +155,27 @@ export default {
 			}
 		}
 
+		function resizeTextarea(event) {
+			const textarea = event.target;
+
+			textarea.style.height = 'auto';
+			textarea.style.height = `${textarea.scrollHeight}px`;
+		}
+
+		watch(isEditable, async (newVal) => {
+			if (newVal) {
+				await nextTick();
+				title.value.style.height = 'auto';
+				title.value.style.height = `${title.value.scrollHeight}px`;
+			}
+		});
+
+		onMounted(async () => {
+			await nextTick();
+			title.value.style.height = 'auto';
+			title.value.style.height = `${title.value.scrollHeight}px`;
+		});
+
 		return {
 			isEditable,
 			filmData,
@@ -156,6 +189,7 @@ export default {
 			price,
 			hotkeys,
 			useHotkey,
+			resizeTextarea,
 		};
 	},
 };
