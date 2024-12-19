@@ -2,14 +2,19 @@
 	<template v-if="!isEditable">
 		<div class="canvas__item">
 			<div class="canvas__time" v-if="filmData.hh != ''">
-				<p class="canvas__hours">{{ filmData.hh }}</p>
-				<p class="canvas__minutes">{{ filmData.mm }}</p>
+				<span class="canvas__hours">{{ filmData.hh }}</span>
+				<span>:</span>
+				<span class="canvas__minutes">{{ filmData.mm }}</span>
 			</div>
 			<div class="canvas__time" v-else></div>
 
-			<p class="canvas__name">
-				{{ filmData.title ? filmData.title : ' ' }}
-			</p>
+			<v-divider vertical></v-divider>
+
+			<div class="canvas__name-wrapper">
+				<p class="canvas__name">
+					{{ filmData.title ? filmData.title : ' ' }}
+				</p>
+			</div>
 
 			<div class="canvas__techincal-info">
 				<p class="canvas__age" v-if="filmData.age && filmData.age != 0">
@@ -20,14 +25,16 @@
 				</p>
 			</div>
 
+			<v-divider vertical></v-divider>
+
 			<div class="canvas__price" v-if="filmData.price != ''">
 				{{ filmData.price }}
 			</div>
 		</div>
 	</template>
 	<template v-else>
-		<div class="canvas__item">
-			<div class="canvas__time">
+		<div class="canvas__item editable">
+			<div class="canvas__time editable">
 				<input
 					type="text"
 					class="canvas__hours"
@@ -45,6 +52,8 @@
 					@keyup="timeInputSwitch('mm')"
 				/>
 			</div>
+
+			<v-divider vertical></v-divider>
 
 			<div class="canvas__name-wrapper">
 				<textarea
@@ -79,6 +88,8 @@
 					@keyup="pCardSwitch()"
 				/>
 			</div>
+
+			<v-divider vertical></v-divider>
 
 			<div class="canvas__price">
 				<input

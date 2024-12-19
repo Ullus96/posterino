@@ -110,7 +110,8 @@
 	&__item {
 		padding: 2px 0;
 		display: grid;
-		grid-template-columns: 6ch 1fr 6ch 5ch;
+		grid-template-columns: 5ch auto 1fr auto auto 5ch;
+		gap: 4px;
 		align-items: center;
 
 		&:not(:last-child) {
@@ -119,7 +120,7 @@
 
 		& input {
 			width: 100%;
-			max-width: 72ch;
+			max-width: 100%;
 		}
 
 		& textarea {
@@ -132,19 +133,25 @@
 
 		& input,
 		& textarea {
-			border: 1px dashed $color-text-900;
+			display: block;
+			// outline: 1px dashed $color-text-900;
 		}
+	}
+
+	&__item.editable {
+		grid-template-columns: 5ch auto 1fr 6ch auto 5ch;
 	}
 
 	&__time {
 		display: flex;
 		color: $color-text-100;
 		font-weight: 300;
-	}
 
-	&__hours {
-		&::after {
-			content: ':';
+		&.editable {
+			input {
+				flex: 1 1 auto;
+				text-align: center;
+			}
 		}
 	}
 
@@ -163,10 +170,6 @@
 		flex: 1 1 auto;
 		padding: 0 3px;
 		gap: 3px;
-
-		input {
-			max-width: 2ch;
-		}
 	}
 
 	&__age {
