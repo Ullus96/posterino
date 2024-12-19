@@ -402,6 +402,9 @@ h3 {
 .canvas__item.editable {
   grid-template-columns: 5ch auto 1fr 6ch auto 5ch;
 }
+.canvas__no-films {
+  grid-column: 1/-1;
+}
 .canvas__time {
   display: flex;
   color: rgb(18, 18, 18);

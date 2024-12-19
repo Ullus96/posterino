@@ -51,7 +51,8 @@
 		</template>
 		<v-divider></v-divider>
 		<!-- single line -->
-		<the-film v-for="film in count" :key="film"></the-film>
+		<!-- <the-film v-for="film in count" :key="film"></the-film> -->
+		<no-films></no-films>
 		<!-- end of single line -->
 	</div>
 	<!-- end of single day -->
@@ -60,10 +61,11 @@
 <script lang="ts">
 import { defineComponent, ref, reactive, inject } from 'vue';
 import TheFilm from './TheFilm.vue';
+import NoFilms from './NoFilms.vue';
 
 export default defineComponent({
 	props: ['iter'],
-	components: { TheFilm },
+	components: { TheFilm, NoFilms },
 	setup() {
 		const isEditable = inject('isEditable');
 		const startDate = inject('startDate');

@@ -147,6 +147,10 @@
 		grid-template-columns: 5ch auto 1fr 6ch auto 5ch;
 	}
 
+	&__no-films {
+		grid-column: 1 / -1;
+	}
+
 	&__time {
 		display: flex;
 		color: $color-text-100;
