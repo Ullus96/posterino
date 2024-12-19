@@ -22,7 +22,7 @@
 					v-model="dayAndWeekday.day"
 				/>
 				<div class="canvas__icon">
-					<div class="canvas__btn-wrapper">
+					<div class="canvas__header-btn-wrapper">
 						<v-btn
 							icon="mdi-plus"
 							color="color-secondary-400"
@@ -34,7 +34,7 @@
 							>Добавить строку</v-tooltip
 						>
 					</div>
-					<div class="canvas__btn-wrapper">
+					<div class="canvas__header-btn-wrapper">
 						<v-btn
 							icon="mdi-minus"
 							color="color-secondary-400"

@@ -110,7 +110,7 @@
 	&__item {
 		padding: 2px 0;
 		display: grid;
-		grid-template-columns: 5ch auto 1fr auto auto 5ch;
+		grid-template-columns: 5ch auto 1fr auto auto auto;
 		gap: 4px;
 		align-items: center;
 
@@ -134,7 +134,11 @@
 		& input,
 		& textarea {
 			display: block;
-			// outline: 1px dashed $color-text-900;
+			background: linear-gradient(
+				to top,
+				rgba($color-text-100, 0.15) 2px,
+				transparent 2px
+			);
 		}
 	}
 
@@ -197,9 +201,9 @@
 	}
 
 	&__price {
-		text-align: center;
 		font-weight: 300;
 		display: flex;
+		justify-content: flex-end;
 		flex-wrap: nowrap;
 
 		&::after {

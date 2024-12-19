@@ -376,7 +376,7 @@ h3 {
 .canvas__item {
   padding: 2px 0;
   display: grid;
-  grid-template-columns: 5ch auto 1fr auto auto 5ch;
+  grid-template-columns: 5ch auto 1fr auto auto auto;
   gap: 4px;
   align-items: center;
 }
@@ -396,6 +396,7 @@ h3 {
 }
 .canvas__item input, .canvas__item textarea {
   display: block;
+  background: linear-gradient(to top, rgba(18, 18, 18, 0.15) 2px, transparent 2px);
 }
 .canvas__item.editable {
   grid-template-columns: 5ch auto 1fr 6ch auto 5ch;
@@ -445,9 +446,9 @@ h3 {
   background-color: rgb(61, 38, 125);
 }
 .canvas__price {
-  text-align: center;
   font-weight: 300;
   display: flex;
+  justify-content: flex-end;
   flex-wrap: nowrap;
 }
 .canvas__price::after {
