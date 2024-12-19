@@ -1,11 +1,11 @@
 import { createStore } from 'vuex';
 import moment from 'moment';
-import { ISingleFilm, Films } from '@/types/films';
+import { ISingleFilm, IDaySchedule } from '@/types/films';
 import { Hotkeys } from '@/types/hotkeys';
 
 export interface State {
 	currentDate: moment.Moment;
-	schedule: Array<Films> | null;
+	schedule: Array<IDaySchedule> | null;
 	hotkeys: Hotkeys | null;
 }
 

@@ -8,4 +8,7 @@ export interface ISingleFilm {
 	price: number;
 }
 
-export type Films = Array<ISingleFilm>;
+export interface IDaySchedule {
+	date: moment.Moment;
+	films: Array<ISingleFilm>;
+}
