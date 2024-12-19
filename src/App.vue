@@ -1,5 +1,5 @@
 <template>
-	<!-- <SettingsInit /> -->
+	<SettingsInit />
 	<v-app>
 		<AsideMenu />
 		<v-main>

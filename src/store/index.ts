@@ -7,6 +7,9 @@ export interface State {
 	currentDate: moment.Moment;
 	schedule: Array<IDaySchedule> | null;
 	hotkeys: Hotkeys | null;
+	settings: {
+		defaultPrice: number;
+	};
 }
 
 export default createStore<State>({
@@ -14,6 +17,13 @@ export default createStore<State>({
 		currentDate: moment().locale('ru'),
 		schedule: null,
 		hotkeys: null,
+		settings: {
+			defaultPrice: 150,
+		},
 	},
-	mutations: {},
+	mutations: {
+		setSchedule(state, payload: Array<IDaySchedule>) {
+			state.schedule = payload;
+		},
+	},
 });

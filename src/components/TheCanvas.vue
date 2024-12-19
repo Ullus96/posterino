@@ -10,7 +10,9 @@
 			:iter="item"
 		></the-day>
 
-		<div class="canvas__empty-col"></div>
+		<div class="canvas__empty-col">
+			{{ store.state }}
+		</div>
 
 		<!-- Posters block:
     <div class="poster__add-btn" v-if="isEditable">
@@ -37,6 +39,7 @@ import { defineComponent, reactive, inject, Ref, ref } from 'vue';
 import TheDay from './DayCard/TheDay.vue';
 import CanvasSocials from './CanvasSocials.vue';
 import moment from 'moment';
+import { useStore } from '@/store/useStore';
 // import ThePoster from "./Posters/ThePoster.vue";
 
 export default defineComponent({
@@ -47,6 +50,7 @@ export default defineComponent({
 	},
 	setup() {
 		const isEditable = inject('isEditable');
+		const store = useStore();
 		// let posters = reactive([
 		//   {
 		//     url: "https://upload.wikimedia.org/wikipedia/ru/thumb/2/2a/%D0%95%D0%BB%D0%BA%D0%B89_%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D1%80.jpg/250px-%D0%95%D0%BB%D0%BA%D0%B89_%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D1%80.jpg",
@@ -81,6 +85,7 @@ export default defineComponent({
 
 		return {
 			isEditable,
+			store,
 			scheduleData,
 			dateTextFormat,
 			// posters,
