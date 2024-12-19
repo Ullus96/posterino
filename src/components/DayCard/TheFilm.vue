@@ -78,8 +78,8 @@
 
 			<div class="canvas__techincal-info">
 				<input
-					type="text"
-					placeholder="xx+"
+					type="number"
+					placeholder="лет"
 					ref="age"
 					v-model="filmData.age"
 					@keyup.+="ageSwitch()"
@@ -107,6 +107,7 @@
 			<div class="canvas__actions-wrapper">
 				<div class="canvas__item-btn-wrapper">
 					<v-btn
+						class="elevation-4"
 						icon="mdi-format-page-break"
 						color="color-primary-500"
 						density="compact"
@@ -121,18 +122,31 @@
 	</template>
 </template>
 
-<script>
-import { ref, inject, reactive, watch, nextTick, onMounted } from 'vue';
-export default {
+<script lang="ts">
+import {
+	defineComponent,
+	ref,
+	Ref,
+	inject,
+	reactive,
+	watch,
+	nextTick,
+	onMounted,
+} from 'vue';
+import { Hotkeys } from '@/types/hotkeys';
+import AgeRestrictionLabel from '@/components/ui/AgeRestrictionLabel.vue';
+import PushkinCardLabel from '@/components/ui/PushkinCardLabel.vue';
+
+export default defineComponent({
 	setup() {
 		const isEditable = inject('isEditable');
 
-		const mm = ref(null);
-		const title = ref(null);
-		const age = ref(null);
-		const pCard = ref(null);
-		const price = ref(null);
-		const filmPool = [
+		const mm: Ref<null | HTMLInputElement> = ref(null);
+		const title: Ref<null | HTMLTextAreaElement> = ref(null);
+		const age: Ref<null | HTMLInputElement> = ref(null);
+		const pCard: Ref<null | HTMLInputElement> = ref(null);
+		const price: Ref<null | HTMLInputElement> = ref(null);
+		const filmPool: string[] = [
 			'Маша и медведь. Парк чудес',
 			'Операция “Преемник”',
 			'Приключения Паддингтона 3',
@@ -148,11 +162,11 @@ export default {
 			price: randomNumInRange(75, 225),
 		});
 
-		function getRandomFilm(filmsArr) {
+		function getRandomFilm(filmsArr: string[]) {
 			return filmsArr[Math.floor(Math.random() * filmsArr.length)];
 		}
 
-		function randomNumInRange(min, max) {
+		function randomNumInRange(min: number, max: number) {
 			return Math.floor(Math.random() * (max - min) + min);
 		}
 
@@ -160,57 +174,82 @@ export default {
 			return Math.random() > 0.33 ? 1 : 0;
 		}
 
-		function timeInputSwitch(field) {
-			if (field === 'hh' && filmData.hh.length === 2) {
+		function timeInputSwitch(field: string) {
+			if (field === 'hh' && String(filmData.hh).length === 2 && mm.value) {
 				mm.value.focus();
-			} else if (field === 'mm' && filmData.mm.length === 2) {
+			} else if (
+				field === 'mm' &&
+				String(filmData.mm).length === 2 &&
+				title.value
+			) {
 				title.value.focus();
 			}
 		}
 
 		function ageSwitch() {
-			pCard.value.focus();
+			if (pCard.value) {
+				pCard.value.focus();
+			}
 		}
 
 		function pCardSwitch() {
-			if (filmData.pCard) {
+			if (filmData.pCard && price.value) {
 				price.value.focus();
 				price.value.select();
 			}
 		}
 
 		// hotkeys
-		const hotkeys = inject('hotkeys');
+		const hotkeys: Hotkeys | undefined = inject('hotkeys');
 
-		function useHotkey(i) {
+		function useHotkey(i: number) {
+			if (!hotkeys || !hotkeys[i]) return;
+
 			filmData.title = hotkeys[i].title;
-			filmData.age = hotkeys[i].age;
-			filmData.pCard = hotkeys[i].pCard;
-			if (filmData.title) {
+			// @ts-expect-error
+			filmData.age = hotkeys[i].age || null;
+			// @ts-expect-error
+			filmData.pCard = hotkeys[i].pCard || null;
+			if (filmData.title && price.value) {
 				price.value.focus();
 				price.value.select();
 			}
 		}
 
-		function resizeTextarea(event) {
-			const textarea = event.target;
-
-			textarea.style.height = 'auto';
-			textarea.style.height = `${textarea.scrollHeight}px`;
+		function isHTMLTextAreaElement(
+			el: EventTarget | null
+		): el is HTMLTextAreaElement {
+			return el instanceof HTMLTextAreaElement;
 		}
 
+		function resizeTextarea(event: Event) {
+			const textarea = event.target;
+
+			if (isHTMLTextAreaElement(textarea)) {
+				textarea.style.height = 'auto';
+				textarea.style.height = `${textarea.scrollHeight}px`;
+			}
+		}
+
+		// @ts-expect-error
 		watch(isEditable, async (newVal) => {
 			if (newVal) {
 				await nextTick();
-				title.value.style.height = 'auto';
-				title.value.style.height = `${title.value.scrollHeight}px`;
+
+				if (isHTMLTextAreaElement(title.value)) {
+					title.value.style.height = 'auto';
+					title.value.style.height = `${title.value.scrollHeight}px`;
+				}
 			}
 		});
 
 		onMounted(async () => {
 			await nextTick();
-			title.value.style.height = 'auto';
-			title.value.style.height = `${title.value.scrollHeight}px`;
+
+			if (isHTMLTextAreaElement(title.value)) {
+				title.value.style.height = 'auto';
+				title.value.style.height = `${title.value.scrollHeight}px`;
+			}
 		});
 
 		return {
@@ -229,7 +268,7 @@ export default {
 			resizeTextarea,
 		};
 	},
-};
+});
 </script>
 
-<style></style>
+<style scoped></style>
