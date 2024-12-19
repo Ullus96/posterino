@@ -4,7 +4,11 @@
 			<h1 class="canvas__header"><span>Кино-</span><br /><span>афиша</span></h1>
 			<p class="canvas__date-period">{{ dateTextFormat }}</p>
 		</div>
-		<the-day v-for="item in scheduleData" :key="item" :iter="item"></the-day>
+		<the-day
+			v-for="(item, idx) in scheduleData"
+			:key="`${String(item)}-${idx}`"
+			:iter="item"
+		></the-day>
 
 		<div class="canvas__empty-col"></div>
 
