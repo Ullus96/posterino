@@ -21,12 +21,8 @@
 			</div>
 
 			<div class="canvas__techincal-info">
-				<p class="canvas__age" v-if="filmData.age && filmData.age != 0">
-					{{ filmData.age }}<span>+</span>
-				</p>
-				<p class="canvas__p-card" v-if="filmData.pCard && filmData.pCard != 0">
-					<span>ПК</span>
-				</p>
+				<AgeRestrictionLabel :age="filmData.age" />
+				<PushkinCardLabel :pCard="filmData.pCard" />
 			</div>
 
 			<v-divider vertical></v-divider>
@@ -138,6 +134,7 @@ import AgeRestrictionLabel from '@/components/ui/AgeRestrictionLabel.vue';
 import PushkinCardLabel from '@/components/ui/PushkinCardLabel.vue';
 
 export default defineComponent({
+	components: { AgeRestrictionLabel, PushkinCardLabel },
 	setup() {
 		const isEditable = inject('isEditable');
 
