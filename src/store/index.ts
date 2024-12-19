@@ -4,7 +4,6 @@ import { ISingleFilm, IDaySchedule } from '@/types/films';
 import { Hotkeys } from '@/types/hotkeys';
 
 export interface State {
-	currentDate: moment.Moment;
 	schedule: Array<IDaySchedule> | null;
 	hotkeys: Hotkeys | null;
 	settings: {
@@ -14,7 +13,6 @@ export interface State {
 
 export default createStore<State>({
 	state: {
-		currentDate: moment().locale('ru'),
 		schedule: null,
 		hotkeys: null,
 		settings: {
@@ -24,6 +22,18 @@ export default createStore<State>({
 	mutations: {
 		setSchedule(state, payload: Array<IDaySchedule>) {
 			state.schedule = payload;
+		},
+		setDate(
+			state,
+			payload: {
+				index: number;
+				newDate: moment.Moment;
+			}
+		) {
+			const { index, newDate } = payload;
+			if (state.schedule && index >= 0 && index < state.schedule.length) {
+				state.schedule[index].date = newDate;
+			}
 		},
 	},
 });

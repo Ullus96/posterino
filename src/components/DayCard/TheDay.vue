@@ -19,6 +19,7 @@
 				<input
 					type="text"
 					class="canvas__numeric-date text-color-100"
+					placeholder="дд.мм"
 					v-model="dayAndWeekday.day"
 				/>
 				<div class="canvas__icon">
@@ -59,18 +60,27 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, inject } from 'vue';
+import { defineComponent, ref, reactive, inject, PropType } from 'vue';
 import TheFilm from './TheFilm.vue';
 import NoFilms from './NoFilms.vue';
+import { IDaySchedule } from '@/types/films';
 
 export default defineComponent({
-	props: ['iter'],
+	props: {
+		dayData: {
+			type: Object as PropType<IDaySchedule>,
+			required: true,
+		},
+		dayIndex: {
+			type: Number,
+			required: true,
+		},
+	},
 	components: { TheFilm, NoFilms },
-	setup() {
+	setup(props, context) {
 		const isEditable = inject('isEditable');
-		const startDate = inject('startDate');
-		// @ts-expect-error
-		let date = startDate.add(1, 'days');
+		const { date } = props.dayData;
+
 		let dayAndWeekday = reactive({
 			day: date.format('DD.MM'),
 			weekday: date.format('dddd'),
@@ -78,20 +88,7 @@ export default defineComponent({
 
 		const count = ref(1);
 
-		// const getDay = () => {
-		//   return {
-		//     day: date.format("LL").slice(0, -8),
-		//     weekday: date.format("llll").substring(0, 2),
-		//   };
-		// };
-
-		// function getWeekday(num) {}
-
 		return {
-			startDate,
-			// getDay,
-			// day,
-			// weekday,
 			dayAndWeekday,
 			isEditable,
 			count,

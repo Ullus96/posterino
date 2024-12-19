@@ -2,12 +2,15 @@
 	<div class="canvas elevation-4" id="canvas">
 		<div class="canvas__header-wrapper">
 			<h1 class="canvas__header"><span>Кино-</span><br /><span>афиша</span></h1>
-			<p class="canvas__date-period">{{ dateTextFormat }}</p>
+			<p class="canvas__date-period" v-if="dateTextFormat">
+				{{ dateTextFormat }}
+			</p>
 		</div>
 		<the-day
 			v-for="(item, idx) in scheduleData"
 			:key="`${String(item)}-${idx}`"
-			:iter="item"
+			:dayData="item"
+			:dayIndex="idx"
 		></the-day>
 
 		<div class="canvas__empty-col">
@@ -40,6 +43,7 @@ import TheDay from './DayCard/TheDay.vue';
 import CanvasSocials from './CanvasSocials.vue';
 import moment from 'moment';
 import { useStore } from '@/store/useStore';
+import { IDaySchedule } from '@/types/films';
 // import ThePoster from "./Posters/ThePoster.vue";
 
 export default defineComponent({
@@ -64,23 +68,26 @@ export default defineComponent({
 		//   },
 		// ]);
 
-		// TODO: подумать над структурой и в Store перенести с типизацией
-		const scheduleData = [[{}], [{}], [{}], [{}], [{}], [{}], [{}]];
+		const scheduleData: Array<IDaySchedule> | null = store.state.schedule;
 
 		const dateTextFormat: Ref<String> = ref('');
-		const nextDay = moment().add(1, 'days').locale('ru');
-		const endOfWeekDay = moment().add(7, 'days').locale('ru');
 
-		if (nextDay.format('MM') === endOfWeekDay.format('MM')) {
-			let result = `${nextDay.format('DD')} - ${endOfWeekDay.format(
-				'DD MMMM'
-			)}`;
-			dateTextFormat.value = result;
-		} else {
-			let result = `${nextDay.format('DD MMM')} - ${endOfWeekDay.format(
-				'DD MMM'
-			)}`;
-			dateTextFormat.value = result;
+		if (scheduleData?.length) {
+			const nextDay = scheduleData[0].date.locale('ru');
+			const endOfWeekDay =
+				scheduleData[scheduleData.length - 1].date.locale('ru');
+
+			if (nextDay.format('MM') === endOfWeekDay.format('MM')) {
+				let result = `${nextDay.format('DD')} - ${endOfWeekDay.format(
+					'DD MMMM'
+				)}`;
+				dateTextFormat.value = result;
+			} else {
+				let result = `${nextDay.format('DD MMM')} - ${endOfWeekDay.format(
+					'DD MMM'
+				)}`;
+				dateTextFormat.value = result;
+			}
 		}
 
 		return {

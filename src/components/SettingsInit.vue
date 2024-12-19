@@ -21,7 +21,9 @@ export default defineComponent({
 		const weekSchedule: IDaySchedule[] = Array.from(
 			{ length: 7 },
 			(_, idx): IDaySchedule => ({
-				date: moment().add(idx + 1, 'days'),
+				date: moment()
+					.add(idx + 1, 'days')
+					.locale('ru'),
 				films: [emptyFilm],
 			})
 		);
