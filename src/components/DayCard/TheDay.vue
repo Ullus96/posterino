@@ -51,7 +51,7 @@
 		</template>
 		<v-divider></v-divider>
 		<!-- single line -->
-		<!-- <the-film v-for="film in count" :key="film"></the-film> -->
+		<the-film v-for="film in count" :key="film"></the-film>
 		<no-films></no-films>
 		<!-- end of single line -->
 	</div>
