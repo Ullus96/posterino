@@ -104,7 +104,19 @@
 				/>
 			</div>
 
-			<div class="canvas__actions-wrapper"></div>
+			<div class="canvas__actions-wrapper">
+				<div class="canvas__item-btn-wrapper">
+					<v-btn
+						icon="mdi-format-page-break"
+						color="color-primary-500"
+						density="compact"
+					>
+					</v-btn>
+					<v-tooltip location="top" activator="parent"
+						>Перенести строку</v-tooltip
+					>
+				</div>
+			</div>
 		</div>
 	</template>
 </template>

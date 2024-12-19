@@ -374,6 +374,7 @@ h3 {
   display: inline-block;
 }
 .canvas__item {
+  position: relative;
   padding: 2px 0;
   display: grid;
   grid-template-columns: 5ch auto 1fr auto auto auto;
@@ -453,6 +454,28 @@ h3 {
 }
 .canvas__price::after {
   content: " ₽";
+}
+.canvas__item:hover .canvas__actions-wrapper {
+  scale: 1;
+}
+.canvas__actions-wrapper {
+  position: absolute;
+  left: calc(100% + 2px);
+  background: rgb(40, 27, 75);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  z-index: 20;
+  scale: 0;
+  transform-origin: left center;
+  transition: ease-in 0.15s scale;
+}
+.canvas__actions-wrapper button {
+  width: 36px !important;
+  height: 36px !important;
 }
 
 .canvas {
