@@ -99,6 +99,8 @@
 					v-model="filmData.price"
 				/>
 			</div>
+
+			<div class="canvas__actions-wrapper"></div>
 		</div>
 	</template>
 </template>
@@ -122,16 +124,24 @@ export default {
 		];
 
 		const filmData = reactive({
-			hh: '12',
-			mm: '20',
+			hh: randomNumInRange(10, 22),
+			mm: randomNumInRange(0, 60),
 			title: getRandomFilm(filmPool),
-			age: '6',
-			pCard: '1',
-			price: '150',
+			age: randomNumInRange(8, 11),
+			pCard: randomTrueOrFalse(),
+			price: randomNumInRange(75, 225),
 		});
 
 		function getRandomFilm(filmsArr) {
 			return filmsArr[Math.floor(Math.random() * filmsArr.length)];
+		}
+
+		function randomNumInRange(min, max) {
+			return Math.floor(Math.random() * (max - min) + min);
+		}
+
+		function randomTrueOrFalse() {
+			return Math.random() > 0.33 ? 1 : 0;
 		}
 
 		function timeInputSwitch(field) {
