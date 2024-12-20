@@ -6,8 +6,6 @@
 	></modal>
 	<the-side-menu
 		@saveScreenshot="saveScreenshot"
-		:isEditable="$store.state.isEditing"
-		@editableSwitch="$store.state.isEditing = !$store.state.isEditing"
 		:hotkeys="hotkeys"
 	></the-side-menu>
 

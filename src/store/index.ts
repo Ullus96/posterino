@@ -45,5 +45,9 @@ export default createStore<State>({
 					!state.schedule[index].isWorkingDay;
 			}
 		},
+
+		toggleEditing(state) {
+			state.isEditing = !state.isEditing;
+		},
 	},
 });

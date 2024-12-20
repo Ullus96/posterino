@@ -230,17 +230,19 @@ export default defineComponent({
 			}
 		}
 
-		// @ts-expect-error
-		watch(store.state.isEditing, async (newVal) => {
-			if (newVal) {
-				await nextTick();
+		watch(
+			() => store.state.isEditing,
+			async (newVal) => {
+				if (newVal) {
+					await nextTick();
 
-				if (isHTMLTextAreaElement(title.value)) {
-					title.value.style.height = 'auto';
-					title.value.style.height = `${title.value.scrollHeight}px`;
+					if (isHTMLTextAreaElement(title.value)) {
+						title.value.style.height = 'auto';
+						title.value.style.height = `${title.value.scrollHeight}px`;
+					}
 				}
 			}
-		});
+		);
 
 		onMounted(async () => {
 			await nextTick();

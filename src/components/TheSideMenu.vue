@@ -1,13 +1,5 @@
 <template>
 	<ul class="sidemenu__items">
-		<!-- edit -->
-		<li class="sidemenu__item">
-			<a href="" @click.prevent="editableSwitch">
-				<p :class="{ toggle: $store.state.isEditing }" id="header-editable">
-					E
-				</p>
-			</a>
-		</li>
 		<!-- hotkeys -->
 		<li class="sidemenu__item">
 			<a href="" @click.prevent="hotkeysVisible = !hotkeysVisible">
@@ -30,16 +22,12 @@
 import { ref, reactive } from 'vue';
 import TheHotkeys from './Options/TheHotkeys.vue';
 export default {
-	props: ['isHeaderVisible', 'hotkeys'],
-	emits: ['saveScreenshot', 'editableSwitch'],
+	emits: ['saveScreenshot'],
 	setup(props, context) {
 		const hotkeysVisible = ref(false);
 
 		function saveScreenshot() {
 			context.emit('saveScreenshot');
-		}
-		function editableSwitch() {
-			context.emit('editableSwitch');
 		}
 		function helpLog(e) {
 			console.log(e);
@@ -48,7 +36,6 @@ export default {
 		return {
 			hotkeysVisible,
 			saveScreenshot,
-			editableSwitch,
 			helpLog,
 		};
 	},

@@ -5,7 +5,10 @@
 				<v-btn
 					variant="text"
 					icon="mdi-pencil"
-					color="color-contrast"
+					:color="
+						$store.state.isEditing ? 'color-primary-500' : 'color-contrast'
+					"
+					@click="$store.commit('toggleEditing')"
 					aria-label="Переключить режим редактирования"
 				>
 				</v-btn>
@@ -52,10 +55,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useStore } from '@/store/useStore';
 
 export default defineComponent({
 	setup() {
-		return {};
+		const store = useStore();
+
+		const isEditing = store.state.isEditing;
+
+		return { isEditing };
 	},
 });
 </script>
