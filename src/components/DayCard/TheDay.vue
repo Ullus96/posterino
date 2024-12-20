@@ -15,6 +15,7 @@
 					type="text"
 					class="canvas__day-of-week text-color-secondary-200"
 					v-model="dayAndWeekday.weekday"
+					disabled
 				/>
 				<input
 					type="text"
@@ -60,10 +61,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, inject, PropType } from 'vue';
+import { defineComponent, ref, reactive, inject, PropType, watch } from 'vue';
 import TheFilm from './TheFilm.vue';
 import NoFilms from './NoFilms.vue';
 import { IDaySchedule } from '@/types/films';
+import { useStore } from '@/store/useStore';
+import moment from 'moment';
 
 export default defineComponent({
 	props: {
@@ -78,6 +81,7 @@ export default defineComponent({
 	},
 	components: { TheFilm, NoFilms },
 	setup(props, context) {
+		const store = useStore();
 		const isEditable = inject('isEditable');
 		const { date } = props.dayData;
 
@@ -85,6 +89,46 @@ export default defineComponent({
 			day: date.format('DD.MM'),
 			weekday: date.format('dddd'),
 		});
+
+		const validDate = /^\d{1,2}\.\d{1,2}$/;
+
+		function updateDate() {
+			if (validDate.test(dayAndWeekday.day)) {
+				const [day, month] = dayAndWeekday.day.split('.');
+				let newDate = moment({
+					day: +day,
+					month: +month - 1,
+					year: date.year(),
+				}).locale('ru');
+
+				if (!newDate.isValid()) {
+					console.error('невалидная дата после парсинга, чекай данные');
+					return;
+				}
+
+				if (newDate.isBefore(moment(), 'month')) {
+					newDate = newDate.add(1, 'year');
+				}
+
+				store.commit('setDate', {
+					index: props.dayIndex,
+					newDate,
+				});
+
+				dayAndWeekday.weekday = newDate.format('dddd');
+			} else {
+				console.error('ошибка в формате даты, исправь на дд.мм');
+			}
+		}
+
+		watch(
+			() => dayAndWeekday.day,
+			(newVal, oldVal) => {
+				if (newVal !== oldVal) {
+					updateDate();
+				}
+			}
+		);
 
 		const count = ref(1);
 

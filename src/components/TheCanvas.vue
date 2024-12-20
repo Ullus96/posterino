@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, inject, Ref, ref } from 'vue';
+import { defineComponent, reactive, inject, Ref, ref, computed } from 'vue';
 import TheDay from './DayCard/TheDay.vue';
 import CanvasSocials from './CanvasSocials.vue';
 import moment from 'moment';
@@ -70,25 +70,29 @@ export default defineComponent({
 
 		const scheduleData: Array<IDaySchedule> | null = store.state.schedule;
 
-		const dateTextFormat: Ref<String> = ref('');
+		const dateTextFormat = computed(() => {
+			let result = '';
 
-		if (scheduleData?.length) {
-			const nextDay = scheduleData[0].date.locale('ru');
-			const endOfWeekDay =
-				scheduleData[scheduleData.length - 1].date.locale('ru');
+			if (scheduleData?.length) {
+				const nextDay = scheduleData[0].date.locale('ru');
+				const endOfWeekDay =
+					scheduleData[scheduleData.length - 1].date.locale('ru');
 
-			if (nextDay.format('MM') === endOfWeekDay.format('MM')) {
-				let result = `${nextDay.format('DD')} - ${endOfWeekDay.format(
-					'DD MMMM'
-				)}`;
-				dateTextFormat.value = result;
+				if (nextDay.format('MM') === endOfWeekDay.format('MM')) {
+					result = `${nextDay.format('DD')} - ${endOfWeekDay.format(
+						'DD MMMM'
+					)}`;
+				} else {
+					result = `${nextDay.format('DD MMM')} - ${endOfWeekDay.format(
+						'DD MMM'
+					)}`;
+				}
 			} else {
-				let result = `${nextDay.format('DD MMM')} - ${endOfWeekDay.format(
-					'DD MMM'
-				)}`;
-				dateTextFormat.value = result;
+				result = '';
 			}
-		}
+
+			return result;
+		});
 
 		return {
 			isEditable,
