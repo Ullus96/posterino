@@ -147,12 +147,6 @@ import { useStore } from '@/store/useStore';
 import { Hotkeys } from '@/types/hotkeys';
 import AgeRestrictionLabel from '@/components/ui/AgeRestrictionLabel.vue';
 import PushkinCardLabel from '@/components/ui/PushkinCardLabel.vue';
-import {
-	filmPool,
-	getRandomFilm,
-	randomNumInRange,
-	randomTrueOrFalse,
-} from '@/utilities/mockDataGenerators';
 import { ISingleFilm } from '@/types/films';
 
 export default defineComponent({

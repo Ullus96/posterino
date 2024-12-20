@@ -32,7 +32,7 @@
 							icon="mdi-plus"
 							color="color-secondary-400"
 							density="compact"
-							@click="count++"
+							@click="handleFilmCreation"
 						>
 						</v-btn>
 						<v-tooltip location="top" activator="parent"
@@ -44,7 +44,7 @@
 							icon="mdi-minus"
 							color="color-secondary-400"
 							density="compact"
-							@click="count == 0 ? (count = 0) : count--"
+							@click="handleFilmRemoving"
 						>
 						</v-btn>
 						<v-tooltip location="top" activator="parent"
@@ -98,6 +98,7 @@ import NoFilms from './NoFilms.vue';
 import { IDaySchedule } from '@/types/films';
 import { useStore } from '@/store/useStore';
 import moment from 'moment';
+import { getEmptyFilm, getMockFilm } from '@/utilities/createFilm';
 
 export default defineComponent({
 	props: {
@@ -172,8 +173,6 @@ export default defineComponent({
 			}
 		);
 
-		const count = ref(1);
-
 		const isWorkingDay = computed(() => {
 			if (store.state.schedule && store.state.schedule[props.dayIndex]) {
 				return store.state.schedule[props.dayIndex].isWorkingDay;
@@ -186,13 +185,30 @@ export default defineComponent({
 			store.commit('switchWorkingDay', props.dayIndex);
 		}
 
+		function handleFilmCreation() {
+			store.commit('createFilm', {
+				dayIndex: props.dayIndex,
+				film: getEmptyFilm(store),
+			});
+		}
+
+		function handleFilmRemoving() {
+			if (currentDayFilmsData.value.length) {
+				store.commit('removeFilm', {
+					dayIndex: props.dayIndex,
+					filmIndex: currentDayFilmsData.value.length - 1,
+				});
+			}
+		}
+
 		return {
 			dayAndWeekday,
 			currentDayFilmsData,
-			count,
 			isWorkingDay,
 			switchWorkingDay,
 			dayIndex,
+			handleFilmCreation,
+			handleFilmRemoving,
 		};
 	},
 });
