@@ -120,6 +120,7 @@
 						icon="mdi-table-row-remove"
 						color="color-danger-200"
 						density="compact"
+						@click="handleFilmRemoving"
 					>
 					</v-btn>
 					<v-tooltip location="top" activator="parent"
@@ -291,6 +292,13 @@ export default defineComponent({
 			}
 		});
 
+		function handleFilmRemoving() {
+			store.commit('removeFilm', {
+				dayIndex: props.dayIndex,
+				filmIndex: props.filmIndex,
+			});
+		}
+
 		return {
 			newData,
 			timeInputSwitch,
@@ -304,6 +312,7 @@ export default defineComponent({
 			hotkeys,
 			useHotkey,
 			resizeTextarea,
+			handleFilmRemoving,
 		};
 	},
 });
