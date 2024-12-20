@@ -48,20 +48,41 @@
 							>Удалить строку</v-tooltip
 						>
 					</div>
+					<div class="canvas__header-btn-wrapper">
+						<v-btn
+							icon="mdi-movie-off-outline"
+							color="color-secondary-400"
+							density="compact"
+							@click="switchWorkingDay"
+						>
+						</v-btn>
+						<v-tooltip location="top" activator="parent"
+							>Переключение "Нет сеансов"</v-tooltip
+						>
+					</div>
 				</div>
 			</div>
 		</template>
 		<v-divider></v-divider>
 		<!-- single line -->
-		<the-film v-for="film in count" :key="film"></the-film>
-		<no-films></no-films>
+		<the-film v-for="film in count" :key="film" v-if="isWorkingDay"></the-film>
+		<no-films v-else></no-films>
 		<!-- end of single line -->
 	</div>
 	<!-- end of single day -->
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, inject, PropType, watch } from 'vue';
+import {
+	defineComponent,
+	ref,
+	reactive,
+	inject,
+	PropType,
+	watch,
+	Ref,
+	computed,
+} from 'vue';
 import TheFilm from './TheFilm.vue';
 import NoFilms from './NoFilms.vue';
 import { IDaySchedule } from '@/types/films';
@@ -132,10 +153,24 @@ export default defineComponent({
 
 		const count = ref(1);
 
+		const isWorkingDay = computed(() => {
+			if (store.state.schedule && store.state.schedule[props.dayIndex]) {
+				return store.state.schedule[props.dayIndex].isWorkingDay;
+			} else {
+				return true;
+			}
+		});
+
+		function switchWorkingDay() {
+			store.commit('switchWorkingDay', props.dayIndex);
+		}
+
 		return {
 			dayAndWeekday,
 			isEditable,
 			count,
+			isWorkingDay,
+			switchWorkingDay,
 		};
 	},
 });

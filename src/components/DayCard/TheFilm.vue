@@ -117,19 +117,6 @@
 				<div class="canvas__item-btn-wrapper">
 					<v-btn
 						class="elevation-4"
-						icon="mdi-movie-off-outline"
-						color="color-primary-500"
-						density="compact"
-					>
-					</v-btn>
-					<v-tooltip location="top" activator="parent"
-						>Состояние "Нет сеансов"</v-tooltip
-					>
-				</div>
-
-				<div class="canvas__item-btn-wrapper">
-					<v-btn
-						class="elevation-4"
 						icon="mdi-table-row-remove"
 						color="color-danger-200"
 						density="compact"

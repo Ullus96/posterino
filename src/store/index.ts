@@ -23,6 +23,7 @@ export default createStore<State>({
 		setSchedule(state, payload: Array<IDaySchedule>) {
 			state.schedule = payload;
 		},
+
 		setDate(
 			state,
 			payload: {
@@ -33,6 +34,13 @@ export default createStore<State>({
 			const { index, newDate } = payload;
 			if (state.schedule && index >= 0 && index < state.schedule.length) {
 				state.schedule[index].date = newDate;
+			}
+		},
+
+		switchWorkingDay(state, index: number) {
+			if (state.schedule && index >= 0 && index < state.schedule.length) {
+				state.schedule[index].isWorkingDay =
+					!state.schedule[index].isWorkingDay;
 			}
 		},
 	},

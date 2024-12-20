@@ -24,6 +24,7 @@ export default defineComponent({
 				date: moment()
 					.add(idx + 1, 'days')
 					.locale('ru'),
+				isWorkingDay: true,
 				films: [emptyFilm],
 			})
 		);
