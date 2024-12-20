@@ -49,5 +49,21 @@ export default createStore<State>({
 		toggleEditing(state) {
 			state.isEditing = !state.isEditing;
 		},
+
+		updateFilm(
+			state,
+			payload: { film: ISingleFilm; filmIndex: number; dayIndex: number }
+		) {
+			const { film, filmIndex, dayIndex } = payload;
+			if (
+				state.schedule &&
+				dayIndex >= 0 &&
+				dayIndex < state.schedule.length &&
+				filmIndex >= 0 &&
+				filmIndex < state.schedule[dayIndex].films.length
+			) {
+				state.schedule[dayIndex].films[filmIndex] = film;
+			}
+		},
 	},
 });

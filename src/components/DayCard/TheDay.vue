@@ -68,7 +68,14 @@
 		</template>
 		<v-divider></v-divider>
 		<!-- single line -->
-		<the-film v-for="film in count" :key="film" v-if="isWorkingDay"></the-film>
+		<the-film
+			v-for="(film, idx) in currentDayFilmsData"
+			:key="film.uuid"
+			:filmData="film"
+			:filmIndex="idx"
+			:dayIndex="dayIndex"
+			v-if="isWorkingDay"
+		></the-film>
 		<no-films v-else></no-films>
 		<!-- end of single line -->
 	</div>
@@ -107,6 +114,18 @@ export default defineComponent({
 	setup(props, context) {
 		const store = useStore();
 		const { date } = props.dayData;
+		const dayIndex = props.dayIndex;
+
+		const currentDayFilmsData = computed(() => {
+			if (
+				store.state.schedule &&
+				store.state.schedule[props.dayIndex].films.length
+			) {
+				return store.state.schedule[props.dayIndex].films;
+			} else {
+				return [];
+			}
+		});
 
 		let dayAndWeekday = reactive({
 			day: date.format('DD.MM'),
@@ -169,9 +188,11 @@ export default defineComponent({
 
 		return {
 			dayAndWeekday,
+			currentDayFilmsData,
 			count,
 			isWorkingDay,
 			switchWorkingDay,
+			dayIndex,
 		};
 	},
 });

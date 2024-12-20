@@ -399,6 +399,9 @@ h3 {
   display: block;
   background: linear-gradient(to top, rgba(18, 18, 18, 0.15) 2px, transparent 2px);
 }
+.canvas__item input[type=checkbox]:focus {
+  outline: 2px solid rgb(52, 203, 254);
+}
 .canvas__item.editable {
   grid-template-columns: 5ch auto 1fr 6ch auto 5ch;
 }

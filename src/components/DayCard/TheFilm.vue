@@ -1,13 +1,13 @@
 <template>
 	<template v-if="!$store.state.isEditing">
 		<div class="canvas__item">
-			<div class="canvas__time" v-if="String(filmData.hh) != ''">
+			<div class="canvas__time" v-if="String(filmData.showTimes[0][0]) != ''">
 				<span class="canvas__hours">{{
-					String(filmData.hh).padStart(2, '0')
+					String(filmData.showTimes[0][0]).padStart(2, '0')
 				}}</span>
 				<span>:</span>
 				<span class="canvas__minutes">{{
-					String(filmData.mm).padStart(2, '0')
+					String(filmData.showTimes[0][1]).padStart(2, '0')
 				}}</span>
 			</div>
 			<div class="canvas__time" v-else></div>
@@ -21,8 +21,8 @@
 			</div>
 
 			<div class="canvas__techincal-info">
-				<AgeRestrictionLabel :age="filmData.age" />
-				<PushkinCardLabel :pCard="Boolean(filmData.pCard)" />
+				<AgeRestrictionLabel :age="filmData.meta?.age" />
+				<PushkinCardLabel :pCard="Boolean(filmData.meta?.pCard)" />
 			</div>
 
 			<v-divider vertical></v-divider>
@@ -40,7 +40,7 @@
 					class="canvas__hours"
 					placeholder="чч"
 					ref="hh"
-					v-model="filmData.hh"
+					v-model="newData.showTimes[0][0]"
 					@keyup="timeInputSwitch('hh')"
 				/>
 				<input
@@ -48,7 +48,7 @@
 					class="canvas__minutes"
 					placeholder="мм"
 					ref="mm"
-					v-model="filmData.mm"
+					v-model="newData.showTimes[0][1]"
 					@keyup="timeInputSwitch('mm')"
 				/>
 			</div>
@@ -62,7 +62,7 @@
 					rows="1"
 					placeholder="Фильм"
 					ref="title"
-					v-model="filmData.title"
+					v-model="newData.title"
 					@keydown.alt.1="useHotkey(0)"
 					@keydown.alt.2="useHotkey(1)"
 					@keydown.alt.3="useHotkey(2)"
@@ -77,14 +77,14 @@
 					type="number"
 					placeholder="лет"
 					ref="age"
-					v-model="filmData.age"
+					v-model="newData.meta.age"
 					@keyup.+="ageSwitch()"
 				/>
 				<input
-					type="number"
+					type="checkbox"
 					placeholder="пк?"
 					ref="pCard"
-					v-model="filmData.pCard"
+					v-model="newData.meta.pCard"
 					@keyup="pCardSwitch()"
 				/>
 			</div>
@@ -96,7 +96,7 @@
 					type="number"
 					placeholder="Цена"
 					ref="price"
-					v-model="filmData.price"
+					v-model="newData.price"
 				/>
 			</div>
 
@@ -141,6 +141,7 @@ import {
 	watch,
 	nextTick,
 	onMounted,
+	PropType,
 } from 'vue';
 import { useStore } from '@/store/useStore';
 import { Hotkeys } from '@/types/hotkeys';
@@ -152,10 +153,25 @@ import {
 	randomNumInRange,
 	randomTrueOrFalse,
 } from '@/utilities/mockDataGenerators';
+import { ISingleFilm } from '@/types/films';
 
 export default defineComponent({
 	components: { AgeRestrictionLabel, PushkinCardLabel },
-	setup() {
+	props: {
+		filmData: {
+			required: true,
+			type: Object as PropType<ISingleFilm>,
+		},
+		filmIndex: {
+			required: true,
+			type: Number,
+		},
+		dayIndex: {
+			required: true,
+			type: Number,
+		},
+	},
+	setup(props, context) {
 		const store = useStore();
 
 		const mm: Ref<null | HTMLInputElement> = ref(null);
@@ -164,55 +180,83 @@ export default defineComponent({
 		const pCard: Ref<null | HTMLInputElement> = ref(null);
 		const price: Ref<null | HTMLInputElement> = ref(null);
 
-		const filmData = reactive({
-			hh: randomNumInRange(10, 22),
-			mm: randomNumInRange(0, 60),
-			title: getRandomFilm(filmPool),
-			age: randomNumInRange(8, 11),
-			pCard: randomTrueOrFalse(),
-			price: randomNumInRange(75, 225),
+		const newData = reactive<ISingleFilm>({
+			showTimes: props.filmData.showTimes,
+			title: props.filmData.title,
+			meta: {
+				age: props.filmData.meta?.age || null,
+				pCard: props.filmData.meta?.pCard || null,
+			},
+			price: props.filmData.price,
+			uuid: props.filmData.uuid,
 		});
 
+		watch(
+			newData,
+			(newVal) => {
+				store.commit('updateFilm', {
+					film: newVal,
+					filmIndex: props.filmIndex,
+					dayIndex: props.dayIndex,
+				});
+			},
+			{ deep: true }
+		);
+
+		/*
+    filmData: ISingleFilm = {
+        time: [[12, 55]],
+        title: "Фильм",
+        meta: {
+          age: 9,
+          pCard: true,
+        },
+        price: 150,
+      };
+    */
+
 		function timeInputSwitch(field: string) {
-			if (field === 'hh' && String(filmData.hh).length === 2 && mm.value) {
-				mm.value.focus();
-			} else if (
-				field === 'mm' &&
-				String(filmData.mm).length === 2 &&
-				title.value
-			) {
-				title.value.focus();
-			}
+			// @ts-expect-error
+			// if (field === 'hh' && String(filmData.hh).length === 2 && mm.value) {
+			// 	mm.value.focus();
+			// } else if (
+			// 	field === 'mm' &&
+			// 	// @ts-expect-error
+			// 	String(filmData.mm).length === 2 &&
+			// 	title.value
+			// ) {
+			// 	title.value.focus();
+			// }
 		}
 
 		function ageSwitch() {
-			if (pCard.value) {
-				pCard.value.focus();
-			}
+			// if (pCard.value) {
+			// 	pCard.value.focus();
+			// }
 		}
 
 		function pCardSwitch() {
-			if (filmData.pCard && price.value) {
-				price.value.focus();
-				price.value.select();
-			}
+			// @ts-expect-error
+			// if (filmData.pCard && price.value) {
+			// 	price.value.focus();
+			// 	price.value.select();
+			// }
 		}
 
 		// hotkeys
 		const hotkeys: Hotkeys | undefined = inject('hotkeys');
 
 		function useHotkey(i: number) {
-			if (!hotkeys || !hotkeys[i]) return;
-
-			filmData.title = hotkeys[i].title;
-			// @ts-expect-error
-			filmData.age = hotkeys[i].age || null;
-			// @ts-expect-error
-			filmData.pCard = hotkeys[i].pCard || null;
-			if (filmData.title && price.value) {
-				price.value.focus();
-				price.value.select();
-			}
+			// if (!hotkeys || !hotkeys[i]) return;
+			// filmData.title = hotkeys[i].title;
+			// // @ts-expect-error
+			// filmData.age = hotkeys[i].age || null;
+			// // @ts-expect-error
+			// filmData.pCard = hotkeys[i].pCard || null;
+			// if (filmData.title && price.value) {
+			// 	price.value.focus();
+			// 	price.value.select();
+			// }
 		}
 
 		function isHTMLTextAreaElement(
@@ -254,7 +298,7 @@ export default defineComponent({
 		});
 
 		return {
-			filmData,
+			newData,
 			timeInputSwitch,
 			ageSwitch,
 			pCardSwitch,

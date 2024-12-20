@@ -141,6 +141,10 @@
 				transparent 2px
 			);
 		}
+
+		& input[type='checkbox']:focus {
+			outline: 2px solid $color-primary-500;
+		}
 	}
 
 	&__item.editable {
