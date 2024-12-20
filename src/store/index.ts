@@ -9,6 +9,7 @@ export interface State {
 	settings: {
 		defaultPrice: number;
 	};
+	isEditing: boolean;
 }
 
 export default createStore<State>({
@@ -18,6 +19,7 @@ export default createStore<State>({
 		settings: {
 			defaultPrice: 150,
 		},
+		isEditing: true,
 	},
 	mutations: {
 		setSchedule(state, payload: Array<IDaySchedule>) {

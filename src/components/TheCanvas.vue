@@ -18,7 +18,7 @@
 		</div>
 
 		<!-- Posters block:
-    <div class="poster__add-btn" v-if="isEditable">
+    <div class="poster__add-btn" v-if="$store.state.isEditing">
       <i class="fa-regular fa-image"></i>
       <i class="fa-solid fa-plus"></i>
     </div>
@@ -53,7 +53,6 @@ export default defineComponent({
 		// ThePoster
 	},
 	setup() {
-		const isEditable = inject('isEditable');
 		const store = useStore();
 		// let posters = reactive([
 		//   {
@@ -95,7 +94,6 @@ export default defineComponent({
 		});
 
 		return {
-			isEditable,
 			store,
 			scheduleData,
 			dateTextFormat,

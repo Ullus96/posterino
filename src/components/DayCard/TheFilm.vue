@@ -1,5 +1,5 @@
 <template>
-	<template v-if="!isEditable">
+	<template v-if="!$store.state.isEditing">
 		<div class="canvas__item">
 			<div class="canvas__time" v-if="String(filmData.hh) != ''">
 				<span class="canvas__hours">{{
@@ -142,6 +142,7 @@ import {
 	nextTick,
 	onMounted,
 } from 'vue';
+import { useStore } from '@/store/useStore';
 import { Hotkeys } from '@/types/hotkeys';
 import AgeRestrictionLabel from '@/components/ui/AgeRestrictionLabel.vue';
 import PushkinCardLabel from '@/components/ui/PushkinCardLabel.vue';
@@ -155,7 +156,7 @@ import {
 export default defineComponent({
 	components: { AgeRestrictionLabel, PushkinCardLabel },
 	setup() {
-		const isEditable = inject('isEditable');
+		const store = useStore();
 
 		const mm: Ref<null | HTMLInputElement> = ref(null);
 		const title: Ref<null | HTMLTextAreaElement> = ref(null);
@@ -230,7 +231,7 @@ export default defineComponent({
 		}
 
 		// @ts-expect-error
-		watch(isEditable, async (newVal) => {
+		watch(store.state.isEditing, async (newVal) => {
 			if (newVal) {
 				await nextTick();
 
@@ -251,7 +252,6 @@ export default defineComponent({
 		});
 
 		return {
-			isEditable,
 			filmData,
 			timeInputSwitch,
 			ageSwitch,

@@ -6,8 +6,8 @@
 	></modal>
 	<the-side-menu
 		@saveScreenshot="saveScreenshot"
-		:isEditable="isEditable"
-		@editableSwitch="isEditable = !isEditable"
+		:isEditable="$store.state.isEditing"
+		@editableSwitch="$store.state.isEditing = !$store.state.isEditing"
 		:hotkeys="hotkeys"
 	></the-side-menu>
 
@@ -35,10 +35,6 @@ export default defineComponent({
 
 		const currentDate = moment().locale('ru');
 		provide('startDate', currentDate);
-
-		// editable
-		const isEditable = ref('false');
-		provide('isEditable', isEditable);
 
 		// screenshot
 		// const isScreenshotModalVisible = false;
@@ -97,7 +93,6 @@ export default defineComponent({
 		return {
 			saveScreenshot,
 			imageURL,
-			isEditable,
 			// isScreenshotModalVisible,
 			isModalVisible,
 			closeModal,

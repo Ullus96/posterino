@@ -1,7 +1,7 @@
 <template>
 	<!-- single day -->
-	<div class="canvas__day" :class="{ editable: isEditable }">
-		<div class="canvas__date" v-if="!isEditable">
+	<div class="canvas__day" :class="{ editable: $store.state.isEditing }">
+		<div class="canvas__date" v-if="!$store.state.isEditing">
 			<h2 class="canvas__day-of-week text-color-secondary-200">
 				{{ dayAndWeekday.weekday }}
 			</h2>
@@ -10,7 +10,10 @@
 			</p>
 		</div>
 		<template v-else>
-			<div class="canvas__day-header" :class="{ editable: isEditable }">
+			<div
+				class="canvas__day-header"
+				:class="{ editable: $store.state.isEditing }"
+			>
 				<input
 					type="text"
 					class="canvas__day-of-week text-color-secondary-200"
@@ -103,7 +106,6 @@ export default defineComponent({
 	components: { TheFilm, NoFilms },
 	setup(props, context) {
 		const store = useStore();
-		const isEditable = inject('isEditable');
 		const { date } = props.dayData;
 
 		let dayAndWeekday = reactive({
@@ -167,7 +169,6 @@ export default defineComponent({
 
 		return {
 			dayAndWeekday,
-			isEditable,
 			count,
 			isWorkingDay,
 			switchWorkingDay,

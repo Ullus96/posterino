@@ -3,7 +3,7 @@
 		class="canvas__info"
 		:class="{ bottom: state === 'bot', right: state === 'right' }"
 	>
-		<div class="info__controls" v-if="isEditable">
+		<div class="info__controls" v-if="$store.state.isEditing">
 			<div
 				class="info__control-btn"
 				:class="{ active: state === 'bot' }"
@@ -57,7 +57,6 @@
 import { ref, inject } from 'vue';
 export default {
 	setup() {
-		const isEditable = inject('isEditable');
 		const state = ref('bot');
 
 		function position(pos) {
@@ -65,7 +64,6 @@ export default {
 		}
 
 		return {
-			isEditable,
 			state,
 			position,
 		};
