@@ -1,17 +1,11 @@
 <template>
 	<template v-if="!$store.state.isEditing">
 		<div class="canvas__item">
-			<div class="canvas__time" v-if="String(filmData.showTimes[0][0]) != ''">
-				<span class="canvas__hours">{{
-					String(filmData.showTimes[0][0]).padStart(2, '0')
-				}}</span>
-				<span>:</span>
-				<span class="canvas__minutes">{{
-					String(filmData.showTimes[0][1]).padStart(2, '0')
-				}}</span>
-			</div>
-			<div class="canvas__time" v-else></div>
-
+			<TimeBlock
+				:filmData="filmData"
+				:dayIndex="dayIndex"
+				:filmIndex="filmIndex"
+			/>
 			<v-divider vertical></v-divider>
 
 			<div class="canvas__name-wrapper">
@@ -34,24 +28,11 @@
 	</template>
 	<template v-else>
 		<div class="canvas__item editable">
-			<div class="canvas__time editable">
-				<input
-					type="text"
-					class="canvas__hours"
-					placeholder="чч"
-					ref="hh"
-					v-model="newData.showTimes[0][0]"
-					@keyup="timeInputSwitch('hh')"
-				/>
-				<input
-					type="text"
-					class="canvas__minutes"
-					placeholder="мм"
-					ref="mm"
-					v-model="newData.showTimes[0][1]"
-					@keyup="timeInputSwitch('mm')"
-				/>
-			</div>
+			<TimeBlock
+				:filmData="filmData"
+				:dayIndex="dayIndex"
+				:filmIndex="filmIndex"
+			/>
 
 			<v-divider vertical></v-divider>
 
@@ -148,10 +129,11 @@ import { useStore } from '@/store/useStore';
 import { Hotkeys } from '@/types/hotkeys';
 import AgeRestrictionLabel from '@/components/ui/AgeRestrictionLabel.vue';
 import PushkinCardLabel from '@/components/ui/PushkinCardLabel.vue';
+import TimeBlock from '@/components/DayCard/TimeBlock.vue';
 import { ISingleFilm } from '@/types/films';
 
 export default defineComponent({
-	components: { AgeRestrictionLabel, PushkinCardLabel },
+	components: { AgeRestrictionLabel, PushkinCardLabel, TimeBlock },
 	props: {
 		filmData: {
 			required: true,
@@ -176,7 +158,7 @@ export default defineComponent({
 		const price: Ref<null | HTMLInputElement> = ref(null);
 
 		const newData = reactive<ISingleFilm>({
-			showTimes: props.filmData.showTimes,
+			timeSlots: props.filmData.timeSlots,
 			title: props.filmData.title,
 			meta: {
 				age: props.filmData.meta?.age || null,

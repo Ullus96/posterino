@@ -1,5 +1,5 @@
 export interface ISingleFilm {
-	showTimes: Array<[number?, number?]>;
+	timeSlots: Array<[number?, number?]>;
 	title: string;
 	meta?: {
 		age?: number | null;

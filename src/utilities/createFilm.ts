@@ -11,7 +11,7 @@ import { State } from '@/store/index';
 
 export function getEmptyFilm(store: Store<State>): ISingleFilm {
 	const emptyFilm: ISingleFilm = {
-		showTimes: [[]],
+		timeSlots: [[]],
 		title: '',
 		price: store.state.settings.defaultPrice,
 		uuid: generateUUID(),
@@ -22,7 +22,7 @@ export function getEmptyFilm(store: Store<State>): ISingleFilm {
 
 export function getMockFilm(): ISingleFilm {
 	const mockFilm: ISingleFilm = {
-		showTimes: [[randomNumInRange(10, 22), randomNumInRange(0, 60)]],
+		timeSlots: [[randomNumInRange(10, 22), randomNumInRange(0, 60)]],
 		title: getRandomFilm(filmPool),
 		meta: {
 			age: randomNumInRange(8, 11),
