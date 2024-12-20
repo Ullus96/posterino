@@ -8,6 +8,13 @@ import { useStore } from '@/store/useStore';
 import { ISingleFilm, IDaySchedule } from '@/types/films';
 import moment from 'moment';
 
+import {
+	filmPool,
+	getRandomFilm,
+	randomNumInRange,
+	randomTrueOrFalse,
+} from '@/utilities/mockDataGenerators';
+
 export default defineComponent({
 	setup() {
 		const store = useStore();
@@ -18,6 +25,16 @@ export default defineComponent({
 			price: store.state.settings.defaultPrice,
 		};
 
+		const mockFilm: ISingleFilm = {
+			time: [[randomNumInRange(10, 22), randomNumInRange(0, 60)]],
+			title: getRandomFilm(filmPool),
+			meta: {
+				age: randomNumInRange(8, 11),
+				pCard: randomTrueOrFalse(),
+			},
+			price: randomNumInRange(75, 225),
+		};
+
 		const weekSchedule: IDaySchedule[] = Array.from(
 			{ length: 7 },
 			(_, idx): IDaySchedule => ({
@@ -25,7 +42,8 @@ export default defineComponent({
 					.add(idx + 1, 'days')
 					.locale('ru'),
 				isWorkingDay: true,
-				films: [emptyFilm],
+				// Потом отсюда вернуть `emptyFilm`
+				films: [mockFilm],
 			})
 		);
 

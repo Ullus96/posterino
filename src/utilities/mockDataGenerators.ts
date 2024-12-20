@@ -25,5 +25,5 @@ export function randomNumInRange(min: number, max: number) {
 }
 
 export function randomTrueOrFalse() {
-	return Math.random() > 0.33 ? 1 : 0;
+	return Math.random() > 0.33 ? true : false;
 }
