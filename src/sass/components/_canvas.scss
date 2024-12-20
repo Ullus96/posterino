@@ -168,6 +168,11 @@
 		}
 	}
 
+	&__time-wrapper {
+		display: flex;
+		flex-direction: column;
+	}
+
 	&__name-wrapper {
 		width: 100%;
 		min-width: 100%;

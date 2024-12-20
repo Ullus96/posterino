@@ -417,6 +417,10 @@ h3 {
   flex: 1 1 auto;
   text-align: center;
 }
+.canvas__time-wrapper {
+  display: flex;
+  flex-direction: column;
+}
 .canvas__name-wrapper {
   width: 100%;
   min-width: 100%;

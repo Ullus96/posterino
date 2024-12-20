@@ -1,36 +1,43 @@
 <template>
 	<template v-if="!$store.state.isEditing">
-		<div
-			class="canvas__time"
-			v-for="time in filmData.timeSlots"
-			:key="`${time[0]}-${time[1]}`"
-		>
-			<span class="canvas__hours">{{ formatDateString(time[0]) }}</span>
-			<span v-if="time[0] && time[1]">:</span>
-			<span class="canvas__minutes">{{ formatDateString(time[1]) }}</span>
+		<div class="canvas__time-wrapper">
+			<div
+				class="canvas__time"
+				v-for="(time, index) in filmData.timeSlots"
+				:key="time.uuid"
+			>
+				<span class="canvas__hours">{{ formatDateString(time.hours) }}</span>
+				<span v-if="time.hours && time.minutes">:</span>
+				<span class="canvas__minutes">{{
+					formatDateString(time.minutes)
+				}}</span>
+			</div>
 		</div>
 	</template>
 	<template v-else>
-		<div
-			class="canvas__time editable"
-			v-for="(time, index) in filmData.timeSlots"
-			:key="`${time[0]}-${time[1]}`"
-		>
-			<input
-				type="text"
-				class="canvas__hours"
-				placeholder="чч"
-				ref="hh"
-				v-model="editTimes[index][0]"
-			/>
-			<input
-				type="text"
-				class="canvas__minutes"
-				placeholder="мм"
-				ref="mm"
-				v-model="editTimes[index][1]"
-				@keydown.enter="addNewShowTime($el)"
-			/>
+		<div class="canvas__time-wrapper">
+			<div
+				class="canvas__time editable"
+				v-for="(time, index) in filmData.timeSlots"
+				:key="time.uuid"
+			>
+				<input
+					type="text"
+					class="canvas__hours"
+					placeholder="чч"
+					ref="hh"
+					v-model="editTimes[index].hours"
+					@keydown.backspace="removeTimeSlot($event, index)"
+				/>
+				<input
+					type="text"
+					class="canvas__minutes"
+					placeholder="мм"
+					ref="mm"
+					v-model="editTimes[index].minutes"
+					@keydown.enter="addNewTimeSlot"
+				/>
+			</div>
 		</div>
 	</template>
 </template>
@@ -66,29 +73,34 @@ export default defineComponent({
 			}
 		}
 
-		// const editTimes: Ref<Array<[number, number]>> = ref([
-		// 	[10, 20],
-		// 	[15, 15],
-		// 	[21, 0],
-		// ]);
-
 		const editTimes = computed(() => {
 			return props.filmData.timeSlots.map((time) => {
 				return time;
 			});
 		});
 
-		console.log(editTimes);
+		function addNewTimeSlot(event: KeyboardEvent) {
+			const input = event.target as HTMLInputElement;
 
-		function addNewShowTime(el: EventTarget) {
 			store.commit('addNewTimeSlot', {
 				dayIndex: props.dayIndex,
 				filmIndex: props.filmIndex,
 			});
-			console.log(el);
 		}
 
-		return { formatDateString, editTimes, addNewShowTime };
+		function removeTimeSlot(event: KeyboardEvent, timeSlotIndex: number) {
+			const input = event.target as HTMLInputElement;
+
+			if (input.value.trim() === '') {
+				store.commit('removeTimeSlot', {
+					dayIndex: props.dayIndex,
+					filmIndex: props.filmIndex,
+					timeSlotIndex,
+				});
+			}
+		}
+
+		return { formatDateString, editTimes, addNewTimeSlot, removeTimeSlot };
 	},
 });
 </script>

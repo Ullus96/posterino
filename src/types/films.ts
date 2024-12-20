@@ -1,5 +1,11 @@
+export interface ITimeSlot {
+	uuid: string;
+	hours?: number;
+	minutes?: number;
+}
+
 export interface ISingleFilm {
-	timeSlots: Array<[number?, number?]>;
+	timeSlots: ITimeSlot[];
 	title: string;
 	meta?: {
 		age?: number | null;

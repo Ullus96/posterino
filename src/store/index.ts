@@ -2,6 +2,7 @@ import { createStore } from 'vuex';
 import moment from 'moment';
 import { ISingleFilm, IDaySchedule } from '@/types/films';
 import { Hotkeys } from '@/types/hotkeys';
+import { generateUUID } from '@/utilities/UUID';
 
 export interface State {
 	schedule: Array<IDaySchedule> | null;
@@ -95,10 +96,30 @@ export default createStore<State>({
 				filmIndex >= 0 &&
 				filmIndex < state.schedule[dayIndex].films.length
 			) {
-				state.schedule[dayIndex].films[filmIndex].timeSlots.push([
-					undefined,
-					undefined,
-				]);
+				state.schedule[dayIndex].films[filmIndex].timeSlots.push({
+					uuid: generateUUID(),
+				});
+			}
+		},
+
+		removeTimeSlot(
+			state,
+			payload: { dayIndex: number; filmIndex: number; timeSlotIndex: number }
+		) {
+			const { dayIndex, filmIndex, timeSlotIndex } = payload;
+			if (
+				state.schedule &&
+				dayIndex >= 0 &&
+				dayIndex < state.schedule.length &&
+				filmIndex >= 0 &&
+				filmIndex < state.schedule[dayIndex].films.length &&
+				timeSlotIndex >= 1 &&
+				state.schedule[dayIndex].films[filmIndex].timeSlots.length > 1
+			) {
+				state.schedule[dayIndex].films[filmIndex].timeSlots.splice(
+					timeSlotIndex,
+					1
+				);
 			}
 		},
 	},
