@@ -1,5 +1,5 @@
 <template>
-	<OptionsBase :modalName="'isSettingsModalOpen'">
+	<OptionsBase :modalName="'isSettingsModalOpen'" :zIndex="31" :topPx="200">
 		<template #title>Настройки</template>
 
 		<template #default>
