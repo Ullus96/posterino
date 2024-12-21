@@ -23,6 +23,7 @@
 					@click="
 						$store.commit('toggleModalVisibility', {
 							name: 'isHotkeysModalOpen',
+							closeAll: true,
 						})
 					"
 				>
@@ -50,6 +51,12 @@
 					icon="mdi-cog"
 					color="color-contrast"
 					aria-label="Открыть настройки приложения"
+					@click="
+						$store.commit('toggleModalVisibility', {
+							name: 'isSettingsModalOpen',
+							closeAll: true,
+						})
+					"
 				>
 				</v-btn>
 				<v-tooltip activator="parent">Настройки</v-tooltip>
@@ -59,6 +66,7 @@
 
 	<transition name="scale-to-left">
 		<OptionsHotkeys v-if="$store.state.modal.isHotkeysModalOpen" />
+		<OptionsSettings v-else-if="$store.state.modal.isSettingsModalOpen" />
 	</transition>
 </template>
 
@@ -66,9 +74,10 @@
 import { defineComponent } from 'vue';
 import { useStore } from '@/store/useStore';
 import OptionsHotkeys from './Options/OptionsHotkeys.vue';
+import OptionsSettings from './Options/OptionsSettings.vue';
 
 export default defineComponent({
-	components: { OptionsHotkeys },
+	components: { OptionsHotkeys, OptionsSettings },
 	setup() {
 		const store = useStore();
 

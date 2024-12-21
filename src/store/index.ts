@@ -6,6 +6,7 @@ import { generateUUID } from '@/utilities/UUID';
 
 export interface IModalState {
 	isHotkeysModalOpen: boolean;
+	isSettingsModalOpen: boolean;
 }
 
 export interface State {
@@ -28,6 +29,7 @@ export default createStore<State>({
 		isEditing: true,
 		modal: {
 			isHotkeysModalOpen: false,
+			isSettingsModalOpen: false,
 		},
 	},
 	mutations: {
@@ -135,13 +137,22 @@ export default createStore<State>({
 			state,
 			payload: {
 				name: keyof State['modal'];
-				forceClose: boolean | undefined;
+				forceClose?: boolean;
+				closeAll?: boolean;
 			}
 		) {
-			const { name, forceClose } = payload;
+			const { name, forceClose, closeAll } = payload;
 			if (forceClose) {
 				state.modal[name] = false;
 				return;
+			}
+
+			if (closeAll) {
+				for (const key in state.modal) {
+					if (name !== key) {
+						state.modal[key as keyof State['modal']] = false;
+					}
+				}
 			}
 
 			state.modal[name] = !state.modal[name];

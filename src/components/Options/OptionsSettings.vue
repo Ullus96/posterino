@@ -1,6 +1,6 @@
 <template>
-	<OptionsBase :modalName="'isHotkeysModalOpen'">
-		<template #title>Горячие клавиши</template>
+	<OptionsBase :modalName="'isSettingsModalOpen'">
+		<template #title>Настройки</template>
 
 		<template #default>
 			<p class="opt__desc">Фильм | Возраст | Пушк. Карта</p>

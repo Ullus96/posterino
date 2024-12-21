@@ -1,5 +1,5 @@
 <template>
-	<div class="opt elevation-8">
+	<div class="opt elevation-8" :style="{ zIndex: zIndex }">
 		<v-btn
 			variant="text"
 			icon="mdi-close"
@@ -29,6 +29,11 @@ export default defineComponent({
 		modalName: {
 			required: true,
 			type: String as PropType<keyof IModalState>,
+		},
+		zIndex: {
+			type: Number,
+			default: 30,
+			required: false,
 		},
 	},
 	setup(props, context) {
