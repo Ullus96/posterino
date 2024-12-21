@@ -18,7 +18,11 @@
 				<v-btn
 					variant="text"
 					icon="mdi-keyboard"
-					color="color-contrast"
+					:color="
+						$store.state.modal.isHotkeysModalOpen
+							? 'color-primary-500'
+							: 'color-contrast'
+					"
 					aria-label="Переключить видимость меню горячих клавиш"
 					@click="
 						$store.commit('toggleModalVisibility', {
@@ -49,7 +53,11 @@
 				<v-btn
 					variant="text"
 					icon="mdi-cog"
-					color="color-contrast"
+					:color="
+						$store.state.modal.isSettingsModalOpen
+							? 'color-primary-500'
+							: 'color-contrast'
+					"
 					aria-label="Открыть настройки приложения"
 					@click="
 						$store.commit('toggleModalVisibility', {
