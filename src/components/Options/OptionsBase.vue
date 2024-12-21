@@ -10,13 +10,11 @@
 			@click="closeModal"
 		>
 		</v-btn>
-		<h3 class="opt__header">Настройки</h3>
-		<p class="opt__desc">Фильм | Возраст | Пушк. Карта</p>
-		<h4 class="opt__keyname">Alt + 1</h4>
-		<div class="opt__inputs">
-			<input type="text" class="opt__input" placeholder="Фильм" />
-			<input type="text" class="opt__input" placeholder="xx+" />
-			<input type="text" class="opt__input" placeholder="0-1" />
+		<h3 class="opt__header" v-if="slots.title">
+			<slot name="title">Заголовок</slot>
+		</h3>
+		<div class="opt__body">
+			<slot></slot>
 		</div>
 	</div>
 </template>
