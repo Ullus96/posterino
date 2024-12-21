@@ -1,16 +1,22 @@
 .opt {
-	position: absolute;
+	position: fixed;
 	background-color: $color-contrast;
-	border: 1px solid $color-text-100;
 	width: 300px;
 	top: 60px;
 	right: 80px;
-	z-index: 31;
-	padding: 15px 15px;
-	box-shadow: 0 6px 8px rgba(18, 18, 18, 0.4);
-	border-radius: 10px;
+	z-index: 30;
+	padding: 16px;
+	border-radius: 8px;
+
+	&__close {
+		position: absolute;
+		top: 4px;
+		left: 4px;
+		cursor: pointer;
+	}
 
 	&__header {
+		padding: 0 12px;
 		text-align: center;
 	}
 

@@ -20,6 +20,11 @@
 					icon="mdi-keyboard"
 					color="color-contrast"
 					aria-label="Переключить видимость меню горячих клавиш"
+					@click="
+						$store.commit('toggleModalVisibility', {
+							name: 'isHotkeysModalOpen',
+						})
+					"
 				>
 				</v-btn>
 				<v-tooltip activator="parent">Горячие клавиши</v-tooltip>
@@ -51,13 +56,17 @@
 			</v-list-item>
 		</v-list>
 	</v-navigation-drawer>
+
+	<OptionsHotkeys v-if="$store.state.modal.isHotkeysModalOpen" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore } from '@/store/useStore';
+import OptionsHotkeys from './Options/OptionsHotkeys.vue';
 
 export default defineComponent({
+	components: { OptionsHotkeys },
 	setup() {
 		const store = useStore();
 

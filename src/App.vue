@@ -1,6 +1,6 @@
 <template>
 	<SettingsInit />
-	<v-app>
+	<v-app id="app-body">
 		<AsideMenu />
 		<v-main>
 			<router-view />

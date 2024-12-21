@@ -193,7 +193,6 @@ export default defineComponent({
     */
 
 		function timeInputSwitch(field: string) {
-			// @ts-expect-error
 			// if (field === 'hh' && String(filmData.hh).length === 2 && mm.value) {
 			// 	mm.value.focus();
 			// } else if (
@@ -213,7 +212,6 @@ export default defineComponent({
 		}
 
 		function pCardSwitch() {
-			// @ts-expect-error
 			// if (filmData.pCard && price.value) {
 			// 	price.value.focus();
 			// 	price.value.select();

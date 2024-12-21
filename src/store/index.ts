@@ -4,6 +4,10 @@ import { ISingleFilm, IDaySchedule } from '@/types/films';
 import { Hotkeys } from '@/types/hotkeys';
 import { generateUUID } from '@/utilities/UUID';
 
+export interface IModalState {
+	isHotkeysModalOpen: boolean;
+}
+
 export interface State {
 	schedule: Array<IDaySchedule> | null;
 	hotkeys: Hotkeys | null;
@@ -11,6 +15,7 @@ export interface State {
 		defaultPrice: number;
 	};
 	isEditing: boolean;
+	modal: IModalState;
 }
 
 export default createStore<State>({
@@ -21,6 +26,9 @@ export default createStore<State>({
 			defaultPrice: 150,
 		},
 		isEditing: true,
+		modal: {
+			isHotkeysModalOpen: false,
+		},
 	},
 	mutations: {
 		setSchedule(state, payload: Array<IDaySchedule>) {
@@ -121,6 +129,22 @@ export default createStore<State>({
 					1
 				);
 			}
+		},
+
+		toggleModalVisibility(
+			state,
+			payload: {
+				name: keyof State['modal'];
+				forceClose: boolean | undefined;
+			}
+		) {
+			const { name, forceClose } = payload;
+			if (forceClose) {
+				state.modal[name] = false;
+				return;
+			}
+
+			state.modal[name] = !state.modal[name];
 		},
 	},
 });
