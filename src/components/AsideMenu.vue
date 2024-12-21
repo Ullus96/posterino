@@ -57,7 +57,9 @@
 		</v-list>
 	</v-navigation-drawer>
 
-	<OptionsHotkeys v-if="$store.state.modal.isHotkeysModalOpen" />
+	<transition name="scale-to-left">
+		<OptionsHotkeys v-if="$store.state.modal.isHotkeysModalOpen" />
+	</transition>
 </template>
 
 <script lang="ts">
@@ -84,5 +86,22 @@ export default defineComponent({
 
 .v-divider {
 	margin: 0 auto;
+}
+
+.scale-to-left-enter-active,
+.scale-to-left-leave-active {
+	transition: transform 0.15s ease-in-out, opacity 0.15s ease-in-out;
+}
+
+.scale-to-left-enter-from,
+.scale-to-left-leave-to {
+	transform: translateX(60px);
+	opacity: 0;
+}
+
+.scale-to-left-enter-to,
+.scale-to-left-leave-from {
+	transform: translateX(0px);
+	opacity: 1;
 }
 </style>
