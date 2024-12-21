@@ -65,8 +65,10 @@
 	</v-navigation-drawer>
 
 	<transition name="scale-to-left">
-		<OptionsHotkeys v-if="$store.state.modal.isHotkeysModalOpen" />
-		<OptionsSettings v-else-if="$store.state.modal.isSettingsModalOpen" />
+		<KeepAlive>
+			<OptionsHotkeys v-if="$store.state.modal.isHotkeysModalOpen" />
+			<OptionsSettings v-else-if="$store.state.modal.isSettingsModalOpen" />
+		</KeepAlive>
 	</transition>
 </template>
 
