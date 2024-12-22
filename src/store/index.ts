@@ -161,7 +161,7 @@ export default createStore<State>({
 		},
 
 		createNewHotkey(state) {
-			if (state.hotkeys.length < 10) {
+			if (state.hotkeys.length < 9) {
 				state.hotkeys.push({
 					title: '',
 					age: null,

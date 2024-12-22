@@ -14,7 +14,25 @@
 		></the-day>
 
 		<div class="canvas__empty-col">
-			{{ store.state }}
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			{{ store.state.hotkeys }}
 		</div>
 
 		<CanvasSocials />

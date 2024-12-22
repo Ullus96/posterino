@@ -578,6 +578,8 @@ h3 {
   z-index: 30;
   padding: 16px;
   border-radius: 8px;
+  max-height: 80dvh;
+  overflow-y: auto;
 }
 .opt__close {
   position: absolute;
@@ -607,7 +609,7 @@ h3 {
 }
 .opt__inputs-wrapper {
   display: grid;
-  grid-template-columns: 10fr 1.25fr 0.75fr;
+  grid-template-columns: 10fr 2.5ch 0.75fr 3ch;
   gap: 8px;
 }
 .opt__inputs-wrapper input[type=checkbox] {
@@ -615,6 +617,9 @@ h3 {
   transform: translateY(-4px);
   width: 100%;
   aspect-ratio: 1/1;
+}
+.opt__inputs-wrapper input[type=checkbox]:focus-visible {
+  outline: 2px solid rgb(52, 203, 254);
 }
 .opt__btn {
   margin-top: 32px;

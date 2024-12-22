@@ -83,7 +83,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore } from '@/store/useStore';
-import OptionsHotkeys from './Options/OptionsHotkeys.vue';
+import OptionsHotkeys from './Options/hotkeys/OptionsHotkeys.vue';
 import OptionsSettings from './Options/OptionsSettings.vue';
 
 export default defineComponent({
