@@ -103,10 +103,16 @@ li {
 	list-style: none;
 }
 
+// убрать стрелочки
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
+}
+
+input[type='number'] {
+	-moz-appearance: textfield;
+	appearance: textfield;
 }
 
 svg {
@@ -117,7 +123,7 @@ svg {
 /* Firefox */
 * {
 	scrollbar-width: 15px;
-	scrollbar-color: $color-text-400 transparent;
+	scrollbar-color: $color-text-900 transparent;
 }
 
 /* Chrome, Edge, and Safari */
@@ -126,11 +132,11 @@ svg {
 }
 
 *::-webkit-scrollbar-track {
-	background: $color-bg-800;
+	background: $color-text-900;
 }
 
 *::-webkit-scrollbar-thumb {
-	background-color: $color-text-400;
+	background-color: $color-text-900;
 	border-radius: 10px;
-	border: 3px none $color-text-400;
+	border: 3px none $color-text-900;
 }

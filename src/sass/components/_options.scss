@@ -47,7 +47,7 @@
 		gap: 8px;
 
 		& input[type='checkbox'] {
-			align-self: end;
+			align-self: flex-end;
 			transform: translateY(-4px);
 			width: 100%;
 			aspect-ratio: 1 / 1;

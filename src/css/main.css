@@ -110,6 +110,12 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+input[type=number] {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+          appearance: textfield;
+}
+
 svg {
   display: block;
 }
@@ -118,7 +124,7 @@ svg {
 /* Firefox */
 * {
   scrollbar-width: 15px;
-  scrollbar-color: rgb(57, 57, 57) transparent;
+  scrollbar-color: rgb(165, 165, 165) transparent;
 }
 
 /* Chrome, Edge, and Safari */
@@ -127,13 +133,13 @@ svg {
 }
 
 *::-webkit-scrollbar-track {
-  background: rgb(187, 167, 134);
+  background: rgb(165, 165, 165);
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: rgb(57, 57, 57);
+  background-color: rgb(165, 165, 165);
   border-radius: 10px;
-  border: 3px none rgb(57, 57, 57);
+  border: 3px none rgb(165, 165, 165);
 }
 
 body {
@@ -341,7 +347,7 @@ h3 {
   margin-bottom: 2px;
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: flex-end;
 }
 .canvas__day-header {
   display: grid;
@@ -355,7 +361,7 @@ h3 {
 .canvas__icon {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 4px;
   flex: 1 1 auto;
 }
@@ -613,7 +619,7 @@ h3 {
   gap: 8px;
 }
 .opt__inputs-wrapper input[type=checkbox] {
-  align-self: end;
+  align-self: flex-end;
   transform: translateY(-4px);
   width: 100%;
   aspect-ratio: 1/1;
