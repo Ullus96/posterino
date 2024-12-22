@@ -22,7 +22,7 @@
 				:key="time.uuid"
 			>
 				<input
-					type="text"
+					type="number"
 					class="canvas__hours"
 					placeholder="чч"
 					ref="hh"
@@ -31,7 +31,7 @@
 					@input="timeInputSwitch"
 				/>
 				<input
-					type="text"
+					type="number"
 					class="canvas__minutes"
 					placeholder="мм"
 					ref="mm"
@@ -102,10 +102,8 @@ export default defineComponent({
 		}
 
 		// Input switch
-		function timeInputSwitch(element: InputEvent | null) {
-			if (!element) return;
-
-			const inputElement = element.target as HTMLInputElement;
+		function timeInputSwitch(event: Event) {
+			const inputElement = event.target as HTMLInputElement;
 			const data = inputElement.value;
 
 			console.log(data.length);
