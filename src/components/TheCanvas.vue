@@ -13,6 +13,9 @@
 			:dayIndex="idx"
 		></the-day>
 
+		<div class="canvas__empty"></div>
+		<div class="canvas__empty"></div>
+
 		<!-- <div class="canvas__empty-col">
 
 		</div> -->

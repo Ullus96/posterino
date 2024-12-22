@@ -53,12 +53,6 @@
 		line-height: 100%;
 	}
 
-	&__empty-col {
-		height: 100%;
-		width: 100%;
-		outline: 1px dashed $color-primary-900;
-	}
-
 	// single item
 	&__day {
 		width: 100%;
@@ -283,5 +277,12 @@
 				transition-delay: $i * 0.05s;
 			}
 		}
+	}
+
+	// Empty block
+	&__empty {
+		height: 50%;
+		width: 100%;
+		outline: 1px dashed $color-primary-900;
 	}
 }

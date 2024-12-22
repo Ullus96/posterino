@@ -363,11 +363,6 @@ h3 {
   font-size: 36px;
   line-height: 100%;
 }
-.canvas__empty-col {
-  height: 100%;
-  width: 100%;
-  outline: 1px dashed rgb(10, 163, 214);
-}
 .canvas__day {
   width: 100%;
 }
@@ -540,6 +535,11 @@ h3 {
 }
 .canvas__actions-wrapper .canvas__item-btn-wrapper:nth-child(3) button {
   transition-delay: 0.15s;
+}
+.canvas__empty {
+  height: 50%;
+  width: 100%;
+  outline: 1px dashed rgb(10, 163, 214);
 }
 
 .canvas {
