@@ -21,26 +21,38 @@
 	}
 
 	&__desc {
+		margin-top: 4px;
 		text-align: center;
-		margin-bottom: 15px;
+		font-weight: 300;
+		color: $color-text-700;
 	}
 
-	&__inputs {
+	&__inputs-block {
+		margin-top: 32px;
 		display: flex;
-		justify-content: space-between;
+		flex-direction: column;
+		gap: 16px;
+	}
 
-		&:not(:last-child) {
-			border-bottom: 1px solid rgba(18, 18, 18, 0.4);
-			padding-bottom: 5px;
-			margin-bottom: 5px;
+	&__inputs-element {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__inputs-wrapper {
+		display: grid;
+		grid-template-columns: 10fr 1.25fr 0.75fr;
+		gap: 8px;
+
+		& input[type='checkbox'] {
+			align-self: end;
+			transform: translateY(-4px);
+			width: 100%;
+			aspect-ratio: 1 / 1;
 		}
 	}
 
-	&__input {
-		width: 15%;
-
-		&:nth-child(1) {
-			width: 68%;
-		}
+	&__btn {
+		margin-top: 32px;
 	}
 }

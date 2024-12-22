@@ -590,23 +590,34 @@ h3 {
   text-align: center;
 }
 .opt__desc {
+  margin-top: 4px;
   text-align: center;
-  margin-bottom: 15px;
+  font-weight: 300;
+  color: rgb(116, 116, 116);
 }
-.opt__inputs {
+.opt__inputs-block {
+  margin-top: 32px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 16px;
 }
-.opt__inputs:not(:last-child) {
-  border-bottom: 1px solid rgba(18, 18, 18, 0.4);
-  padding-bottom: 5px;
-  margin-bottom: 5px;
+.opt__inputs-element {
+  display: flex;
+  flex-direction: column;
 }
-.opt__input {
-  width: 15%;
+.opt__inputs-wrapper {
+  display: grid;
+  grid-template-columns: 10fr 1.25fr 0.75fr;
+  gap: 8px;
 }
-.opt__input:nth-child(1) {
-  width: 68%;
+.opt__inputs-wrapper input[type=checkbox] {
+  align-self: end;
+  transform: translateY(-4px);
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+.opt__btn {
+  margin-top: 32px;
 }
 
 .poster {
