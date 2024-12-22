@@ -1,80 +1,48 @@
-.canvas {
-	// info
-	position: relative;
-	&__info {
-		width: 491.5px;
-		position: absolute;
-		background: $color-contrast;
-		padding: 10px;
-
-		&.bottom {
-			bottom: 2%;
-			left: calc(50% + 11.5px);
-			transform: translateX(-50%);
-		}
-
-		&.right {
-			bottom: 2%;
-			right: 2%;
-		}
+.info {
+	&__wrapper {
+		flex: 1 1 auto;
+		justify-content: flex-end;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		font-size: 18px;
 	}
 
-	&__info-header {
-		font-size: 19px;
-		text-align: center;
-		margin-bottom: 05px;
+	&__phone-address-wrapper {
+		display: flex;
+		justify-content: space-between;
 	}
 
-	&__info-link {
+	&__phone {
+		font-weight: 700;
+	}
+
+	&__socials {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 4px;
+		font-size: 16px;
+	}
+
+	&__social-item {
 		display: flex;
 		align-items: center;
-		gap: 05px;
+		justify-content: center;
+		gap: 4px;
+
+		&--single {
+			grid-column: 1 / -1;
+		}
 	}
 
-	&__info-links {
+	&__pCard-wrapper {
 		display: flex;
-		justify-content: space-around;
-		flex-wrap: wrap;
-		gap: 05px;
-		&:not(:last-child) {
-			margin-bottom: 20px;
-		}
+		align-items: center;
+		gap: 4px;
 	}
 
-	&__info {
-		&-tel,
-		&-location {
-			text-align: center;
-		}
-	}
-}
-
-.info {
-	&__controls {
-		position: absolute;
-		top: 05px;
-		left: 10px;
-		display: flex;
-		gap: 10px;
-	}
-
-	&__control-btn {
-		cursor: pointer;
-		background-color: rgba($color-contrast, 0.95);
-		border: 1px solid $color-text-100;
-		padding: 05px 08px;
-		border-radius: 05px;
-
-		&:nth-child(2) {
-			padding: 05px 07px 05px 09px;
-		}
-
-		&.active {
-			background-color: $color-success-200;
-		}
-	}
-
-	&__legend {
-		display: flex;
+	&__pCard-desc {
+		font-weight: 300;
+		font-size: 16px;
 	}
 }
