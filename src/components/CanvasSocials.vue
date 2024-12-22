@@ -1,28 +1,30 @@
 <template>
 	<div class="info__wrapper">
 		<div class="info__phone-address-wrapper">
-			<p class="info__phone">Тел. 2-17-43</p>
-			<p class="info__address">с.Одесское, ул.Ленина, д.27</p>
+			<p class="info__phone">Тел. {{ $store.state.settings.socials.tel }}</p>
+			<p class="info__address">{{ $store.state.settings.socials.address }}</p>
 		</div>
 
 		<div class="info__socials">
 			<div class="info__social-item">
 				<IconBase :width="18" :height="18">
-					<IconOk />
+					<IconVk />
 				</IconBase>
-				<p class="info__social-text">ok.ru/odesskyrkd</p>
+				<p class="info__social-text">{{ $store.state.settings.socials.vk }}</p>
 			</div>
 			<div class="info__social-item">
 				<IconBase :width="18" :height="18">
-					<IconVk />
+					<IconOk />
 				</IconBase>
-				<p class="info__social-text">vk.com/odess_kino</p>
+				<p class="info__social-text">{{ $store.state.settings.socials.ok }}</p>
 			</div>
 			<div class="info__social-item info__social-item--single">
 				<IconBase :width="18" :height="18">
 					<IconLink />
 				</IconBase>
-				<p class="info__social-text">odesskoekdc.omsk.muzkult.ru</p>
+				<p class="info__social-text">
+					{{ $store.state.settings.socials.link }}
+				</p>
 			</div>
 		</div>
 

@@ -13,6 +13,13 @@ export interface State {
 	schedule: Array<IDaySchedule> | null;
 	settings: {
 		defaultPrice: number;
+		socials: {
+			tel: string;
+			address: string;
+			ok: string;
+			vk: string;
+			link: string;
+		};
 	};
 	isEditing: boolean;
 	modal: IModalState;
@@ -24,6 +31,13 @@ export default createStore<State>({
 		schedule: null,
 		settings: {
 			defaultPrice: 150,
+			socials: {
+				tel: '2-17-43',
+				address: 'с.Одесское, ул.Ленина, д.27',
+				ok: 'ok.ru/odesskyrkd',
+				vk: 'vk.com/odess_kino',
+				link: 'odesskoekdc.omsk.muzkult.ru',
+			},
 		},
 		isEditing: true,
 		modal: {
