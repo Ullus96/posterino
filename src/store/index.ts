@@ -30,7 +30,9 @@ export default createStore<State>({
 			isHotkeysModalOpen: false,
 			isSettingsModalOpen: false,
 		},
-		hotkeys: [{ title: '', age: null, pCard: null, uuid: generateUUID() }],
+		hotkeys: [
+			{ title: '', age: null, pCard: null, uuid: generateUUID(), price: 150 },
+		],
 	},
 	mutations: {
 		setSchedule(state, payload: Array<IDaySchedule>) {
@@ -165,7 +167,15 @@ export default createStore<State>({
 					age: null,
 					pCard: null,
 					uuid: generateUUID(),
+					price: state.settings.defaultPrice,
 				});
+			}
+		},
+
+		updateHotkey(state, payload: { hotkeyData: IHotkey; hotkeyIndex: number }) {
+			const { hotkeyData, hotkeyIndex } = payload;
+			if (hotkeyIndex >= 0 && hotkeyIndex < state.hotkeys.length) {
+				state.hotkeys[hotkeyIndex] = hotkeyData;
 			}
 		},
 	},
