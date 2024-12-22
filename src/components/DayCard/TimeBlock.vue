@@ -20,13 +20,14 @@
 				class="canvas__time editable"
 				v-for="(time, index) in filmData.timeSlots"
 				:key="time.uuid"
+				ref="timeSlotRefs"
 			>
 				<input
 					type="number"
 					class="canvas__hours"
 					placeholder="чч"
 					ref="hh"
-					v-model="editTimes[index].hours"
+					v-model="editableTimeSlots[index].hours"
 					@keydown.backspace="removeTimeSlot($event, index)"
 					@input="timeInputSwitch"
 				/>
@@ -35,7 +36,7 @@
 					class="canvas__minutes"
 					placeholder="мм"
 					ref="mm"
-					v-model="editTimes[index].minutes"
+					v-model="editableTimeSlots[index].minutes"
 					@keydown.enter="addNewTimeSlot"
 				/>
 			</div>
@@ -44,7 +45,15 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, reactive, Ref, ref } from 'vue';
+import {
+	computed,
+	defineComponent,
+	nextTick,
+	PropType,
+	reactive,
+	Ref,
+	ref,
+} from 'vue';
 import { ISingleFilm } from '@/types/films';
 import { useStore } from '@/store/useStore';
 
@@ -65,6 +74,7 @@ export default defineComponent({
 	},
 	setup(props, context) {
 		const store = useStore();
+		const timeSlotRefs: Ref<Array<HTMLDivElement | null>> = ref([]);
 
 		function formatDateString(data: number | undefined): string {
 			if (data) {
@@ -74,18 +84,29 @@ export default defineComponent({
 			}
 		}
 
-		const editTimes = computed(() => {
+		const editableTimeSlots = computed(() => {
 			return props.filmData.timeSlots.map((time) => {
 				return time;
 			});
 		});
 
-		function addNewTimeSlot(event: KeyboardEvent) {
-			const input = event.target as HTMLInputElement;
-
+		async function addNewTimeSlot(event: KeyboardEvent) {
 			store.commit('addNewTimeSlot', {
 				dayIndex: props.dayIndex,
 				filmIndex: props.filmIndex,
+			});
+
+			await nextTick(() => {
+				console.log(`inside of nextTick`);
+				const lastTimeSlot = timeSlotRefs.value[timeSlotRefs.value.length - 1];
+				console.log(`${timeSlotRefs.value}`);
+				const hoursInput = lastTimeSlot?.querySelector(
+					'.canvas__hours'
+				) as HTMLInputElement;
+
+				if (hoursInput) {
+					hoursInput.focus();
+				}
 			});
 		}
 
@@ -116,10 +137,11 @@ export default defineComponent({
 
 		return {
 			formatDateString,
-			editTimes,
+			editableTimeSlots,
 			addNewTimeSlot,
 			removeTimeSlot,
 			timeInputSwitch,
+			timeSlotRefs,
 		};
 	},
 });
