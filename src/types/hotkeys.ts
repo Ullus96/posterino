@@ -1,7 +1,6 @@
 export interface IHotkey {
 	title: string;
-	age: number | null;
-	pCard: boolean | number | null;
+	age?: number | null;
+	pCard?: boolean | null;
+	uuid: string;
 }
-
-export type Hotkeys = Array<IHotkey>;

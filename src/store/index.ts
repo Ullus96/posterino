@@ -1,7 +1,7 @@
 import { createStore } from 'vuex';
 import moment from 'moment';
 import { ISingleFilm, IDaySchedule } from '@/types/films';
-import { Hotkeys } from '@/types/hotkeys';
+import { IHotkey } from '@/types/hotkeys';
 import { generateUUID } from '@/utilities/UUID';
 
 export interface IModalState {
@@ -11,18 +11,17 @@ export interface IModalState {
 
 export interface State {
 	schedule: Array<IDaySchedule> | null;
-	hotkeys: Hotkeys | null;
 	settings: {
 		defaultPrice: number;
 	};
 	isEditing: boolean;
 	modal: IModalState;
+	hotkeys: Array<IHotkey>;
 }
 
 export default createStore<State>({
 	state: {
 		schedule: null,
-		hotkeys: null,
 		settings: {
 			defaultPrice: 150,
 		},
@@ -31,6 +30,7 @@ export default createStore<State>({
 			isHotkeysModalOpen: false,
 			isSettingsModalOpen: false,
 		},
+		hotkeys: [{ title: '', age: null, pCard: null, uuid: generateUUID() }],
 	},
 	mutations: {
 		setSchedule(state, payload: Array<IDaySchedule>) {
@@ -156,6 +156,17 @@ export default createStore<State>({
 			}
 
 			state.modal[name] = !state.modal[name];
+		},
+
+		createNewHotkey(state) {
+			if (state.hotkeys.length < 10) {
+				state.hotkeys.push({
+					title: '',
+					age: null,
+					pCard: null,
+					uuid: generateUUID(),
+				});
+			}
 		},
 	},
 });

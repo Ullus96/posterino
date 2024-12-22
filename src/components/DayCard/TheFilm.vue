@@ -126,7 +126,6 @@ import {
 	PropType,
 } from 'vue';
 import { useStore } from '@/store/useStore';
-import { Hotkeys } from '@/types/hotkeys';
 import AgeRestrictionLabel from '@/components/ui/AgeRestrictionLabel.vue';
 import PushkinCardLabel from '@/components/ui/PushkinCardLabel.vue';
 import TimeBlock from '@/components/DayCard/TimeBlock.vue';
@@ -219,8 +218,6 @@ export default defineComponent({
 		}
 
 		// hotkeys
-		const hotkeys: Hotkeys | undefined = inject('hotkeys');
-
 		function useHotkey(i: number) {
 			// if (!hotkeys || !hotkeys[i]) return;
 			// filmData.title = hotkeys[i].title;
@@ -289,7 +286,6 @@ export default defineComponent({
 			age,
 			pCard,
 			price,
-			hotkeys,
 			useHotkey,
 			resizeTextarea,
 			handleFilmRemoving,
