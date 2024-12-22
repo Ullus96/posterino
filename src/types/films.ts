@@ -7,10 +7,8 @@ export interface ITimeSlot {
 export interface ISingleFilm {
 	timeSlots: ITimeSlot[];
 	title: string;
-	meta?: {
-		age?: number | null;
-		pCard?: boolean | null;
-	};
+	age: number | null;
+	pCard: boolean | null;
 	price: number;
 	uuid: string;
 }

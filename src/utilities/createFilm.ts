@@ -17,6 +17,8 @@ export function getEmptyFilm(store: Store<State>): ISingleFilm {
 			},
 		],
 		title: '',
+		age: null,
+		pCard: null,
 		price: store.state.settings.defaultPrice,
 		uuid: generateUUID(),
 	};
@@ -34,10 +36,8 @@ export function getMockFilm(): ISingleFilm {
 			},
 		],
 		title: getRandomFilm(filmPool),
-		meta: {
-			age: randomNumInRange(8, 11),
-			pCard: randomTrueOrFalse(),
-		},
+		age: randomNumInRange(8, 11),
+		pCard: randomTrueOrFalse(),
 		price: randomNumInRange(75, 225),
 		uuid: generateUUID(),
 	};

@@ -15,8 +15,8 @@
 			</div>
 
 			<div class="canvas__techincal-info">
-				<AgeRestrictionLabel :age="filmData.meta?.age" />
-				<PushkinCardLabel :pCard="Boolean(filmData.meta?.pCard)" />
+				<AgeRestrictionLabel :age="filmData.age ? filmData.age : 0" />
+				<PushkinCardLabel :pCard="Boolean(filmData.pCard)" />
 			</div>
 
 			<v-divider vertical></v-divider>
@@ -44,11 +44,7 @@
 					placeholder="Фильм"
 					ref="title"
 					v-model="newData.title"
-					@keydown.alt.1="useHotkey(0)"
-					@keydown.alt.2="useHotkey(1)"
-					@keydown.alt.3="useHotkey(2)"
-					@keydown.alt.4="useHotkey(3)"
-					@keydown.alt.5="useHotkey(4)"
+					@keydown="handleHotkey"
 					@input="resizeTextarea"
 				/>
 			</div>
@@ -58,15 +54,14 @@
 					type="number"
 					placeholder="лет"
 					ref="age"
-					v-model="newData.meta.age"
-					@keyup.+="ageSwitch()"
+					v-model="newData.age"
 				/>
 				<input
 					type="checkbox"
 					placeholder="пк?"
 					ref="pCard"
-					v-model="newData.meta.pCard"
-					@keyup="pCardSwitch()"
+					v-model="newData.pCard"
+					@keyup.space="pCardSwitch()"
 				/>
 			</div>
 
@@ -147,7 +142,7 @@ export default defineComponent({
 			type: Number,
 		},
 	},
-	setup(props, context) {
+	setup(props) {
 		const store = useStore();
 
 		const mm: Ref<null | HTMLInputElement> = ref(null);
@@ -159,10 +154,8 @@ export default defineComponent({
 		const newData = reactive<ISingleFilm>({
 			timeSlots: props.filmData.timeSlots,
 			title: props.filmData.title,
-			meta: {
-				age: props.filmData.meta?.age || null,
-				pCard: props.filmData.meta?.pCard || null,
-			},
+			age: props.filmData.age,
+			pCard: props.filmData.pCard,
 			price: props.filmData.price,
 			uuid: props.filmData.uuid,
 		});
@@ -204,12 +197,6 @@ export default defineComponent({
 			// }
 		}
 
-		function ageSwitch() {
-			// if (pCard.value) {
-			// 	pCard.value.focus();
-			// }
-		}
-
 		function pCardSwitch() {
 			// if (filmData.pCard && price.value) {
 			// 	price.value.focus();
@@ -218,17 +205,30 @@ export default defineComponent({
 		}
 
 		// hotkeys
-		function useHotkey(i: number) {
-			// if (!hotkeys || !hotkeys[i]) return;
-			// filmData.title = hotkeys[i].title;
-			// // @ts-expect-error
-			// filmData.age = hotkeys[i].age || null;
-			// // @ts-expect-error
-			// filmData.pCard = hotkeys[i].pCard || null;
-			// if (filmData.title && price.value) {
-			// 	price.value.focus();
-			// 	price.value.select();
-			// }
+		function handleHotkey(event: KeyboardEvent) {
+			if (event.altKey) {
+				const key = Number(event.key);
+				if (key >= 1 && key <= 9) {
+					useHotkey(key - 1);
+				}
+			}
+		}
+
+		async function useHotkey(i: number) {
+			console.log(`used hotkey ${i}`);
+			const hotkeyData = store.state.hotkeys[i];
+
+			if (!hotkeyData) return;
+			console.log(`found hotkeyData at index ${i}`, hotkeyData);
+			const { title: filmTitle, age, pCard, price } = hotkeyData;
+
+			newData.title = filmTitle;
+			newData.age = age ?? null;
+			newData.pCard = pCard ?? null;
+			newData.price = price;
+
+			await nextTick();
+			setHeight(title.value);
 		}
 
 		function isHTMLTextAreaElement(
@@ -237,13 +237,18 @@ export default defineComponent({
 			return el instanceof HTMLTextAreaElement;
 		}
 
+		function setHeight(el: HTMLTextAreaElement | EventTarget | null) {
+			if (isHTMLTextAreaElement(el)) {
+				el.style.height = 'auto';
+				el.style.height = `${el.scrollHeight}px`;
+				console.log(`triggered setHeight for ${el}`);
+			}
+		}
+
 		function resizeTextarea(event: Event) {
 			const textarea = event.target;
 
-			if (isHTMLTextAreaElement(textarea)) {
-				textarea.style.height = 'auto';
-				textarea.style.height = `${textarea.scrollHeight}px`;
-			}
+			setHeight(textarea);
 		}
 
 		watch(
@@ -252,10 +257,7 @@ export default defineComponent({
 				if (newVal) {
 					await nextTick();
 
-					if (isHTMLTextAreaElement(title.value)) {
-						title.value.style.height = 'auto';
-						title.value.style.height = `${title.value.scrollHeight}px`;
-					}
+					setHeight(title.value);
 				}
 			}
 		);
@@ -263,10 +265,7 @@ export default defineComponent({
 		onMounted(async () => {
 			await nextTick();
 
-			if (isHTMLTextAreaElement(title.value)) {
-				title.value.style.height = 'auto';
-				title.value.style.height = `${title.value.scrollHeight}px`;
-			}
+			setHeight(title.value);
 		});
 
 		function handleFilmRemoving() {
@@ -279,13 +278,13 @@ export default defineComponent({
 		return {
 			newData,
 			timeInputSwitch,
-			ageSwitch,
 			pCardSwitch,
 			mm,
 			title,
 			age,
 			pCard,
 			price,
+			handleHotkey,
 			useHotkey,
 			resizeTextarea,
 			handleFilmRemoving,

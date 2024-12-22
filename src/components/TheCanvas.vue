@@ -33,6 +33,8 @@
 			<br />
 			<br />
 			{{ store.state.hotkeys }}
+			<br />
+			{{ store.state.schedule[store.state.schedule?.length - 1] }}
 		</div>
 
 		<CanvasSocials />
