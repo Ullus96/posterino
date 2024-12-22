@@ -28,7 +28,7 @@
 					placeholder="чч"
 					ref="hh"
 					v-model="editableTimeSlots[index].hours"
-					@keydown.backspace="removeTimeSlot($event, index)"
+					@keyup.backspace="removeTimeSlot($event, index)"
 					@input="timeInputSwitch"
 				/>
 				<input
@@ -37,7 +37,7 @@
 					placeholder="мм"
 					ref="mm"
 					v-model="editableTimeSlots[index].minutes"
-					@keydown.enter="addNewTimeSlot"
+					@keyup.enter="addNewTimeSlot"
 				/>
 			</div>
 		</div>
@@ -90,16 +90,14 @@ export default defineComponent({
 			});
 		});
 
-		async function addNewTimeSlot(event: KeyboardEvent) {
+		function addNewTimeSlot(event: KeyboardEvent) {
 			store.commit('addNewTimeSlot', {
 				dayIndex: props.dayIndex,
 				filmIndex: props.filmIndex,
 			});
 
-			await nextTick(() => {
-				console.log(`inside of nextTick`);
+			nextTick(() => {
 				const lastTimeSlot = timeSlotRefs.value[timeSlotRefs.value.length - 1];
-				console.log(`${timeSlotRefs.value}`);
 				const hoursInput = lastTimeSlot?.querySelector(
 					'.canvas__hours'
 				) as HTMLInputElement;
@@ -118,6 +116,19 @@ export default defineComponent({
 					dayIndex: props.dayIndex,
 					filmIndex: props.filmIndex,
 					timeSlotIndex,
+				});
+
+				nextTick(() => {
+					if (timeSlotIndex > 0) {
+						const prevTimeSlot = timeSlotRefs.value[timeSlotIndex - 1];
+						const hoursInputEl = prevTimeSlot?.querySelector(
+							'.canvas__hours'
+						) as HTMLInputElement;
+
+						if (hoursInputEl) {
+							hoursInputEl.focus();
+						}
+					}
 				});
 			}
 		}
