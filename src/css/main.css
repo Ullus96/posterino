@@ -58,6 +58,16 @@
   box-sizing: inherit;
 }
 
+#app-body {
+  overflow-x: auto;
+}
+
+@media (width < 1320px) {
+  .v-main {
+    padding-right: 64px !important;
+  }
+}
+
 .link {
   color: rgb(112, 219, 255);
   text-decoration: underline;
@@ -308,12 +318,34 @@ h3 {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  flex: 0 0 auto;
   gap: 20px 40px;
   color: rgb(18, 18, 18);
   line-height: 120%;
+  overflow-y: hidden;
+}
+@media (width < 1320px) {
+  .canvas {
+    scale: 90%;
+  }
+}
+@media (width < 1220px) {
+  .canvas {
+    scale: 75%;
+  }
+}
+@media (width < 1060px) {
+  .canvas {
+    scale: 68.75%;
+  }
+}
+@media (width < 950px) {
+  .canvas {
+    scale: 62.5%;
+  }
 }
 .canvas > * {
-  max-width: calc(33.333% - 26px);
+  max-width: calc(33.333% - 27px);
 }
 .canvas__header-wrapper {
   display: flex;
@@ -719,4 +751,9 @@ h3 {
   align-items: center;
   font-size: 19px;
   z-index: 30;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
 }/*# sourceMappingURL=main.css.map */

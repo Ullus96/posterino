@@ -1,5 +1,10 @@
 <template>
-	<v-navigation-drawer width="64" location="right" class="bg-secondary">
+	<v-navigation-drawer
+		width="64"
+		location="right"
+		class="bg-secondary"
+		permanent
+	>
 		<v-list nav>
 			<v-list-item>
 				<v-btn

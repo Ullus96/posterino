@@ -8,12 +8,30 @@
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
+	flex: 0 0 auto;
 	gap: 20px 40px;
 	color: $color-text-100;
 	line-height: 120%;
+	overflow-y: hidden;
+
+	@media (width < 1320px) {
+		scale: 90%;
+	}
+
+	@media (width < 1220px) {
+		scale: 75%;
+	}
+
+	@media (width < 1060px) {
+		scale: 68.75%;
+	}
+
+	@media (width < 950px) {
+		scale: 62.5%;
+	}
 
 	& > * {
-		max-width: calc(33.333% - 26px);
+		max-width: calc(33.333% - 27px);
 	}
 
 	&__header-wrapper {

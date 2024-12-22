@@ -13,33 +13,9 @@
 			:dayIndex="idx"
 		></the-day>
 
-		<div class="canvas__empty-col">
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			{{ store.state.hotkeys }}
-			<br />
-			{{ store.state.schedule[store.state.schedule?.length - 1] }}
-			<br />
-			<br />
-			<br />
-			{{ store.state }}
-		</div>
+		<!-- <div class="canvas__empty-col">
+
+		</div> -->
 
 		<CanvasSocials />
 	</div>

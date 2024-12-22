@@ -51,6 +51,16 @@
 // 	color: inherit;
 // }
 
+#app-body {
+	overflow-x: auto;
+}
+
+.v-main {
+	@media (width < 1320px) {
+		padding-right: 64px !important;
+	}
+}
+
 .link {
 	@include link;
 }
