@@ -61,7 +61,6 @@
 					placeholder="пк?"
 					ref="pCard"
 					v-model="newData.pCard"
-					@keyup.space="pCardSwitch()"
 				/>
 			</div>
 
@@ -145,7 +144,6 @@ export default defineComponent({
 	setup(props) {
 		const store = useStore();
 
-		const mm: Ref<null | HTMLInputElement> = ref(null);
 		const title: Ref<null | HTMLTextAreaElement> = ref(null);
 		const age: Ref<null | HTMLInputElement> = ref(null);
 		const pCard: Ref<null | HTMLInputElement> = ref(null);
@@ -172,38 +170,6 @@ export default defineComponent({
 			{ deep: true }
 		);
 
-		/*
-    filmData: ISingleFilm = {
-        time: [[12, 55]],
-        title: "Фильм",
-        meta: {
-          age: 9,
-          pCard: true,
-        },
-        price: 150,
-      };
-    */
-
-		function timeInputSwitch(field: string) {
-			// if (field === 'hh' && String(filmData.hh).length === 2 && mm.value) {
-			// 	mm.value.focus();
-			// } else if (
-			// 	field === 'mm' &&
-			// 	// @ts-expect-error
-			// 	String(filmData.mm).length === 2 &&
-			// 	title.value
-			// ) {
-			// 	title.value.focus();
-			// }
-		}
-
-		function pCardSwitch() {
-			// if (filmData.pCard && price.value) {
-			// 	price.value.focus();
-			// 	price.value.select();
-			// }
-		}
-
 		// hotkeys
 		function handleHotkey(event: KeyboardEvent) {
 			if (event.altKey) {
@@ -215,11 +181,9 @@ export default defineComponent({
 		}
 
 		async function useHotkey(i: number) {
-			console.log(`used hotkey ${i}`);
 			const hotkeyData = store.state.hotkeys[i];
 
 			if (!hotkeyData) return;
-			console.log(`found hotkeyData at index ${i}`, hotkeyData);
 			const { title: filmTitle, age, pCard, price } = hotkeyData;
 
 			newData.title = filmTitle;
@@ -241,7 +205,6 @@ export default defineComponent({
 			if (isHTMLTextAreaElement(el)) {
 				el.style.height = 'auto';
 				el.style.height = `${el.scrollHeight}px`;
-				console.log(`triggered setHeight for ${el}`);
 			}
 		}
 
@@ -277,9 +240,6 @@ export default defineComponent({
 
 		return {
 			newData,
-			timeInputSwitch,
-			pCardSwitch,
-			mm,
 			title,
 			age,
 			pCard,

@@ -28,6 +28,7 @@
 					ref="hh"
 					v-model="editTimes[index].hours"
 					@keydown.backspace="removeTimeSlot($event, index)"
+					@input="timeInputSwitch"
 				/>
 				<input
 					type="text"
@@ -100,7 +101,28 @@ export default defineComponent({
 			}
 		}
 
-		return { formatDateString, editTimes, addNewTimeSlot, removeTimeSlot };
+		// Input switch
+		function timeInputSwitch(element: InputEvent | null) {
+			if (!element) return;
+
+			const inputElement = element.target as HTMLInputElement;
+			const data = inputElement.value;
+
+			console.log(data.length);
+			if (data && data.length === 2) {
+				const mmInputElement =
+					inputElement.nextElementSibling as HTMLInputElement;
+				mmInputElement.focus();
+			}
+		}
+
+		return {
+			formatDateString,
+			editTimes,
+			addNewTimeSlot,
+			removeTimeSlot,
+			timeInputSwitch,
+		};
 	},
 });
 </script>
