@@ -726,6 +726,7 @@ h3 {
 .empty {
   height: 50%;
   width: 100%;
+  transition: 0.15s ease-in-out height;
 }
 .empty.editable {
   outline: 1px dashed rgb(10, 163, 214);
@@ -738,14 +739,21 @@ h3 {
   color: rgb(116, 116, 116);
   font-size: 16px;
   padding: 8px 12px 4px 12px;
-  height: auto;
-  transition: 0.15s ease-in-out height;
+  max-height: 200px;
+  transform: rotateX(0deg);
+  transition: 0.15s ease-in-out max-height, 0.15s ease-in-out transform;
 }
-.empty__desc.hide {
-  height: 0;
+.empty__desc.compact {
+  max-height: 0;
+  transform: rotateX(90deg);
+  padding: 0;
 }
 .empty__btn {
   margin-top: 8px;
+}
+.empty__btn.compact {
+  margin-top: 0;
+  height: 28px !important;
 }
 
 .content {
