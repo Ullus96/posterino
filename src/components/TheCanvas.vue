@@ -15,12 +15,14 @@
 			@addEmptyBlock="addEmptyBlock"
 		></the-day>
 
-		<EmptyBlock
-			v-for="(item, index) in emptyBlocks"
-			:key="item"
-			:blockIndex="index"
-			@removeEmptyBlock="removeEmptyBlock(index)"
-		/>
+		<transition-group name="empty-blocks">
+			<EmptyBlock
+				v-for="(item, index) in emptyBlocks"
+				:key="item"
+				:blockIndex="index"
+				@removeEmptyBlock="removeEmptyBlock(index)"
+			/>
+		</transition-group>
 
 		<!-- <div class="canvas__empty-col">
 
@@ -99,4 +101,21 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.empty-blocks-enter-active,
+.empty-blocks-leave-active {
+	transition: 0.15s ease-in-out opacity, 0.15s ease-in-out transform;
+}
+
+.empty-blocks-enter-from,
+.empty-blocks-leave-to {
+	opacity: 0;
+	transform: translateX(-20px);
+}
+
+.empty-blocks-enter-to,
+.empty-blocks-leave-from {
+	opacity: 1;
+	transform: translate(0);
+}
+</style>
