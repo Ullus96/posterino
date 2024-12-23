@@ -15,7 +15,12 @@
 			@addEmptyBlock="addEmptyBlock"
 		></the-day>
 
-		<EmptyBlock v-for="(item, index) in emptyBlocks" :key="item" />
+		<EmptyBlock
+			v-for="(item, index) in emptyBlocks"
+			:key="item"
+			:blockIndex="index"
+			@removeEmptyBlock="removeEmptyBlock(index)"
+		/>
 
 		<!-- <div class="canvas__empty-col">
 
@@ -74,7 +79,6 @@ export default defineComponent({
 		const emptyBlocks = reactive<string[]>([]);
 
 		function addEmptyBlock() {
-			console.log(`Look! I'm addEmptyBlock`);
 			const uuid = generateUUID();
 			emptyBlocks.push(uuid);
 		}

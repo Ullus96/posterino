@@ -45,6 +45,7 @@
 				variant="text"
 				prepend-icon="mdi-trash-can"
 				color="color-danger-200"
+				@click="$emit('removeEmptyBlock', blockIndex)"
 				>Удалить</v-btn
 			>
 		</template>
@@ -55,6 +56,12 @@
 import { defineComponent, ref, Ref } from 'vue';
 
 export default defineComponent({
+	props: {
+		blockIndex: {
+			required: true,
+			type: Number,
+		},
+	},
 	setup() {
 		const height: Ref<number> = ref(20);
 
