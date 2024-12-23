@@ -322,7 +322,6 @@ h3 {
   gap: 20px 40px;
   color: rgb(18, 18, 18);
   line-height: 120%;
-  overflow-y: hidden;
 }
 @media (width < 1320px) {
   .canvas {
