@@ -1,0 +1,30 @@
+.empty {
+	height: 50%;
+	width: 100%;
+
+	&.editable {
+		outline: 1px dashed $color-primary-900;
+	}
+
+	&__btns-wrapper {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+	}
+
+	&__desc {
+		color: $color-text-700;
+		font-size: 16px;
+		padding: 8px 12px 4px 12px;
+		height: auto;
+
+		transition: 0.15s ease-in-out height;
+
+		&.hide {
+			height: 0;
+		}
+	}
+
+	&__btn {
+		margin-top: 8px;
+	}
+}

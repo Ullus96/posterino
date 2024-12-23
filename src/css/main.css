@@ -536,11 +536,6 @@ h3 {
 .canvas__actions-wrapper .canvas__item-btn-wrapper:nth-child(3) button {
   transition-delay: 0.15s;
 }
-.canvas__empty {
-  height: 50%;
-  width: 100%;
-  outline: 1px dashed rgb(10, 163, 214);
-}
 
 .info__wrapper {
   flex: 1 1 auto;
@@ -726,6 +721,31 @@ h3 {
   align-items: center;
   font-size: 19px;
   z-index: 30;
+}
+
+.empty {
+  height: 50%;
+  width: 100%;
+}
+.empty.editable {
+  outline: 1px dashed rgb(10, 163, 214);
+}
+.empty__btns-wrapper {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.empty__desc {
+  color: rgb(116, 116, 116);
+  font-size: 16px;
+  padding: 8px 12px 4px 12px;
+  height: auto;
+  transition: 0.15s ease-in-out height;
+}
+.empty__desc.hide {
+  height: 0;
+}
+.empty__btn {
+  margin-top: 8px;
 }
 
 .content {

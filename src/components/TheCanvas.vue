@@ -13,8 +13,7 @@
 			:dayIndex="idx"
 		></the-day>
 
-		<div class="canvas__empty"></div>
-		<div class="canvas__empty"></div>
+		<EmptyBlock v-for="i in 2" :key="i" />
 
 		<!-- <div class="canvas__empty-col">
 
@@ -31,11 +30,13 @@ import CanvasSocials from './CanvasSocials.vue';
 import moment from 'moment';
 import { useStore } from '@/store/useStore';
 import { IDaySchedule } from '@/types/films';
+import EmptyBlock from '@/components/DayCard/EmptyBlock.vue';
 
 export default defineComponent({
 	components: {
 		TheDay,
 		CanvasSocials,
+		EmptyBlock,
 	},
 	setup() {
 		const store = useStore();
