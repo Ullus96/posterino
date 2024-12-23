@@ -12,9 +12,10 @@
 			:dayData="item"
 			:dayIndex="idx"
 			:totalIndexes="scheduleData.length - 1"
+			@addEmptyBlock="addEmptyBlock"
 		></the-day>
 
-		<EmptyBlock v-for="i in 2" :key="i" />
+		<EmptyBlock v-for="(item, index) in emptyBlocks" :key="item" />
 
 		<!-- <div class="canvas__empty-col">
 
@@ -32,6 +33,7 @@ import moment from 'moment';
 import { useStore } from '@/store/useStore';
 import { IDaySchedule } from '@/types/films';
 import EmptyBlock from '@/components/DayCard/EmptyBlock.vue';
+import { generateUUID } from '@/utilities/UUID';
 
 export default defineComponent({
 	components: {
@@ -68,10 +70,26 @@ export default defineComponent({
 			return result;
 		});
 
+		// Empty blocks
+		const emptyBlocks = reactive<string[]>([]);
+
+		function addEmptyBlock() {
+			console.log(`Look! I'm addEmptyBlock`);
+			const uuid = generateUUID();
+			emptyBlocks.push(uuid);
+		}
+
+		function removeEmptyBlock(blockIndex: number) {
+			emptyBlocks.splice(blockIndex, 1);
+		}
+
 		return {
 			store,
 			scheduleData,
 			dateTextFormat,
+			emptyBlocks,
+			addEmptyBlock,
+			removeEmptyBlock,
 		};
 	},
 });

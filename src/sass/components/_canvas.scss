@@ -55,6 +55,7 @@
 
 	// single item
 	&__day {
+		position: relative;
 		width: 100%;
 
 		&.editable {
@@ -277,5 +278,30 @@
 				transition-delay: $i * 0.05s;
 			}
 		}
+	}
+
+	&__last-day-btns-wrapper {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 100%;
+		display: flex;
+		justify-content: center;
+		transform-origin: top;
+		transform: rotateX(90deg);
+		opacity: 0;
+		z-index: 20;
+
+		transition: ease-in-out 0.15s transform, ease-in-out 0.15s opacity;
+	}
+
+	&__last-day-btn {
+		margin-top: 12px;
+		margin-bottom: 12px;
+	}
+
+	&__day.editable:hover .canvas__last-day-btns-wrapper {
+		transform: rotateX(0deg);
+		opacity: 1;
 	}
 }

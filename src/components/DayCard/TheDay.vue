@@ -78,6 +78,15 @@
 		></the-film>
 		<no-films v-else></no-films>
 		<!-- end of single line -->
+		<div class="canvas__last-day-btns-wrapper" v-if="dayIndex === totalIndexes">
+			<v-btn
+				class="canvas__last-day-btn"
+				prepend-icon="mdi-plus"
+				color="color-primary-500"
+				@click="$emit('addEmptyBlock')"
+				>Добавить пустой блок</v-btn
+			>
+		</div>
 	</div>
 	<!-- end of single day -->
 </template>
@@ -99,6 +108,7 @@ import { IDaySchedule } from '@/types/films';
 import { useStore } from '@/store/useStore';
 import moment from 'moment';
 import { getEmptyFilm, getMockFilm } from '@/utilities/createFilm';
+import { generateUUID } from '@/utilities/UUID';
 
 export default defineComponent({
 	props: {

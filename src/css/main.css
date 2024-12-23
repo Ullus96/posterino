@@ -364,6 +364,7 @@ h3 {
   line-height: 100%;
 }
 .canvas__day {
+  position: relative;
   width: 100%;
 }
 .canvas__day.editable {
@@ -536,6 +537,27 @@ h3 {
 .canvas__actions-wrapper .canvas__item-btn-wrapper:nth-child(3) button {
   transition-delay: 0.15s;
 }
+.canvas__last-day-btns-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  display: flex;
+  justify-content: center;
+  transform-origin: top;
+  transform: rotateX(90deg);
+  opacity: 0;
+  z-index: 20;
+  transition: ease-in-out 0.15s transform, ease-in-out 0.15s opacity;
+}
+.canvas__last-day-btn {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.canvas__day.editable:hover .canvas__last-day-btns-wrapper {
+  transform: rotateX(0deg);
+  opacity: 1;
+}
 
 .info__wrapper {
   flex: 1 1 auto;
@@ -563,7 +585,7 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1 1 45%;
+  flex: 1 1 calc(50% - 4px);
   gap: 4px;
 }
 .info__pCard-wrapper {
