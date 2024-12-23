@@ -110,6 +110,10 @@ export default defineComponent({
 			type: Number,
 			required: true,
 		},
+		totalIndexes: {
+			type: Number,
+			required: true,
+		},
 	},
 	components: { TheFilm, NoFilms },
 	setup(props, context) {

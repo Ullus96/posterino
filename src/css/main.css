@@ -553,8 +553,9 @@ h3 {
   font-weight: 700;
 }
 .info__socials {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 4px;
   font-size: 16px;
 }
@@ -562,10 +563,8 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 1 1 45%;
   gap: 4px;
-}
-.info__social-item--single {
-  grid-column: 1/-1;
 }
 .info__pCard-wrapper {
   display: flex;

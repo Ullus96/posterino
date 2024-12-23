@@ -11,6 +11,7 @@
 			:key="`${item.date}-${idx}`"
 			:dayData="item"
 			:dayIndex="idx"
+			:totalIndexes="scheduleData.length - 1"
 		></the-day>
 
 		<EmptyBlock v-for="i in 2" :key="i" />

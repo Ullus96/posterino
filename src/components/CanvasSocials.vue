@@ -18,7 +18,7 @@
 				</IconBase>
 				<p class="info__social-text">{{ $store.state.settings.socials.ok }}</p>
 			</div>
-			<div class="info__social-item info__social-item--single">
+			<div class="info__social-item">
 				<IconBase :width="18" :height="18">
 					<IconLink />
 				</IconBase>
