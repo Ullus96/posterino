@@ -19,7 +19,7 @@ export function getEmptyFilm(store: Store<State>): ISingleFilm {
 		title: '',
 		age: null,
 		pCard: null,
-		price: store.state.settings.defaultPrice,
+		price: store.state.settings.card.defaultPrice,
 		uuid: generateUUID(),
 	};
 

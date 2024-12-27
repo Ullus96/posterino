@@ -4,6 +4,19 @@ import { ISingleFilm, IDaySchedule } from '@/types/films';
 import { IHotkey } from '@/types/hotkeys';
 import { generateUUID } from '@/utilities/UUID';
 
+type KeyPath<T, P extends string = ''> = {
+	[K in keyof T]: T[K] extends object
+		? `${P}${K & string}` | KeyPath<T[K], `${P}${K & string}.`>
+		: `${P}${K & string}`;
+}[keyof T];
+
+type SettingsPath = KeyPath<State['settings']>;
+
+export type SettingsPayload = {
+	field: SettingsPath;
+	value: string | number;
+};
+
 export interface IModalState {
 	isHotkeysModalOpen: boolean;
 	isSettingsModalOpen: boolean;
@@ -12,7 +25,10 @@ export interface IModalState {
 export interface State {
 	schedule: Array<IDaySchedule> | null;
 	settings: {
-		defaultPrice: number;
+		card: {
+			defaultPrice: number;
+			noSessionsText: string;
+		};
 		socials: {
 			tel: string;
 			address: string;
@@ -30,7 +46,10 @@ export default createStore<State>({
 	state: {
 		schedule: null,
 		settings: {
-			defaultPrice: 150,
+			card: {
+				defaultPrice: 150,
+				noSessionsText: 'В этот день сеансов нет',
+			},
 			socials: {
 				tel: '2-17-43',
 				address: 'с.Одесское, ул.Ленина, д.27',
@@ -181,7 +200,7 @@ export default createStore<State>({
 					age: null,
 					pCard: null,
 					uuid: generateUUID(),
-					price: state.settings.defaultPrice,
+					price: state.settings.card.defaultPrice,
 				});
 			}
 		},
@@ -191,6 +210,19 @@ export default createStore<State>({
 			if (hotkeyIndex >= 0 && hotkeyIndex < state.hotkeys.length) {
 				state.hotkeys[hotkeyIndex] = hotkeyData;
 			}
+		},
+
+		updateSettings(state: State, payload: SettingsPayload) {
+			const { field, value } = payload;
+
+			const keys = field.split('.') as (keyof State['settings'])[];
+			let target = state.settings as any;
+
+			for (let i = 0; i < keys.length - 1; i++) {
+				target = target[keys[i]];
+			}
+
+			target[keys[keys.length - 1]] = value;
 		},
 	},
 });

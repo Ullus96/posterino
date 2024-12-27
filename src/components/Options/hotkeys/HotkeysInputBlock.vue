@@ -33,7 +33,7 @@
 				variant="underlined"
 				density="compact"
 				hide-details="auto"
-				:placeholder="String($store.state.settings.defaultPrice)"
+				:placeholder="String($store.state.settings.card.defaultPrice)"
 				type="number"
 				v-model="hotkeyData.price"
 				@input="updateHotkeyData"
@@ -61,7 +61,7 @@ export default defineComponent({
 			title: '',
 			age: null,
 			pCard: null,
-			price: store.state.settings.defaultPrice,
+			price: store.state.settings.card.defaultPrice,
 			uuid: store.state.hotkeys[props.hotkeyIndex].uuid,
 		});
 
