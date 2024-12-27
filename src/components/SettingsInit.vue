@@ -28,6 +28,8 @@ export default defineComponent({
 
 		store.commit('setSchedule', weekSchedule);
 
+		// Settings by default
+
 		return {};
 	},
 });

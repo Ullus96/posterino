@@ -150,13 +150,136 @@
 				<!-- End of ui -->
 
 				<!-- Socials -->
-				<v-tabs-window-item value="socials">
+				<v-tabs-window-item value="socials" class="mt-6">
+					<p>
+						Если какое-то из полей нужно скрыть, задай ему пустое значение и
+						примени.
+					</p>
+					<v-divider class="mt-4"></v-divider>
+
+					<v-text-field
+						class="pr-2 mt-6"
+						label="Телефон"
+						prefix="Тел. "
+						variant="outlined"
+						density="compact"
+						type="text"
+						persistent-hint
+						hint="Телефон (сделай пустым, чтобы скрыть)"
+						v-model="tel"
+						:append-icon="'mdi-check-bold'"
+						@click:append="
+							updateStoreSettings({
+								field: 'socials.tel',
+								value: tel,
+							})
+						"
+						@keyup.enter="
+							updateStoreSettings({
+								field: 'socials.tel',
+								value: tel,
+							})
+						"
+					></v-text-field>
+
+					<v-text-field
+						class="pr-2 mt-6"
+						label="Адрес"
+						variant="outlined"
+						density="compact"
+						type="text"
+						persistent-hint
+						hint="Адрес (сделай пустым, чтобы скрыть)"
+						v-model="address"
+						:append-icon="'mdi-check-bold'"
+						@click:append="
+							updateStoreSettings({
+								field: 'socials.address',
+								value: address,
+							})
+						"
+						@keyup.enter="
+							updateStoreSettings({
+								field: 'socials.address',
+								value: address,
+							})
+						"
+					></v-text-field>
+
+					<v-text-field
+						class="pr-2 mt-6"
+						label="ВКонтакте"
+						prefix="vk.com/"
+						variant="outlined"
+						density="compact"
+						type="text"
+						persistent-hint
+						hint="Ссылка на группу ВК (сделай пустым, чтобы скрыть)"
+						v-model="vk"
+						:append-icon="'mdi-check-bold'"
+						@click:append="
+							updateStoreSettings({
+								field: 'socials.vk',
+								value: vk,
+							})
+						"
+						@keyup.enter="
+							updateStoreSettings({
+								field: 'socials.vk',
+								value: vk,
+							})
+						"
+					></v-text-field>
+
+					<v-text-field
+						class="pr-2 mt-6"
+						label="Одноклассники"
+						prefix="ok.ru/"
+						variant="outlined"
+						density="compact"
+						type="text"
+						persistent-hint
+						hint="Ссылка на группу ОК (сделай пустым, чтобы скрыть)"
+						v-model="ok"
+						:append-icon="'mdi-check-bold'"
+						@click:append="
+							updateStoreSettings({
+								field: 'socials.ok',
+								value: ok,
+							})
+						"
+						@keyup.enter="
+							updateStoreSettings({
+								field: 'socials.ok',
+								value: ok,
+							})
+						"
+					></v-text-field>
+
+					<v-text-field
+						class="pr-2 mt-6"
+						label="Сайт"
+						variant="outlined"
+						density="compact"
+						type="text"
+						persistent-hint
+						hint="Ссылка на сайт, целиком (сделай пустым, чтобы скрыть)"
+						v-model="link"
+						:append-icon="'mdi-check-bold'"
+						@click:append="
+							updateStoreSettings({
+								field: 'socials.link',
+								value: link,
+							})
+						"
+						@keyup.enter="
+							updateStoreSettings({
+								field: 'socials.link',
+								value: link,
+							})
+						"
+					></v-text-field>
 					<ul>
-						<li>Телефон</li>
-						<li>Адрес</li>
-						<li>ВК</li>
-						<li>ОК</li>
-						<li>Ссылка</li>
 						<li>Отображать ПК?</li>
 					</ul>
 				</v-tabs-window-item>
@@ -208,11 +331,18 @@ export default defineComponent({
 		const noSessionsText: Ref<string> = ref(
 			store.state.settings.card.noSessionsText
 		);
+
 		const weekdayFontSize: Ref<number> = ref(
 			store.state.settings.ui.weekdayFontSize
 		);
 		const filmFontSize: Ref<number> = ref(store.state.settings.ui.filmFontSize);
 		const filmsGap: Ref<number> = ref(store.state.settings.ui.filmsGap);
+
+		const tel: Ref<string> = ref(store.state.settings.socials.tel);
+		const address: Ref<string> = ref(store.state.settings.socials.address);
+		const ok: Ref<string> = ref(store.state.settings.socials.ok);
+		const vk: Ref<string> = ref(store.state.settings.socials.vk);
+		const link: Ref<string> = ref(store.state.settings.socials.link);
 
 		const shouldBeNumber: Partial<SettingsPath>[] = [
 			'card.defaultPrice',
@@ -306,6 +436,11 @@ export default defineComponent({
 			weekdayFontSize,
 			filmFontSize,
 			filmsGap,
+			tel,
+			address,
+			ok,
+			vk,
+			link,
 			updateCSSVariable,
 			resetDialog,
 			resetSettingsToDefault,
