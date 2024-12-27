@@ -1,5 +1,8 @@
 <template>
-	<div class="opt elevation-8" :style="{ zIndex: zIndex, top: `${topPx}px` }">
+	<div
+		class="opt elevation-8"
+		:style="{ zIndex: zIndex, top: `${topPx}px`, width: `${width}px` }"
+	>
 		<v-btn
 			variant="text"
 			icon="mdi-close"
@@ -39,6 +42,11 @@ export default defineComponent({
 			type: Number,
 			default: 60,
 			required: false,
+		},
+		width: {
+			type: Number,
+			required: false,
+			default: 300,
 		},
 	},
 	setup(props, context) {

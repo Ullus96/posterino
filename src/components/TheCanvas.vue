@@ -24,9 +24,9 @@
 			/>
 		</transition-group>
 
-		<!-- <div class="canvas__empty-col">
-
-		</div> -->
+		<div class="div">
+			{{ $store.state.settings }}
+		</div>
 
 		<CanvasSocials />
 	</div>
@@ -36,7 +36,6 @@
 import { defineComponent, reactive, inject, Ref, ref, computed } from 'vue';
 import TheDay from './DayCard/TheDay.vue';
 import CanvasSocials from './CanvasSocials.vue';
-import moment from 'moment';
 import { useStore } from '@/store/useStore';
 import { IDaySchedule } from '@/types/films';
 import EmptyBlock from '@/components/DayCard/EmptyBlock.vue';

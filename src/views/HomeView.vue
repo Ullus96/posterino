@@ -6,7 +6,6 @@
 	></modal>
 	<the-side-menu
 		@saveScreenshot="saveScreenshot"
-		:hotkeys="hotkeys"
 	></the-side-menu>
 
 	<div class="content">
@@ -55,47 +54,12 @@ export default defineComponent({
 			imageURL.value = '';
 		}
 
-		// hotkeys
-		let hotkeys = reactive([
-			{
-				title: '',
-				age: null,
-				pCard: null,
-			},
-			{
-				title: '',
-				age: null,
-				pCard: null,
-			},
-			{
-				title: '',
-				age: null,
-				pCard: null,
-			},
-			{
-				title: '',
-				age: null,
-				pCard: null,
-			},
-			{
-				title: '',
-				age: null,
-				pCard: null,
-			},
-		]);
-		provide('hotkeys', hotkeys);
-		function showHotkeys() {
-			console.log(hotkeys);
-		}
-
 		return {
 			saveScreenshot,
 			imageURL,
 			// isScreenshotModalVisible,
 			isModalVisible,
 			closeModal,
-			hotkeys,
-			showHotkeys,
 		};
 	},
 });
