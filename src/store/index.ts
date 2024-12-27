@@ -10,7 +10,7 @@ type KeyPath<T, P extends string = ''> = {
 		: `${P}${K & string}`;
 }[keyof T];
 
-type SettingsPath = KeyPath<State['settings']>;
+export type SettingsPath = KeyPath<State['settings']>;
 
 export type SettingsPayload = {
 	field: SettingsPath;
@@ -28,6 +28,11 @@ export interface State {
 		card: {
 			defaultPrice: number;
 			noSessionsText: string;
+		};
+		ui: {
+			weekdayFontSize: number;
+			filmFontSize: number;
+			filmsGap: number;
 		};
 		socials: {
 			tel: string;
@@ -49,6 +54,11 @@ export default createStore<State>({
 			card: {
 				defaultPrice: 150,
 				noSessionsText: 'В этот день сеансов нет',
+			},
+			ui: {
+				weekdayFontSize: 28,
+				filmFontSize: 18,
+				filmsGap: 20,
 			},
 			socials: {
 				tel: '2-17-43',
