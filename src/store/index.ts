@@ -64,8 +64,8 @@ export default createStore<State>({
 			socials: {
 				tel: '2-17-43',
 				address: 'с.Одесское, ул.Ленина, д.27',
-				ok: 'ok.ru/odesskyrkd',
-				vk: 'vk.com/odess_kino',
+				ok: 'odesskyrkd',
+				vk: 'odess_kino',
 				link: 'odesskoekdc.omsk.muzkult.ru',
 				showPCard: true,
 			},
