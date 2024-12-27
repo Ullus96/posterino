@@ -29,6 +29,11 @@
 		color: $color-text-700;
 	}
 
+	&__secondary-text {
+		color: $color-text-400;
+		font-size: $ui-font-size-s;
+	}
+
 	&__inputs-block {
 		margin-top: 32px;
 		display: flex;
@@ -60,5 +65,9 @@
 
 	&__btn {
 		margin-top: 32px;
+	}
+
+	&__switch-label {
+		font-size: $ui-font-size-s;
 	}
 }

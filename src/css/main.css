@@ -631,6 +631,10 @@ h3 {
   font-weight: 300;
   color: rgb(116, 116, 116);
 }
+.opt__secondary-text {
+  color: rgb(57, 57, 57);
+  font-size: 14px;
+}
 .opt__inputs-block {
   margin-top: 32px;
   display: flex;
@@ -657,6 +661,9 @@ h3 {
 }
 .opt__btn {
   margin-top: 32px;
+}
+.opt__switch-label {
+  font-size: 14px;
 }
 
 .poster {

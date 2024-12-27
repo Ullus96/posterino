@@ -14,7 +14,7 @@ export type SettingsPath = KeyPath<State['settings']>;
 
 export type SettingsPayload = {
 	field: SettingsPath;
-	value: string | number;
+	value: string | number | boolean;
 };
 
 export interface IModalState {
@@ -40,6 +40,7 @@ export interface State {
 			ok: string;
 			vk: string;
 			link: string;
+			showPCard: boolean;
 		};
 	};
 	isEditing: boolean;
@@ -66,6 +67,7 @@ export default createStore<State>({
 				ok: 'ok.ru/odesskyrkd',
 				vk: 'vk.com/odess_kino',
 				link: 'odesskoekdc.omsk.muzkult.ru',
+				showPCard: true,
 			},
 		},
 		isEditing: true,

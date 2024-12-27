@@ -151,7 +151,7 @@
 
 				<!-- Socials -->
 				<v-tabs-window-item value="socials" class="mt-6">
-					<p>
+					<p class="opt__secondary-text pr-2">
 						Если какое-то из полей нужно скрыть, задай ему пустое значение и
 						примени.
 					</p>
@@ -279,9 +279,21 @@
 							})
 						"
 					></v-text-field>
-					<ul>
-						<li>Отображать ПК?</li>
-					</ul>
+
+					<v-row>
+						<v-col cols="10" class="d-flex align-center">
+							<p class="opt__switch-label">
+								Отображать строку-описание про Пушкинскую Карту:
+							</p>
+						</v-col>
+						<v-col cols="2">
+							<v-switch
+								v-model="showPCard"
+								color="color-secondary-100"
+								hide-details
+							></v-switch>
+						</v-col>
+					</v-row>
 				</v-tabs-window-item>
 			</v-tabs-window>
 
@@ -313,7 +325,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, Ref, ref } from 'vue';
+import { computed, defineComponent, Ref, ref, watch } from 'vue';
 import OptionsBase from '../OptionsBase.vue';
 import { useStore } from '@/store/useStore';
 import { State, SettingsPayload, SettingsPath } from '@/store';
@@ -343,6 +355,13 @@ export default defineComponent({
 		const ok: Ref<string> = ref(store.state.settings.socials.ok);
 		const vk: Ref<string> = ref(store.state.settings.socials.vk);
 		const link: Ref<string> = ref(store.state.settings.socials.link);
+		const showPCard: Ref<boolean> = ref(store.state.settings.socials.showPCard);
+		watch(showPCard, (newVal) => {
+			updateStoreSettings({
+				field: 'socials.showPCard',
+				value: newVal,
+			});
+		});
 
 		const shouldBeNumber: Partial<SettingsPath>[] = [
 			'card.defaultPrice',
@@ -403,6 +422,7 @@ export default defineComponent({
 			{ field: 'socials.ok', value: 'ok.ru/odesskyrkd' },
 			{ field: 'socials.vk', value: 'vk.com/odess_kino' },
 			{ field: 'socials.link', value: 'odesskoekdc.omsk.muzkult.ru' },
+			{ field: 'socials.showPCard', value: true },
 		];
 
 		function resetSettingsToDefault() {
@@ -441,6 +461,7 @@ export default defineComponent({
 			ok,
 			vk,
 			link,
+			showPCard,
 			updateCSSVariable,
 			resetDialog,
 			resetSettingsToDefault,
