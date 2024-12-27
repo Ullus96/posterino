@@ -83,13 +83,15 @@
 							updateStoreSettings({
 								field: 'ui.weekdayFontSize',
 								value: weekdayFontSize,
-							})
+							});
+							updateCSSVariable('ui.weekdayFontSize');
 						"
 						@keyup.enter="
 							updateStoreSettings({
 								field: 'ui.weekdayFontSize',
 								value: weekdayFontSize,
-							})
+							});
+							updateCSSVariable('ui.weekdayFontSize');
 						"
 					></v-text-field>
 
@@ -107,13 +109,15 @@
 							updateStoreSettings({
 								field: 'ui.filmFontSize',
 								value: filmFontSize,
-							})
+							});
+							updateCSSVariable('ui.filmFontSize');
 						"
 						@keyup.enter="
 							updateStoreSettings({
 								field: 'ui.filmFontSize',
 								value: filmFontSize,
-							})
+							});
+							updateCSSVariable('ui.filmFontSize');
 						"
 					></v-text-field>
 
@@ -131,13 +135,15 @@
 							updateStoreSettings({
 								field: 'ui.filmsGap',
 								value: filmsGap,
-							})
+							});
+							updateCSSVariable('ui.filmsGap');
 						"
 						@keyup.enter="
 							updateStoreSettings({
 								field: 'ui.filmsGap',
 								value: filmsGap,
-							})
+							});
+							updateCSSVariable('ui.filmsGap');
 						"
 					></v-text-field>
 				</v-tabs-window-item>
@@ -227,6 +233,30 @@ export default defineComponent({
 			}
 		}
 
+		// Update CSS variables
+		function updateCSSVariable(field: SettingsPath) {
+			switch (field) {
+				case 'ui.weekdayFontSize':
+					document.documentElement.style.setProperty(
+						'--ui-weekday-font-size',
+						`${weekdayFontSize.value}px`
+					);
+					break;
+				case 'ui.filmFontSize':
+					document.documentElement.style.setProperty(
+						'--ui-film-font-size',
+						`${filmFontSize.value}px`
+					);
+					break;
+				case 'ui.filmsGap':
+					document.documentElement.style.setProperty(
+						'--ui-films-gap',
+						`${filmsGap.value}px`
+					);
+					break;
+			}
+		}
+
 		// Reset settings
 		const resetDialog: Ref<boolean> = ref(false);
 
@@ -250,6 +280,14 @@ export default defineComponent({
 
 			for (const setting of standartSettings) {
 				updateStoreSettings(setting);
+
+				if (setting.field.split('.')[0] === 'ui') {
+					weekdayFontSize.value = store.state.settings.ui.weekdayFontSize;
+					filmFontSize.value = store.state.settings.ui.filmFontSize;
+					filmsGap.value = store.state.settings.ui.filmsGap;
+
+					updateCSSVariable(setting.field as SettingsPath);
+				}
 			}
 
 			// Reset refs
@@ -268,6 +306,7 @@ export default defineComponent({
 			weekdayFontSize,
 			filmFontSize,
 			filmsGap,
+			updateCSSVariable,
 			resetDialog,
 			resetSettingsToDefault,
 		};

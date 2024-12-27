@@ -3,6 +3,12 @@
   --color-text-700: rgb(116, 116, 116);
 }
 
+:root {
+  --ui-weekday-font-size: 28px;
+  --ui-film-font-size: 18px;
+  --ui-films-gap: 20px;
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0;
@@ -319,7 +325,7 @@ h3 {
   flex-direction: column;
   flex-wrap: wrap;
   flex: 0 0 auto;
-  gap: 20px 40px;
+  gap: var(--ui-films-gap, 20px) 40px;
   color: rgb(18, 18, 18);
   line-height: 120%;
 }
@@ -395,7 +401,7 @@ h3 {
 .canvas__day-of-week {
   font-weight: 700;
   display: inline-block;
-  font-size: 28px;
+  font-size: var(--ui-weekday-font-size, 28px);
   text-transform: uppercase;
 }
 .canvas__day-of-week.input {
@@ -460,7 +466,7 @@ h3 {
 }
 .canvas__name {
   line-height: 1.2;
-  font-size: 18px;
+  font-size: var(--ui-film-font-size, 18px);
 }
 .canvas__techincal-info {
   display: flex;

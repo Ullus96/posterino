@@ -64,3 +64,10 @@ $ui-font-size-m: $ui-font-size-base;
 $ui-font-size-h1: 48px;
 $ui-font-size-h2: 32px;
 $ui-font-size-h3: 24px;
+
+// Configurable variables
+:root {
+	--ui-weekday-font-size: 28px;
+	--ui-film-font-size: 18px;
+	--ui-films-gap: 20px;
+}
