@@ -236,5 +236,12 @@ export default createStore<State>({
 
 			target[keys[keys.length - 1]] = value;
 		},
+
+		setSettingsFromLocalStorage(state) {
+			const settings = localStorage.getItem('settings');
+			if (settings) {
+				state.settings = JSON.parse(settings);
+			}
+		},
 	},
 });

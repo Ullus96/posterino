@@ -3,11 +3,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, onMounted, reactive, ref, Ref } from 'vue';
 import { useStore } from '@/store/useStore';
 import moment from 'moment';
 import { ISingleFilm, IDaySchedule } from '@/types/films';
-
 import { getEmptyFilm, getMockFilm } from '@/utilities/createFilm';
 
 export default defineComponent({
@@ -28,7 +27,41 @@ export default defineComponent({
 
 		store.commit('setSchedule', weekSchedule);
 
-		// Settings by default
+		const savedSettings = localStorage.getItem('settings');
+
+		if (savedSettings) {
+			store.commit('setSettingsFromLocalStorage');
+
+			const parsedSettings = JSON.parse(savedSettings);
+			const variables = parsedSettings.ui;
+
+			for (const key in variables) {
+				updateCSSVariable(`ui.${key}`, variables[key]);
+			}
+		}
+
+		function updateCSSVariable(field: string, value: number) {
+			switch (field) {
+				case 'ui.weekdayFontSize':
+					document.documentElement.style.setProperty(
+						'--ui-weekday-font-size',
+						`${value}px`
+					);
+					break;
+				case 'ui.filmFontSize':
+					document.documentElement.style.setProperty(
+						'--ui-film-font-size',
+						`${value}px`
+					);
+					break;
+				case 'ui.filmsGap':
+					document.documentElement.style.setProperty(
+						'--ui-films-gap',
+						`${value}px`
+					);
+					break;
+			}
+		}
 
 		return {};
 	},

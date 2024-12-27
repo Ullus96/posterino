@@ -380,6 +380,8 @@ export default defineComponent({
 			} else {
 				store.commit('updateSettings', { field, value });
 			}
+
+			localStorage.setItem('settings', JSON.stringify(store.state.settings));
 		}
 
 		// Update CSS variables
@@ -419,8 +421,8 @@ export default defineComponent({
 
 			{ field: 'socials.tel', value: '2-17-43' },
 			{ field: 'socials.address', value: 'с.Одесское, ул.Ленина, д.27' },
-			{ field: 'socials.ok', value: 'ok.ru/odesskyrkd' },
-			{ field: 'socials.vk', value: 'vk.com/odess_kino' },
+			{ field: 'socials.ok', value: 'odesskyrkd' },
+			{ field: 'socials.vk', value: 'odess_kino' },
 			{ field: 'socials.link', value: 'odesskoekdc.omsk.muzkult.ru' },
 			{ field: 'socials.showPCard', value: true },
 		];
@@ -444,7 +446,14 @@ export default defineComponent({
 			defaultPrice.value = store.state.settings.card.defaultPrice;
 			noSessionsText.value = store.state.settings.card.noSessionsText;
 
-			console.log(`settings resetted`);
+			tel.value = store.state.settings.socials.tel;
+			address.value = store.state.settings.socials.address;
+			ok.value = store.state.settings.socials.ok;
+			vk.value = store.state.settings.socials.vk;
+			link.value = store.state.settings.socials.link;
+			showPCard.value = store.state.settings.socials.showPCard;
+
+			localStorage.removeItem('settings');
 		}
 
 		return {
