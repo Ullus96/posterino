@@ -63,6 +63,21 @@ export default defineComponent({
 			}
 		}
 
+		// Auto-save schedule
+		const allowAutoSave: Ref<boolean> = ref(true);
+		function autoSave() {
+			const schedule = store.state.schedule;
+			localStorage.setItem('schedule', JSON.stringify(schedule));
+		}
+
+		onMounted(() => {
+			setInterval(() => {
+				if (allowAutoSave.value) {
+					autoSave();
+				}
+			}, 15000);
+		});
+
 		return {};
 	},
 });

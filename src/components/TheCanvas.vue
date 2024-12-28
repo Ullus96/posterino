@@ -40,6 +40,7 @@ import { useStore } from '@/store/useStore';
 import { IDaySchedule } from '@/types/films';
 import EmptyBlock from '@/components/DayCard/EmptyBlock.vue';
 import { generateUUID } from '@/utilities/UUID';
+import { useDateTextFormat } from '@/utilities/dateTextFormat';
 
 export default defineComponent({
 	components: {
@@ -52,29 +53,7 @@ export default defineComponent({
 
 		const scheduleData: Array<IDaySchedule> | [] = store.state.schedule || [];
 
-		const dateTextFormat = computed(() => {
-			let result = '';
-
-			if (scheduleData?.length) {
-				const nextDay = scheduleData[0].date.locale('ru');
-				const endOfWeekDay =
-					scheduleData[scheduleData.length - 1].date.locale('ru');
-
-				if (nextDay.format('MM') === endOfWeekDay.format('MM')) {
-					result = `${nextDay.format('DD')} - ${endOfWeekDay.format(
-						'DD MMMM'
-					)}`;
-				} else {
-					result = `${nextDay.format('DD MMM')} - ${endOfWeekDay.format(
-						'DD MMM'
-					)}`;
-				}
-			} else {
-				result = '';
-			}
-
-			return result;
-		});
+		const dateTextFormat = useDateTextFormat();
 
 		// Empty blocks
 		const emptyBlocks = reactive<string[]>([]);
