@@ -8,6 +8,7 @@ import { useStore } from '@/store/useStore';
 import moment from 'moment';
 import { ISingleFilm, IDaySchedule } from '@/types/films';
 import { getEmptyFilm, getMockFilm } from '@/utilities/createFilm';
+import { useDateTextFormat } from '@/utilities/dateTextFormat';
 
 export default defineComponent({
 	setup() {
@@ -27,6 +28,7 @@ export default defineComponent({
 
 		store.commit('setSchedule', weekSchedule);
 
+		// Settings
 		const savedSettings = localStorage.getItem('settings');
 
 		if (savedSettings) {
@@ -83,6 +85,17 @@ export default defineComponent({
 				}
 			}, 15000);
 		});
+
+		// Load auto-save from localStorage
+		const savedSchedule = localStorage.getItem('schedule');
+
+		if (savedSchedule) {
+			const parsedSchedule = JSON.parse(savedSchedule) as IDaySchedule[];
+			console.log(parsedSchedule);
+			console.log(
+				`Found saved schedule: ${useDateTextFormat(parsedSchedule).value}`
+			);
+		}
 
 		return {};
 	},

@@ -2,17 +2,22 @@ import { computed } from 'vue';
 import { useStore } from '@/store/useStore';
 import type { Ref } from 'vue';
 import { IDaySchedule } from '@/types/films';
+import moment from 'moment';
 
-export function useDateTextFormat(localStorageSchedule?: string): Ref<string> {
+export function useDateTextFormat(
+	transferedSchedule?: Array<IDaySchedule>
+): Ref<string> {
 	const store = useStore();
+	let scheduleData: Array<IDaySchedule> | [];
 
-	// TODO: завтра доделаю
-	// if (localStorageSchedule) {
-
-	// } else {
-
-	const scheduleData: Array<IDaySchedule> | [] = store.state.schedule || [];
-	// }
+	if (transferedSchedule) {
+		scheduleData = transferedSchedule;
+		for (const day of scheduleData) {
+			day.date = moment(day.date);
+		}
+	} else {
+		scheduleData = store.state.schedule || [];
+	}
 
 	const dateTextFormat = computed(() => {
 		let result = '';
