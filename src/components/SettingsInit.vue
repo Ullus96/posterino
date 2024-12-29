@@ -1,5 +1,27 @@
 <template>
-	<div></div>
+	<v-dialog v-model="showLoadingDialog" width="auto">
+		<v-card
+			max-width="400"
+			:title="`Cохранение: ${saveDateString}`"
+			prepend-icon="mdi-content-save-outline"
+		>
+			<template v-slot:text>
+				Найдено расписание за
+				<b>{{ saveDateString.split(' ').join(' ') }}</b
+				>. Загрузить?
+			</template>
+			<template v-slot:actions>
+				<v-btn
+					variant="flat"
+					color="color-secondary-100"
+					text="Загрузить"
+					@click="loadSavedSchedule"
+				></v-btn>
+				<v-divider vertical></v-divider>
+				<v-btn text="Начать сначала" @click="showLoadingDialog = false"></v-btn>
+			</template>
+		</v-card>
+	</v-dialog>
 </template>
 
 <script lang="ts">
@@ -72,10 +94,11 @@ export default defineComponent({
 		}
 
 		// Auto-save schedule
-		const allowAutoSave: Ref<boolean> = ref(true);
+		const allowAutoSave: Ref<boolean> = ref(false);
 		function autoSave() {
 			const schedule = store.state.schedule;
 			localStorage.setItem('schedule', JSON.stringify(schedule));
+			console.log(`Auto-save`);
 		}
 
 		onMounted(() => {
@@ -88,16 +111,29 @@ export default defineComponent({
 
 		// Load auto-save from localStorage
 		const savedSchedule = localStorage.getItem('schedule');
+		const showLoadingDialog: Ref<boolean> = ref(true);
+		const saveDateString: Ref<string> = ref('');
 
 		if (savedSchedule) {
 			const parsedSchedule = JSON.parse(savedSchedule) as IDaySchedule[];
-			console.log(parsedSchedule);
-			console.log(
-				`Found saved schedule: ${useDateTextFormat(parsedSchedule).value}`
-			);
+			saveDateString.value = useDateTextFormat(parsedSchedule).value;
 		}
 
-		return {};
+		function loadSavedSchedule() {
+			if (savedSchedule) {
+				const parsedSchedule = JSON.parse(savedSchedule) as IDaySchedule[];
+				store.commit('setSchedule', parsedSchedule);
+			}
+
+			showLoadingDialog.value = false;
+			allowAutoSave.value = true;
+		}
+
+		return {
+			showLoadingDialog,
+			saveDateString,
+			loadSavedSchedule,
+		};
 	},
 });
 </script>
