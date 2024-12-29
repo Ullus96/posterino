@@ -6,7 +6,7 @@ import {
 	randomTrueOrFalse,
 } from '@/utilities/mockDataGenerators';
 import { generateUUID } from '@/utilities/UUID';
-import { Store } from 'vuex';
+import { Store, useStore } from 'vuex';
 import { State } from '@/store/index';
 
 export function getEmptyFilm(store: Store<State>): ISingleFilm {

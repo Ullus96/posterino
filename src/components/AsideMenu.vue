@@ -115,6 +115,7 @@ import { defineComponent, ref, Ref } from 'vue';
 import { useStore } from '@/store/useStore';
 import OptionsHotkeys from './Options/hotkeys/OptionsHotkeys.vue';
 import OptionsSettings from './Options/settings/OptionsSettings.vue';
+import { setNewWeeklySchedule } from '@/utilities/setNewWeeklySchedule';
 
 export default defineComponent({
 	components: { OptionsHotkeys, OptionsSettings },
@@ -125,7 +126,10 @@ export default defineComponent({
 
 		const showClearingDialog: Ref<boolean> = ref(false);
 
-		function clearSchedule() {}
+		function clearSchedule() {
+			setNewWeeklySchedule(store, 'empty');
+			showClearingDialog.value = false;
+		}
 
 		return { isEditing, showClearingDialog, clearSchedule };
 	},

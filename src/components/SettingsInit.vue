@@ -37,7 +37,7 @@ export default defineComponent({
 	setup() {
 		const store = useStore();
 
-		setNewWeeklySchedule('mock');
+		setNewWeeklySchedule(store, 'mock');
 
 		// Settings
 		const savedSettings = localStorage.getItem('settings');

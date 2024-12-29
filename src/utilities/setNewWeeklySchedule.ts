@@ -2,16 +2,19 @@ import { IDaySchedule } from '@/types/films';
 import moment from 'moment';
 import { getMockFilm, getEmptyFilm } from './createFilm';
 import { useStore } from '@/store/useStore';
+import { Store } from 'vuex';
+import { State } from '@/store';
 
-export function setNewWeeklySchedule(type: 'mock' | 'empty') {
-	const store = useStore();
-
+export function setNewWeeklySchedule(
+	store: Store<State>,
+	type: 'mock' | 'empty'
+) {
 	if (type === 'mock') {
 		const weekSchedule: IDaySchedule[] = getMockFilms();
 		store.commit('setSchedule', weekSchedule);
 		return;
 	} else {
-		const weekSchedule: IDaySchedule[] = getEmptyFilms();
+		const weekSchedule: IDaySchedule[] = getEmptyFilms(store);
 		store.commit('setSchedule', weekSchedule);
 		return;
 	}
@@ -30,9 +33,7 @@ function getMockFilms() {
 	);
 }
 
-function getEmptyFilms() {
-	const store = useStore();
-
+function getEmptyFilms(store: Store<State>) {
 	return Array.from(
 		{ length: 7 },
 		(_, idx): IDaySchedule => ({
