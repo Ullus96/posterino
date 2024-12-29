@@ -31,24 +31,13 @@ import moment from 'moment';
 import { ISingleFilm, IDaySchedule } from '@/types/films';
 import { getEmptyFilm, getMockFilm } from '@/utilities/createFilm';
 import { useDateTextFormat } from '@/utilities/dateTextFormat';
+import { setNewWeeklySchedule } from '@/utilities/setNewWeeklySchedule';
 
 export default defineComponent({
 	setup() {
 		const store = useStore();
 
-		const weekSchedule: IDaySchedule[] = Array.from(
-			{ length: 7 },
-			(_, idx): IDaySchedule => ({
-				date: moment()
-					.add(idx + 1, 'days')
-					.locale('ru'),
-				isWorkingDay: true,
-				// Потом отсюда вернуть `emptyFilm`
-				films: [getMockFilm()],
-			})
-		);
-
-		store.commit('setSchedule', weekSchedule);
+		setNewWeeklySchedule('mock');
 
 		// Settings
 		const savedSettings = localStorage.getItem('settings');
