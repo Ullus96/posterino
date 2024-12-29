@@ -473,7 +473,7 @@ export default defineComponent({
 				if (setting.field.split('.')[0] === 'ui') {
 					weekdayFontSize.value = store.state.settings.ui.weekdayFontSize;
 					filmFontSize.value = store.state.settings.ui.filmFontSize;
-					filmsGap.value = store.state.settings.ui.filmsGap;
+					filmTitlePadding.value = store.state.settings.ui.filmTitlePadding;
 					filmsGap.value = store.state.settings.ui.filmsGap;
 
 					updateCSSVariable(setting.field as SettingsPath);

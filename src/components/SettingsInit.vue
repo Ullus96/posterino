@@ -54,6 +54,12 @@ export default defineComponent({
 						`${value}px`
 					);
 					break;
+				case 'ui.filmTitlePadding':
+					document.documentElement.style.setProperty(
+						'--ui-film-title-padding',
+						`${value}px`
+					);
+					break;
 				case 'ui.filmsGap':
 					document.documentElement.style.setProperty(
 						'--ui-films-gap',
