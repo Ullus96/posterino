@@ -3,10 +3,16 @@ import { useStore } from '@/store/useStore';
 import type { Ref } from 'vue';
 import { IDaySchedule } from '@/types/films';
 
-export function useDateTextFormat(): Ref<string> {
+export function useDateTextFormat(localStorageSchedule?: string): Ref<string> {
 	const store = useStore();
 
+	// TODO: завтра доделаю
+	// if (localStorageSchedule) {
+
+	// } else {
+
 	const scheduleData: Array<IDaySchedule> | [] = store.state.schedule || [];
+	// }
 
 	const dateTextFormat = computed(() => {
 		let result = '';

@@ -6,6 +6,7 @@
 :root {
   --ui-weekday-font-size: 28px;
   --ui-film-font-size: 18px;
+  --ui-film-title-padding: 2px;
   --ui-films-gap: 20px;
 }
 
@@ -414,7 +415,7 @@ h3 {
 }
 .canvas__item {
   position: relative;
-  padding: 2px 0;
+  padding: var(--ui-film-title-padding, 2px) 0;
   display: grid;
   grid-template-columns: 5ch auto 1fr auto auto auto;
   gap: 4px;

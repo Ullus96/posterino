@@ -123,6 +123,32 @@
 
 					<v-text-field
 						class="pr-2 mt-6"
+						label="Отступ заголовка фильма"
+						variant="outlined"
+						density="compact"
+						type="number"
+						persistent-hint
+						hint="Вертикальный отступ у заголовка фильма (по ум. 2)"
+						v-model="filmTitlePadding"
+						:append-icon="'mdi-check-bold'"
+						@click:append="
+							updateStoreSettings({
+								field: 'ui.filmTitlePadding',
+								value: filmTitlePadding,
+							});
+							updateCSSVariable('ui.filmTitlePadding');
+						"
+						@keyup.enter="
+							updateStoreSettings({
+								field: 'ui.filmTitlePadding',
+								value: filmTitlePadding,
+							});
+							updateCSSVariable('ui.filmTitlePadding');
+						"
+					></v-text-field>
+
+					<v-text-field
+						class="pr-2 mt-6"
 						label="Расстояние между карточками"
 						variant="outlined"
 						density="compact"
@@ -348,6 +374,9 @@ export default defineComponent({
 			store.state.settings.ui.weekdayFontSize
 		);
 		const filmFontSize: Ref<number> = ref(store.state.settings.ui.filmFontSize);
+		const filmTitlePadding: Ref<number> = ref(
+			store.state.settings.ui.filmTitlePadding
+		);
 		const filmsGap: Ref<number> = ref(store.state.settings.ui.filmsGap);
 
 		const tel: Ref<string> = ref(store.state.settings.socials.tel);
@@ -367,6 +396,7 @@ export default defineComponent({
 			'card.defaultPrice',
 			'ui.weekdayFontSize',
 			'ui.filmFontSize',
+			'ui.filmTitlePadding',
 			'ui.filmsGap',
 		];
 
@@ -399,6 +429,12 @@ export default defineComponent({
 						`${filmFontSize.value}px`
 					);
 					break;
+				case 'ui.filmTitlePadding':
+					document.documentElement.style.setProperty(
+						'--ui-film-title-padding',
+						`${filmTitlePadding.value}px`
+					);
+					break;
 				case 'ui.filmsGap':
 					document.documentElement.style.setProperty(
 						'--ui-films-gap',
@@ -417,6 +453,7 @@ export default defineComponent({
 
 			{ field: 'ui.weekdayFontSize', value: 28 },
 			{ field: 'ui.filmFontSize', value: 18 },
+			{ field: 'ui.filmTitlePadding', value: 2 },
 			{ field: 'ui.filmsGap', value: 20 },
 
 			{ field: 'socials.tel', value: '2-17-43' },
@@ -436,6 +473,7 @@ export default defineComponent({
 				if (setting.field.split('.')[0] === 'ui') {
 					weekdayFontSize.value = store.state.settings.ui.weekdayFontSize;
 					filmFontSize.value = store.state.settings.ui.filmFontSize;
+					filmsGap.value = store.state.settings.ui.filmsGap;
 					filmsGap.value = store.state.settings.ui.filmsGap;
 
 					updateCSSVariable(setting.field as SettingsPath);
@@ -464,6 +502,7 @@ export default defineComponent({
 			noSessionsText,
 			weekdayFontSize,
 			filmFontSize,
+			filmTitlePadding,
 			filmsGap,
 			tel,
 			address,

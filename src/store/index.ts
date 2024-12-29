@@ -33,6 +33,7 @@ export interface State {
 			weekdayFontSize: number;
 			filmFontSize: number;
 			filmsGap: number;
+			filmTitlePadding: number;
 		};
 		socials: {
 			tel: string;
@@ -59,6 +60,7 @@ export default createStore<State>({
 			ui: {
 				weekdayFontSize: 28,
 				filmFontSize: 18,
+				filmTitlePadding: 2,
 				filmsGap: 20,
 			},
 			socials: {
