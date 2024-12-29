@@ -86,6 +86,10 @@ export default createStore<State>({
 			state.schedule = payload;
 		},
 
+		setHotkeys(state, payload: Array<IHotkey>) {
+			state.hotkeys = payload;
+		},
+
 		setDate(
 			state,
 			payload: {

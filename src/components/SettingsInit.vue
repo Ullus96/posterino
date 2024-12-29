@@ -18,7 +18,7 @@
 					@click="loadSavedSchedule"
 				></v-btn>
 				<v-divider vertical></v-divider>
-				<v-btn text="Начать сначала" @click="showLoadingDialog = false"></v-btn>
+				<v-btn text="Начать сначала" @click="handleLoadingClose"></v-btn>
 			</template>
 		</v-card>
 	</v-dialog>
@@ -98,6 +98,8 @@ export default defineComponent({
 		function autoSave() {
 			const schedule = store.state.schedule;
 			localStorage.setItem('schedule', JSON.stringify(schedule));
+			const hotkeys = store.state.hotkeys;
+			localStorage.setItem('hotkeys', JSON.stringify(hotkeys));
 			console.log(`Auto-save`);
 		}
 
@@ -111,6 +113,7 @@ export default defineComponent({
 
 		// Load auto-save from localStorage
 		const savedSchedule = localStorage.getItem('schedule');
+		const savedHotkeys = localStorage.getItem('hotkeys');
 		const showLoadingDialog: Ref<boolean> = ref(true);
 		const saveDateString: Ref<string> = ref('');
 
@@ -123,8 +126,18 @@ export default defineComponent({
 			if (savedSchedule) {
 				const parsedSchedule = JSON.parse(savedSchedule) as IDaySchedule[];
 				store.commit('setSchedule', parsedSchedule);
+
+				if (savedHotkeys) {
+					const parsedHotkeys = JSON.parse(savedHotkeys);
+					store.commit('setHotkeys', parsedHotkeys);
+					console.log(store.state.hotkeys);
+				}
 			}
 
+			handleLoadingClose();
+		}
+
+		function handleLoadingClose() {
 			showLoadingDialog.value = false;
 			allowAutoSave.value = true;
 		}
@@ -133,6 +146,7 @@ export default defineComponent({
 			showLoadingDialog,
 			saveDateString,
 			loadSavedSchedule,
+			handleLoadingClose,
 		};
 	},
 });

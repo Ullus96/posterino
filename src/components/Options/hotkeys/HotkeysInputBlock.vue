@@ -58,10 +58,12 @@ export default defineComponent({
 		const store = useStore();
 
 		const hotkeyData = reactive<IHotkey>({
-			title: '',
-			age: null,
-			pCard: null,
-			price: store.state.settings.card.defaultPrice,
+			title: store.state.hotkeys[props.hotkeyIndex].title || '',
+			age: store.state.hotkeys[props.hotkeyIndex].age || null,
+			pCard: store.state.hotkeys[props.hotkeyIndex].pCard || null,
+			price:
+				store.state.hotkeys[props.hotkeyIndex].price ||
+				store.state.settings.card.defaultPrice,
 			uuid: store.state.hotkeys[props.hotkeyIndex].uuid,
 		});
 
