@@ -74,6 +74,17 @@
 				</v-btn>
 				<v-tooltip activator="parent">Настройки</v-tooltip>
 			</v-list-item>
+			<v-list-item>
+				<v-btn
+					variant="text"
+					icon="mdi-eraser"
+					color="color-contrast"
+					aria-label="Очистить расписание"
+					@click="showClearingDialog = true"
+				>
+				</v-btn>
+				<v-tooltip activator="parent">Очистить расписание</v-tooltip>
+			</v-list-item>
 		</v-list>
 	</v-navigation-drawer>
 
@@ -83,10 +94,24 @@
 			<OptionsSettings v-else-if="$store.state.modal.isSettingsModalOpen" />
 		</KeepAlive>
 	</transition>
+
+	<v-dialog v-model="showClearingDialog" width="auto">
+		<v-card
+			max-width="400"
+			title="Очистить расписание?"
+			text="Это действие удалит все введенные данные сеансов. Продолжить?"
+			prepend-icon="mdi-eraser"
+		>
+			<template v-slot:actions>
+				<v-btn text="Удалить" @click="clearSchedule"></v-btn>
+				<v-btn text="Назад" @click="showClearingDialog = false"></v-btn>
+			</template>
+		</v-card>
+	</v-dialog>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, Ref } from 'vue';
 import { useStore } from '@/store/useStore';
 import OptionsHotkeys from './Options/hotkeys/OptionsHotkeys.vue';
 import OptionsSettings from './Options/settings/OptionsSettings.vue';
@@ -98,7 +123,11 @@ export default defineComponent({
 
 		const isEditing = store.state.isEditing;
 
-		return { isEditing };
+		const showClearingDialog: Ref<boolean> = ref(false);
+
+		function clearSchedule() {}
+
+		return { isEditing, showClearingDialog, clearSchedule };
 	},
 });
 </script>
