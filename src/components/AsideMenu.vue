@@ -45,7 +45,7 @@
 					icon="mdi-download"
 					color="color-contrast"
 					aria-label="Скачать результат"
-					@click="showScreenshotDialog = true"
+					@click="handleScreenshotButtonClick()"
 				>
 				</v-btn>
 				<v-tooltip activator="parent">Скачать результат</v-tooltip>
@@ -111,12 +111,15 @@
 	</v-dialog>
 
 	<v-dialog v-model="showScreenshotDialog" max-width="450">
-		<ScreenshotModal @closeScreenshotModal="showScreenshotDialog = false" />
+		<ScreenshotModal
+			:imageURL="imageURL"
+			@closeScreenshotModal="showScreenshotDialog = false"
+		/>
 	</v-dialog>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref } from 'vue';
+import { defineComponent, ref, Ref, watch } from 'vue';
 import { useStore } from '@/store/useStore';
 import OptionsHotkeys from './Options/hotkeys/OptionsHotkeys.vue';
 import OptionsSettings from './Options/settings/OptionsSettings.vue';
@@ -145,26 +148,38 @@ export default defineComponent({
 		// https://adnan-tech.com/save-div-as-image-html2canvas/
 		function saveScreenshot() {
 			window.scrollTo(0, 0);
-			isModalVisible.value = true;
 
-			html2canvas(document.getElementById('canvas') as any).then((canvas) => {
+			html2canvas(document.getElementById('canvas') as HTMLCanvasElement, {
+				scale: 1.1,
+			}).then((canvas) => {
 				const url = canvas.toDataURL('image/png', 1);
-				imageURL.value = `<a href="${url}">Ссылка на изображение</a>`;
+				setTimeout(() => {
+					imageURL.value = url;
+				}, Math.random() * 500 + 500);
 			});
 		}
 
-		// modal
-		let isModalVisible = ref(false);
-		function closeModal() {
-			isModalVisible.value = false;
-			imageURL.value = '';
+		function handleScreenshotButtonClick() {
+			showScreenshotDialog.value = true;
+			saveScreenshot();
 		}
+
+		watch(showScreenshotDialog, (newValue) => {
+			if (!newValue) {
+				setTimeout(() => {
+					imageURL.value = '';
+				}, 200);
+			}
+		});
 
 		return {
 			isEditing,
 			showClearingDialog,
 			clearSchedule,
 			showScreenshotDialog,
+			saveScreenshot,
+			imageURL,
+			handleScreenshotButtonClick,
 		};
 	},
 });

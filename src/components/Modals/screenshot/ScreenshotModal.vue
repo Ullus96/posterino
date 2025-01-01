@@ -1,6 +1,6 @@
 <template>
-	<AsyncLoader />
-	<CompleteScreenshot />
+	<AsyncLoader v-if="!imageURL" />
+	<CompleteScreenshot v-else :imageURL="imageURL" />
 </template>
 
 <script lang="ts">
@@ -10,6 +10,12 @@ import CompleteScreenshot from './CompleteScreenshot.vue';
 
 export default defineComponent({
 	components: { AsyncLoader, CompleteScreenshot },
+	props: {
+		imageURL: {
+			type: String,
+			required: true,
+		},
+	},
 	setup() {
 		return {};
 	},
