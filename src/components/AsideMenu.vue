@@ -45,6 +45,7 @@
 					icon="mdi-download"
 					color="color-contrast"
 					aria-label="Скачать результат"
+					@click="showScreenshotDialog = true"
 				>
 				</v-btn>
 				<v-tooltip activator="parent">Скачать результат</v-tooltip>
@@ -108,6 +109,10 @@
 			</template>
 		</v-card>
 	</v-dialog>
+
+	<v-dialog v-model="showScreenshotDialog" max-width="450">
+		<ScreenshotModal @closeScreenshotModal="showScreenshotDialog = false" />
+	</v-dialog>
 </template>
 
 <script lang="ts">
@@ -116,9 +121,11 @@ import { useStore } from '@/store/useStore';
 import OptionsHotkeys from './Options/hotkeys/OptionsHotkeys.vue';
 import OptionsSettings from './Options/settings/OptionsSettings.vue';
 import { setNewWeeklySchedule } from '@/utilities/setNewWeeklySchedule';
+import html2canvas from 'html2canvas';
+import ScreenshotModal from '@/components/Modals/screenshot/ScreenshotModal.vue';
 
 export default defineComponent({
-	components: { OptionsHotkeys, OptionsSettings },
+	components: { OptionsHotkeys, OptionsSettings, ScreenshotModal },
 	setup() {
 		const store = useStore();
 
@@ -131,7 +138,34 @@ export default defineComponent({
 			showClearingDialog.value = false;
 		}
 
-		return { isEditing, showClearingDialog, clearSchedule };
+		// screenshot
+		const showScreenshotDialog: Ref<boolean> = ref(false);
+		let imageURL: Ref<string> = ref('');
+
+		// https://adnan-tech.com/save-div-as-image-html2canvas/
+		function saveScreenshot() {
+			window.scrollTo(0, 0);
+			isModalVisible.value = true;
+
+			html2canvas(document.getElementById('canvas') as any).then((canvas) => {
+				const url = canvas.toDataURL('image/png', 1);
+				imageURL.value = `<a href="${url}">Ссылка на изображение</a>`;
+			});
+		}
+
+		// modal
+		let isModalVisible = ref(false);
+		function closeModal() {
+			isModalVisible.value = false;
+			imageURL.value = '';
+		}
+
+		return {
+			isEditing,
+			showClearingDialog,
+			clearSchedule,
+			showScreenshotDialog,
+		};
 	},
 });
 </script>
