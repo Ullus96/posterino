@@ -69,7 +69,10 @@
 		<v-divider></v-divider>
 		<!-- single line -->
 		<the-film
-			v-for="(film, idx) in currentDayFilmsData.slice(0, dayBreakIndex)"
+			v-for="(film, idx) in currentDayFilmsData.slice(
+				0,
+				dayData.lineBreakIndex || dayData.films.length
+			)"
 			:key="film.uuid"
 			:filmData="film"
 			:filmIndex="idx"
@@ -90,7 +93,11 @@
 	</div>
 	<!-- end of single day -->
 	<!-- new line separator -->
-	<div class="canvas__day" :class="{ editable: $store.state.isEditing }">
+	<div
+		class="canvas__day"
+		:class="{ editable: $store.state.isEditing }"
+		v-if="dayData.lineBreakIndex"
+	>
 		<div class="canvas__date" v-if="!$store.state.isEditing">
 			<h3 class="canvas__day-of-week--continue text-color-text-100">
 				{{ dayAndWeekday.weekday }}, продолжение
@@ -128,7 +135,7 @@
 		<v-divider></v-divider>
 		<!-- single line -->
 		<the-film
-			v-for="(film, idx) in currentDayFilmsData.slice(dayBreakIndex)"
+			v-for="(film, idx) in currentDayFilmsData.slice(dayData.lineBreakIndex)"
 			:key="film.uuid"
 			:filmData="film"
 			:filmIndex="idx"
@@ -275,7 +282,6 @@ export default defineComponent({
 		}
 
 		// Разделение дня на две части
-		const dayBreakIndex: Ref<number> = ref(1);
 		function handleDayStiching() {}
 
 		return {
@@ -286,7 +292,6 @@ export default defineComponent({
 			dayIndex,
 			handleFilmCreation,
 			handleFilmRemoving,
-			dayBreakIndex,
 			handleDayStiching,
 		};
 	},

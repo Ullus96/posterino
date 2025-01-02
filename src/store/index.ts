@@ -186,6 +186,12 @@ export default createStore<State>({
 			}
 		},
 
+		setLineBreakIndex(state, index) {
+			if (state.schedule && index >= 0 && index < state.schedule.length) {
+				state.schedule[index].lineBreakIndex = index;
+			}
+		},
+
 		toggleModalVisibility(
 			state,
 			payload: {

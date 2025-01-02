@@ -16,5 +16,6 @@ export interface ISingleFilm {
 export interface IDaySchedule {
 	date: moment.Moment;
 	isWorkingDay: boolean;
+	lineBreakIndex: number;
 	films: Array<ISingleFilm>;
 }
