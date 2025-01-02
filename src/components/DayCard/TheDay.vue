@@ -71,7 +71,7 @@
 		<the-film
 			v-for="(film, idx) in currentDayFilmsData.slice(
 				0,
-				dayData.lineBreakIndex || dayData.films.length
+				lineBreakIndex || dayData.films.length
 			)"
 			:key="film.uuid"
 			:filmData="film"
@@ -96,7 +96,7 @@
 	<div
 		class="canvas__day"
 		:class="{ editable: $store.state.isEditing }"
-		v-if="dayData.lineBreakIndex"
+		v-if="lineBreakIndex"
 	>
 		<div class="canvas__date" v-if="!$store.state.isEditing">
 			<h3 class="canvas__day-of-week--continue text-color-text-100">
@@ -135,7 +135,7 @@
 		<v-divider></v-divider>
 		<!-- single line -->
 		<the-film
-			v-for="(film, idx) in currentDayFilmsData.slice(dayData.lineBreakIndex)"
+			v-for="(film, idx) in currentDayFilmsData.slice(lineBreakIndex)"
 			:key="film.uuid"
 			:filmData="film"
 			:filmIndex="idx"
@@ -290,6 +290,14 @@ export default defineComponent({
 			});
 		}
 
+		const lineBreakIndex = computed(() => {
+			if (store.state.schedule) {
+				return store.state.schedule[props.dayIndex].lineBreakIndex;
+			} else {
+				return 0;
+			}
+		});
+
 		return {
 			dayAndWeekday,
 			currentDayFilmsData,
@@ -299,6 +307,7 @@ export default defineComponent({
 			handleFilmCreation,
 			handleFilmRemoving,
 			handleDayStiching,
+			lineBreakIndex,
 		};
 	},
 });
