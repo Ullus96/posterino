@@ -76,12 +76,16 @@
 			</div>
 
 			<div class="canvas__actions-wrapper">
-				<div class="canvas__item-btn-wrapper">
+				<div
+					class="canvas__item-btn-wrapper"
+					v-if="!$store.state.schedule[dayIndex].lineBreakIndex"
+				>
 					<v-btn
 						class="elevation-4"
 						icon="mdi-format-page-break"
 						color="color-primary-500"
 						density="compact"
+						@click="$store.commit('setLineBreakIndex', { dayIndex, filmIndex })"
 					>
 					</v-btn>
 					<v-tooltip location="top" activator="parent"

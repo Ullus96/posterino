@@ -186,9 +186,23 @@ export default createStore<State>({
 			}
 		},
 
-		setLineBreakIndex(state, index) {
-			if (state.schedule && index >= 0 && index < state.schedule.length) {
-				state.schedule[index].lineBreakIndex = index;
+		setLineBreakIndex(
+			state,
+			payload: {
+				dayIndex: number;
+				filmIndex: number;
+			}
+		) {
+			const { dayIndex, filmIndex } = payload;
+			if (
+				state.schedule &&
+				dayIndex >= 0 &&
+				dayIndex < state.schedule.length &&
+				filmIndex >= 0 &&
+				filmIndex < state.schedule[dayIndex].films.length
+			) {
+				state.schedule[dayIndex].lineBreakIndex = filmIndex;
+				console.log(`line break index set to ${filmIndex}`);
 			}
 		},
 
