@@ -152,10 +152,14 @@ export default defineComponent({
 			html2canvas(document.getElementById('canvas') as HTMLCanvasElement, {
 				scale: 1.1,
 			}).then((canvas) => {
-				const url = canvas.toDataURL('image/png', 1);
-				setTimeout(() => {
-					imageURL.value = url;
-				}, Math.random() * 500 + 500);
+				canvas.toBlob((blob) => {
+					if (blob) {
+						const url = URL.createObjectURL(blob);
+						imageURL.value = url;
+					} else {
+						console.error('Ошибка при создании Blob');
+					}
+				}, 'image/png');
 			});
 		}
 
