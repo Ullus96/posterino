@@ -76,16 +76,18 @@
 			</div>
 
 			<div class="canvas__actions-wrapper">
-				<div
-					class="canvas__item-btn-wrapper"
-					v-if="!$store.state.schedule[dayIndex].lineBreakIndex"
-				>
+				<div class="canvas__item-btn-wrapper" v-if="showLineBreakButton">
 					<v-btn
 						class="elevation-4"
 						icon="mdi-format-page-break"
 						color="color-primary-500"
 						density="compact"
-						@click="$store.commit('setLineBreakIndex', { dayIndex, filmIndex })"
+						@click="
+							$store.commit('setLineBreakIndex', {
+								dayIndex,
+								filmIndex: filmIndex,
+							})
+						"
 					>
 					</v-btn>
 					<v-tooltip location="top" activator="parent"
@@ -122,6 +124,7 @@ import {
 	nextTick,
 	onMounted,
 	PropType,
+	computed,
 } from 'vue';
 import { useStore } from '@/store/useStore';
 import AgeRestrictionLabel from '@/components/ui/AgeRestrictionLabel.vue';
@@ -242,6 +245,30 @@ export default defineComponent({
 			});
 		}
 
+		const showLineBreakButton = computed(() => {
+			if (store.state.schedule) {
+				const lineBreakIndex =
+					store.state.schedule[props.dayIndex].lineBreakIndex;
+				let isCurrentFilmLast;
+
+				if (store.state.schedule[props.dayIndex].films) {
+					isCurrentFilmLast =
+						props.filmIndex ===
+						store.state.schedule[props.dayIndex].films.length - 1;
+				} else {
+					isCurrentFilmLast = false;
+				}
+
+				if (!lineBreakIndex && !isCurrentFilmLast) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+
+			return true;
+		});
+
 		return {
 			newData,
 			title,
@@ -252,6 +279,7 @@ export default defineComponent({
 			useHotkey,
 			resizeTextarea,
 			handleFilmRemoving,
+			showLineBreakButton,
 		};
 	},
 });
