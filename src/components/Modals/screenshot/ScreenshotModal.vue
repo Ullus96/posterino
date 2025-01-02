@@ -1,6 +1,8 @@
 <template>
-	<AsyncLoader v-if="!imageURL" />
-	<CompleteScreenshot v-else :imageURL="imageURL" />
+	<Transition name="fade" mode="out-in">
+		<AsyncLoader v-if="!imageURL" />
+		<CompleteScreenshot v-else :imageURL="imageURL" />
+	</Transition>
 </template>
 
 <script lang="ts">
@@ -22,4 +24,19 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.fade-enter-from,
+.fade-leave-to {
+	opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+	opacity: 1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: 0.2s ease-in-out opacity;
+}
+</style>
