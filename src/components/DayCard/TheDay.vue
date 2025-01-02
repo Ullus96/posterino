@@ -69,7 +69,7 @@
 		<v-divider></v-divider>
 		<!-- single line -->
 		<the-film
-			v-for="(film, idx) in currentDayFilmsData"
+			v-for="(film, idx) in currentDayFilmsData.slice(0, dayBreakIndex)"
 			:key="film.uuid"
 			:filmData="film"
 			:filmIndex="idx"
@@ -89,6 +89,64 @@
 		</div>
 	</div>
 	<!-- end of single day -->
+	<!-- new line separator -->
+	<div class="canvas__day" :class="{ editable: $store.state.isEditing }">
+		<div class="canvas__date" v-if="!$store.state.isEditing">
+			<h3 class="canvas__day-of-week--continue text-color-text-100">
+				{{ dayAndWeekday.weekday }}, продолжение
+			</h3>
+			<p class="canvas__numeric-date text-color-100"> </p>
+		</div>
+		<template v-else>
+			<div
+				class="canvas__day-header canvas__day-header--continue"
+				:class="{ editable: $store.state.isEditing }"
+			>
+				<input
+					type="text"
+					class="canvas__day-of-week--continue text-color-text-100"
+					v-model="dayAndWeekday.weekday"
+					disabled
+				/>
+				<span class="canvas__day-of-week-state">прод.</span>
+				<div class="canvas__icon">
+					<div class="canvas__header-btn-wrapper">
+						<v-btn
+							icon="mdi-undo"
+							color="color-secondary-400"
+							density="compact"
+							@click="handleDayStiching"
+						>
+						</v-btn>
+						<v-tooltip location="top" activator="parent"
+							>Соединить обратно</v-tooltip
+						>
+					</div>
+				</div>
+			</div>
+		</template>
+		<v-divider></v-divider>
+		<!-- single line -->
+		<the-film
+			v-for="(film, idx) in currentDayFilmsData.slice(dayBreakIndex)"
+			:key="film.uuid"
+			:filmData="film"
+			:filmIndex="idx"
+			:dayIndex="dayIndex"
+			v-if="isWorkingDay"
+		></the-film>
+		<no-films v-else></no-films>
+		<!-- end of single line -->
+		<div class="canvas__last-day-btns-wrapper" v-if="dayIndex === totalIndexes">
+			<v-btn
+				class="canvas__last-day-btn"
+				prepend-icon="mdi-plus"
+				color="color-primary-500"
+				@click="$emit('addEmptyBlock')"
+				>Добавить пустой блок</v-btn
+			>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">
@@ -125,6 +183,7 @@ export default defineComponent({
 			required: true,
 		},
 	},
+	emits: ['addEmptyBlock'],
 	components: { TheFilm, NoFilms },
 	setup(props, context) {
 		const store = useStore();
@@ -215,6 +274,10 @@ export default defineComponent({
 			}
 		}
 
+		// Разделение дня на две части
+		const dayBreakIndex: Ref<number> = ref(1);
+		function handleDayStiching() {}
+
 		return {
 			dayAndWeekday,
 			currentDayFilmsData,
@@ -223,6 +286,8 @@ export default defineComponent({
 			dayIndex,
 			handleFilmCreation,
 			handleFilmRemoving,
+			dayBreakIndex,
+			handleDayStiching,
 		};
 	},
 });

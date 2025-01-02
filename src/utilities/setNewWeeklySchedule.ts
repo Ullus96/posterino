@@ -28,7 +28,10 @@ function getMockFilms() {
 				.add(idx + 1, 'days')
 				.locale('ru'),
 			isWorkingDay: true,
-			films: [getMockFilm()],
+			films: Array.from(
+				{ length: Math.floor(Math.random() * 3) + 5 },
+				getMockFilm
+			),
 		})
 	);
 }
