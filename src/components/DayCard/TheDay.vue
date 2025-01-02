@@ -100,7 +100,10 @@
 	>
 		<div class="canvas__date" v-if="!$store.state.isEditing">
 			<h3 class="canvas__day-of-week--continue text-color-text-100">
-				{{ dayAndWeekday.weekday }}, продолжение
+				{{
+					dayAndWeekday.weekday.split('')[0].toUpperCase() +
+					dayAndWeekday.weekday.slice(1)
+				}}, продолжение
 			</h3>
 			<p class="canvas__numeric-date text-color-100"> </p>
 		</div>

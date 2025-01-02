@@ -396,9 +396,6 @@ h3 {
   font-weight: 700;
   line-height: 120%;
 }
-.canvas__day-of-week--continue::first-letter {
-  text-transform: uppercase;
-}
 .canvas__day-of-week-state {
   text-align: right;
 }
