@@ -282,7 +282,13 @@ export default defineComponent({
 		}
 
 		// Разделение дня на две части
-		function handleDayStiching() {}
+		function handleDayStiching() {
+			store.commit('setLineBreakIndex', {
+				dayIndex: props.dayIndex,
+				filmIndex: 0,
+				shouldReset: true,
+			});
+		}
 
 		return {
 			dayAndWeekday,

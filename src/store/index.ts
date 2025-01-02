@@ -191,6 +191,7 @@ export default createStore<State>({
 			payload: {
 				dayIndex: number;
 				filmIndex: number;
+				shouldReset?: boolean;
 			}
 		) {
 			let { dayIndex, filmIndex } = payload;
@@ -201,6 +202,11 @@ export default createStore<State>({
 				filmIndex >= 0 &&
 				filmIndex < state.schedule[dayIndex].films.length
 			) {
+				if (payload.shouldReset) {
+					state.schedule[dayIndex].lineBreakIndex = 0;
+					return;
+				}
+
 				filmIndex++;
 				state.schedule[dayIndex].lineBreakIndex = filmIndex;
 			}

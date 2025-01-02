@@ -25,7 +25,7 @@
 		</transition-group>
 
 		<div class="div">
-			{{ $store.state.schedule[0] }}
+			<!-- {{ $store.state.schedule[0] }} -->
 		</div>
 
 		<CanvasSocials />
