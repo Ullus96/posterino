@@ -2,91 +2,108 @@
 	<v-navigation-drawer
 		width="64"
 		location="right"
-		class="bg-secondary"
+		class="nav bg-secondary"
 		permanent
 	>
-		<v-list nav>
-			<v-list-item>
-				<v-btn
-					variant="text"
-					icon="mdi-pencil"
-					:color="
-						$store.state.isEditing ? 'color-primary-500' : 'color-contrast'
-					"
-					@click="$store.commit('toggleEditing')"
-					aria-label="Переключить режим редактирования"
-				>
-				</v-btn>
-				<v-tooltip activator="parent">Режим редактирования</v-tooltip>
-			</v-list-item>
-			<v-list-item>
-				<v-btn
-					variant="text"
-					icon="mdi-keyboard"
-					:color="
-						$store.state.modal.isHotkeysModalOpen
-							? 'color-primary-500'
-							: 'color-contrast'
-					"
-					aria-label="Переключить видимость меню горячих клавиш"
-					@click="
-						$store.commit('toggleModalVisibility', {
-							name: 'isHotkeysModalOpen',
-							closeAll: true,
-						})
-					"
-				>
-				</v-btn>
-				<v-tooltip activator="parent">Горячие клавиши</v-tooltip>
-			</v-list-item>
-			<v-list-item>
-				<v-btn
-					variant="text"
-					icon="mdi-download"
-					color="color-contrast"
-					aria-label="Скачать результат"
-					@click="handleScreenshotButtonClick()"
-				>
-				</v-btn>
-				<v-tooltip activator="parent">Скачать результат</v-tooltip>
-			</v-list-item>
-		</v-list>
+		<div class="nav__upper-part">
+			<v-list nav>
+				<v-list-item>
+					<v-btn
+						variant="text"
+						icon="mdi-pencil"
+						:color="
+							$store.state.isEditing ? 'color-primary-500' : 'color-contrast'
+						"
+						@click="$store.commit('toggleEditing')"
+						aria-label="Переключить режим редактирования"
+					>
+					</v-btn>
+					<v-tooltip activator="parent">Режим редактирования</v-tooltip>
+				</v-list-item>
+				<v-list-item>
+					<v-btn
+						variant="text"
+						icon="mdi-keyboard"
+						:color="
+							$store.state.modal.isHotkeysModalOpen
+								? 'color-primary-500'
+								: 'color-contrast'
+						"
+						aria-label="Переключить видимость меню горячих клавиш"
+						@click="
+							$store.commit('toggleModalVisibility', {
+								name: 'isHotkeysModalOpen',
+								closeAll: true,
+							})
+						"
+					>
+					</v-btn>
+					<v-tooltip activator="parent">Горячие клавиши</v-tooltip>
+				</v-list-item>
+				<v-list-item>
+					<v-btn
+						variant="text"
+						icon="mdi-download"
+						color="color-contrast"
+						aria-label="Скачать результат"
+						@click="handleScreenshotButtonClick()"
+					>
+					</v-btn>
+					<v-tooltip activator="parent">Скачать результат</v-tooltip>
+				</v-list-item>
+			</v-list>
 
-		<v-divider width="80%"></v-divider>
+			<v-divider width="80%"></v-divider>
 
-		<v-list nav>
-			<v-list-item>
-				<v-btn
-					variant="text"
-					icon="mdi-cog"
-					:color="
-						$store.state.modal.isSettingsModalOpen
-							? 'color-primary-500'
-							: 'color-contrast'
-					"
-					aria-label="Открыть настройки приложения"
-					@click="
-						$store.commit('toggleModalVisibility', {
-							name: 'isSettingsModalOpen',
-							closeAll: true,
-						})
-					"
-				>
-				</v-btn>
-				<v-tooltip activator="parent">Настройки</v-tooltip>
-			</v-list-item>
-			<v-list-item>
-				<v-btn
-					variant="text"
-					icon="mdi-eraser"
-					color="color-contrast"
-					aria-label="Очистить расписание"
-					@click="showClearingDialog = true"
-				>
-				</v-btn>
-				<v-tooltip activator="parent">Очистить расписание</v-tooltip>
-			</v-list-item>
-		</v-list>
+			<v-list nav>
+				<v-list-item>
+					<v-btn
+						variant="text"
+						icon="mdi-cog"
+						:color="
+							$store.state.modal.isSettingsModalOpen
+								? 'color-primary-500'
+								: 'color-contrast'
+						"
+						aria-label="Открыть настройки приложения"
+						@click="
+							$store.commit('toggleModalVisibility', {
+								name: 'isSettingsModalOpen',
+								closeAll: true,
+							})
+						"
+					>
+					</v-btn>
+					<v-tooltip activator="parent">Настройки</v-tooltip>
+				</v-list-item>
+				<v-list-item>
+					<v-btn
+						variant="text"
+						icon="mdi-eraser"
+						color="color-contrast"
+						aria-label="Очистить расписание"
+						@click="showClearingDialog = true"
+					>
+					</v-btn>
+					<v-tooltip activator="parent">Очистить расписание</v-tooltip>
+				</v-list-item>
+			</v-list>
+		</div>
+		<div class="nav__bottom_part">
+			<v-list nav>
+				<v-list-item>
+					<v-btn
+						variant="text"
+						icon="mdi-help-circle-outline"
+						:color="showTutorialDialog ? 'color-primary-500' : 'color-contrast'"
+						aria-label="Открыть настройки приложения"
+						@click="showTutorialDialog = true"
+					>
+					</v-btn>
+					<v-tooltip activator="parent">Обучение</v-tooltip>
+				</v-list-item>
+			</v-list>
+		</div>
 	</v-navigation-drawer>
 
 	<transition name="scale-to-left">
@@ -116,6 +133,10 @@
 			@closeScreenshotModal="showScreenshotDialog = false"
 		/>
 	</v-dialog>
+
+	<v-dialog v-model="showTutorialDialog" max-width="600">
+		<TutorialDialog @close="showTutorialDialog = false" />
+	</v-dialog>
 </template>
 
 <script lang="ts">
@@ -126,9 +147,15 @@ import OptionsSettings from './Options/settings/OptionsSettings.vue';
 import { setNewWeeklySchedule } from '@/utilities/setNewWeeklySchedule';
 import html2canvas from 'html2canvas';
 import ScreenshotModal from '@/components/Modals/screenshot/ScreenshotModal.vue';
+import TutorialDialog from './Modals/TutorialDialog.vue';
 
 export default defineComponent({
-	components: { OptionsHotkeys, OptionsSettings, ScreenshotModal },
+	components: {
+		OptionsHotkeys,
+		OptionsSettings,
+		ScreenshotModal,
+		TutorialDialog,
+	},
 	setup() {
 		const store = useStore();
 
@@ -191,6 +218,9 @@ export default defineComponent({
 			}
 		});
 
+		// Tutorial
+		const showTutorialDialog: Ref<boolean> = ref(false);
+
 		return {
 			isEditing,
 			showClearingDialog,
@@ -199,6 +229,7 @@ export default defineComponent({
 			saveScreenshot,
 			imageURL,
 			handleScreenshotButtonClick,
+			showTutorialDialog,
 		};
 	},
 });

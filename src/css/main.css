@@ -320,7 +320,7 @@ h3 {
   aspect-ratio: 3/2;
   background: #fff;
   background-size: cover;
-  margin: 60px auto;
+  margin: 44px auto 12px;
   padding: 32px 24px;
   display: flex;
   flex-direction: column;
@@ -817,6 +817,24 @@ h3 {
 }
 .screenshot__link {
   font-size: 18px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.nav .v-navigation-drawer__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.nav__upper-part {
+  flex: 1 1 auto;
+}
+.nav__bottom-part {
+  flex: 0 0 auto;
 }
 
 .content {
