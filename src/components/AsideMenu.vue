@@ -165,10 +165,14 @@ export default defineComponent({
 
 		function handleScreenshotButtonClick() {
 			showScreenshotDialog.value = true;
-			saveScreenshot();
+
+			// wait for the editing mode switch
+			setTimeout(() => {
+				saveScreenshot();
+			}, 0);
 		}
 
-		watch(showScreenshotDialog, (newValue, oldValue) => {
+		watch(showScreenshotDialog, (newValue) => {
 			const isEditing = store.state.isEditing;
 
 			if (isEditing && newValue) {
