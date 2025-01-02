@@ -168,9 +168,20 @@ export default defineComponent({
 			saveScreenshot();
 		}
 
-		watch(showScreenshotDialog, (newValue) => {
+		watch(showScreenshotDialog, (newValue, oldValue) => {
+			const isEditing = store.state.isEditing;
+
+			if (isEditing && newValue) {
+				store.commit('toggleEditing');
+			}
+
+			if (!newValue && !isEditing) {
+				store.commit('toggleEditing');
+			}
+
 			if (!newValue) {
 				setTimeout(() => {
+					URL.revokeObjectURL(imageURL.value);
 					imageURL.value = '';
 				}, 200);
 			}
