@@ -837,6 +837,32 @@ h3 {
   flex: 0 0 auto;
 }
 
+.tutorial__tab h3 {
+  margin-bottom: 0.8rem;
+}
+.tutorial__tab p {
+  margin-top: 0.4rem;
+}
+.tutorial__tab .grid-1-2 {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+.tutorial__tab ul,
+.tutorial__tab ol {
+  padding-left: 1.2rem;
+}
+.tutorial__tab ul li {
+  list-style: circle;
+}
+.tutorial__tab ol li {
+  list-style: decimal;
+}
+.tutorial__flex {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
 .content {
   display: flex;
   justify-content: center;

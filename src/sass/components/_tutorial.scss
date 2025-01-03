@@ -1,0 +1,35 @@
+.tutorial {
+	&__tab {
+		h3 {
+			margin-bottom: 0.8rem;
+		}
+
+		p {
+			margin-top: 0.4rem;
+		}
+
+		.grid-1-2 {
+			display: grid;
+			grid-template-columns: 1fr 2fr;
+		}
+
+		ul,
+		ol {
+			padding-left: 1.2rem;
+		}
+
+		ul li {
+			list-style: circle;
+		}
+
+		ol li {
+			list-style: decimal;
+		}
+	}
+
+	&__flex {
+		display: flex;
+		align-items: center;
+		gap: 0.8rem;
+	}
+}

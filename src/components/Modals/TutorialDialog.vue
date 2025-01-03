@@ -1,119 +1,181 @@
 <template>
 	<v-card max-width="auto" title="Функционал редактора">
 		<template v-slot:text>
-			<v-tabs v-model="tab" class="mt-1 mb-6" density="compact">
-				<v-tab value="base">Время</v-tab>
-				<v-tab value="timeblock">Время</v-tab>
+			<v-tabs v-model="tab" class="mt-1 mb-6" density="compact" center-active>
+				<v-tab value="base">Режим редактирования</v-tab>
+				<v-tab value="schedule">Сеансы</v-tab>
 				<v-tab value="linebreak">Перенос строки</v-tab>
+				<v-tab value="hotkeys">Горячие клавиши</v-tab>
 				<v-tab value="settings">Настройки</v-tab>
 				<v-tab value="auto-save">Сохранение</v-tab>
-				<v-tab value="hotkeys">Горячие клавиши</v-tab>
 			</v-tabs>
 
 			<v-tabs-window v-model="tab">
 				<!-- base -->
-				<v-tabs-window-item value="base">
-					<p>
-						Любые взаимодействия с расписанием происходят при активной кнопке
-						"Режим редактирования"
-					</p>
-					<p>По умолчанию, дата выставится на дату следующего дня.</p>
-					<p>
-						Чтобы изменить - необходимо выставить ее в правой-верхней части
-						карточки в формате ДД.ММ, день недели затем сменится автоматически.
-					</p>
-					<p>
-						Для добавление/удаления строк в конец списка существуют кнопки "+" и
-						"-".
-					</p>
-					<p>
-						Так же, справа имеется кнопка "Нет сеансов". Она изменяет содержимое
-						дня на фразу "В этот день сеансов нет". Для ее замены -
-						воспольузйтесь настройками.
-					</p>
-					<p>
-						Кнопка "-" по умолчанию удалит последнюю строку. Для удаления
-						конкретной строки - наведите на фильм, справа появится кнопка
-						"Удалить строку"
-					</p>
-
-					<p>
-						В редакторе имеется возможность ставить в одну запись фильма
-						несколько времен сеанса. Для ознакомления, переключите вкладку
-						обучения на "Время"
-					</p>
+				<v-tabs-window-item value="base" class="tutorial__tab">
+					<h3>Режим редактирования</h3>
+					<p>Все изменения делаются в режиме "Редактирования".</p>
+					<div class="tutorial__flex mt-4 mb-4">
+						<v-btn variant="flat" icon="mdi-pencil" color="color-secondary-200">
+						</v-btn>
+						<p>
+							Найдите кнопку на панели инструментов, чтобы включить этот режим.
+						</p>
+					</div>
+					<v-divider class="mb-4"></v-divider>
+					<h3>Дата</h3>
+					<div class="tutorial__flex mt-4">
+						<v-btn
+							variant="flat"
+							icon="mdi-calendar"
+							color="color-secondary-200"
+						>
+						</v-btn>
+						<p>
+							Дата автоматически выставляется на завтра, но вы можете поменять
+							её на панели инструментов, нажав на кнопку.
+						</p>
+					</div>
 				</v-tabs-window-item>
 				<!-- End of base -->
 
-				<!-- timeblock -->
-				<v-tabs-window-item value="timeblock">
-					<p>Время сеансов можно группировать в одной ячейке.</p>
+				<!-- schedule -->
+				<v-tabs-window-item value="schedule" class="tutorial__tab">
+					<h3>Сеансы</h3>
 					<p>
-						Для этого, в графе минут нажмите Enter, чтобы создать новую ячейку
-						времени.
+						Для добавления или удаления строк используйте кнопки "+" и "-",
+						расположенные справа-сверху карточки дня.<br />
 					</p>
 					<p>
-						Для удаления ячейки - нажмите Backspace в графе часов в
-						дополнительно созданной ячейке.
+						Кнопка "Нет сеансов" скрывает расписание и заменяет его текстом "В
+						этот день сеансов нет".<br />
+					</p>
+					<div class="tutorial__flex mt-4 mb-4">
+						<p>Внешний вид кнопок:</p>
+						<v-btn
+							icon="mdi-plus"
+							color="color-secondary-400"
+							density="compact"
+						>
+						</v-btn>
+						<v-btn
+							icon="mdi-minus"
+							color="color-secondary-400"
+							density="compact"
+						>
+						</v-btn>
+						<v-btn
+							icon="mdi-movie-off-outline"
+							color="color-secondary-400"
+							density="compact"
+						>
+						</v-btn>
+					</div>
+					<v-divider class="mb-4"></v-divider>
+					<h3>Больше сеансов в одной ячейке</h3>
+					<p>
+						Можно добавять более одного времени сеанса для конкретного фильма.
+					</p>
+					<p>
+						Для этого, в графе минут нажмите <b>Enter</b>, чтобы создать новую
+						ячейку времени.
+					</p>
+					<p>
+						Для удаления ячейки - нажмите <b>Backspace</b> (удалить) в графе
+						часов в дополнительно созданной ячейке.
 					</p>
 				</v-tabs-window-item>
-				<!-- End of timeblock -->
+				<!-- End of schedule -->
 
 				<!-- linebreak -->
-				<v-tabs-window-item value="linebreak">
+				<v-tabs-window-item value="linebreak" class="tutorial__tab">
+					<h3>Перенос строки</h3>
 					<p>
-						Если блок дня слишком длинный, он автоматически перенесется в новую
-						колонку
+						Карточки дня (как и весь контент) автоматически распределяются по
+						трём колонкам. Если день занимает больше высоты, где осталось места
+						в колонке, он переносится в следующую.
 					</p>
 					<p>
-						Чтобы создать "перенос", разбив блок на две части, наведите на
-						фильм, справа у него появится кнопка "Создать перенос строки".
-						Нажмите на нее, и перенос будет создан
+						В приложении имеется возможность разбить карточку дня на 2 части.
 					</p>
-					<p>
-						Для удаления переноса, у нового созданного блока будет кнопка
-						"соединить обратно", справа от дня недели
-					</p>
+					<v-divider class="mt-4 mb-4"></v-divider>
+
+					<h3>Ручной перенос</h3>
+					<p>Кнопка имеет следующий вид.</p>
+					<div class="tutorial__flex mt-4 mb-4">
+						<v-btn icon="mdi-format-page-break" color="color-primary-500">
+						</v-btn>
+						<ol>
+							<li>Наведите на фильм, нажмите кнопку "Перенос строки".</li>
+							<li>Список разделится на две части.</li>
+						</ol>
+					</div>
+					<v-divider class="mb-4"></v-divider>
+
+					<h3>Отмена переноса</h3>
+					<div class="tutorial__flex mt-4 mb-4">
+						<v-btn icon="mdi-undo" color="color-secondary-400"> </v-btn>
+						<p>Нажмите "Соединить обратно" справа от дня недели.</p>
+					</div>
 				</v-tabs-window-item>
 				<!-- End of linebreak -->
 
-				<!-- settings -->
-				<v-tabs-window-item value="settings">
-					<p>
-						Приложение можно настраивать под себя, изменяя разные настройки.
-					</p>
-					<p>
-						Можно изменять цену по умолчанию, текст отсутствия сеансов, разные
-						размеры шрифтов, а так же, текст с контактами.
-					</p>
-				</v-tabs-window-item>
-
-				<!-- auto-save -->
-				<v-tabs-window-item value="auto-save">
-					<p>
-						Приложение автоматически сохраняет прогресс раз в 15 секунд. Горячие
-						клавиши так же сохраняются
-					</p>
-				</v-tabs-window-item>
-
 				<!-- hotkeys -->
-				<v-tabs-window-item value="hotkeys">
-					<p>В панели навигации имеется кнопка "горячих клавиш"</p>
-					<p>
-						В ней можно указать данные в следующем формате: название фильма,
-						возрастное ограничение (число), возможность оплаты по Пушкинской
-						Карте (галочка), цена
-					</p>
+				<v-tabs-window-item value="hotkeys" class="tutorial__tab">
+					<h3>Горячие клавиши</h3>
+					<div class="tutorial__flex mt-4 mb-2">
+						<v-btn
+							variant="flat"
+							icon="mdi-keyboard"
+							color="color-secondary-200"
+						>
+						</v-btn>
+
+						<p>
+							Кнопка "Горячие клавиши" в панели навигации позволяет быстро
+							вводить следующие данные:
+						</p>
+					</div>
+					<ul>
+						<li>Название фильма</li>
+						<li>Возрастное ограничение</li>
+						<li>Оплата по Пушкинской карте</li>
+						<li>Цена</li>
+					</ul>
+					<v-divider class="mt-4 mb-4"></v-divider>
+					<h3>Применение:</h3>
 					<p>
 						Для применения, необходимо выделить текстовое поле, куда
 						устанавливается название фильма, и нажать соответсвующую горячую
 						клавишу (например, Alt+1)
 					</p>
 				</v-tabs-window-item>
+
+				<!-- settings -->
+				<v-tabs-window-item value="settings" class="tutorial__tab">
+					<h3>Настройки</h3>
+					<p>
+						Вы можете изменить цену, текст "Нет сеансов", размеры шрифтов и
+						контакты
+					</p>
+					<div class="tutorial__flex mt-4 mb-4">
+						<v-btn variant="flat" icon="mdi-cog" color="color-secondary-200">
+						</v-btn>
+						<p>
+							Для этого, найдите соответсвующую кнопку на панели инструментов.
+						</p>
+					</div>
+				</v-tabs-window-item>
+
+				<!-- auto-save -->
+				<v-tabs-window-item value="auto-save" class="tutorial__tab">
+					<h3>Сохранение</h3>
+					<p>Сохранение происходит автоматически каждые 15 секунд.</p>
+					<p>Все данные сохраняются, в том числе, горячие клавиши.</p>
+				</v-tabs-window-item>
 			</v-tabs-window>
 		</template>
 		<template v-slot:actions>
-			<!-- <v-btn text="Удалить" @click="clearSchedule"></v-btn> -->
 			<v-btn text="Назад" @click="$emit('close')"></v-btn>
 		</template>
 	</v-card>
