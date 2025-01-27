@@ -14,9 +14,9 @@
 				<v-tab value="socials">Соцсети</v-tab>
 			</v-tabs>
 
-			<v-tabs-window v-model="tab">
+			<v-tabs-window v-model="tab" class="mb-6">
 				<!-- Cards -->
-				<v-tabs-window-item value="cards" class="mt-6">
+				<v-tabs-window-item value="cards" class="pt-6">
 					<v-text-field
 						class="pr-2"
 						label="Цена по умолчанию"
@@ -68,7 +68,7 @@
 				<!-- End of cards -->
 
 				<!-- UI -->
-				<v-tabs-window-item value="ui" class="mt-6">
+				<v-tabs-window-item value="ui" class="pt-6">
 					<v-text-field
 						class="pr-2"
 						label="Размер шрифта дня недели"
@@ -176,7 +176,7 @@
 				<!-- End of ui -->
 
 				<!-- Socials -->
-				<v-tabs-window-item value="socials" class="mt-6">
+				<v-tabs-window-item value="socials" class="pt-6">
 					<p class="opt__secondary-text pr-2">
 						Если какое-то из полей нужно скрыть, задай ему пустое значение и
 						примени.

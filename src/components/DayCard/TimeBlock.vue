@@ -7,7 +7,13 @@
 				:key="time.uuid"
 			>
 				<span class="canvas__hours">{{ formatDateString(time.hours) }}</span>
-				<span v-if="time.hours && time.minutes">:</span>
+				<span
+					v-if="
+						(time.hours || time.hours == 0) &&
+						(time.minutes || time.minutes == 0)
+					"
+					>:</span
+				>
 				<span class="canvas__minutes">{{
 					formatDateString(time.minutes)
 				}}</span>
@@ -77,7 +83,7 @@ export default defineComponent({
 		const timeSlotRefs: Ref<Array<HTMLDivElement | null>> = ref([]);
 
 		function formatDateString(data: number | undefined): string {
-			if (data) {
+			if (data || data === 0) {
 				return String(data).padStart(2, '0');
 			} else {
 				return '';
