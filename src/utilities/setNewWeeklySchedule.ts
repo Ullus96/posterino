@@ -28,6 +28,7 @@ function getMockFilms() {
 				.add(idx + 1, 'days')
 				.locale('ru'),
 			isWorkingDay: true,
+			isDayVisible: true,
 			lineBreakIndex: 0,
 			films: Array.from(
 				{ length: Math.floor(Math.random() * 3) + 5 },
@@ -45,6 +46,7 @@ function getEmptyFilms(store: Store<State>) {
 				.add(idx + 1, 'days')
 				.locale('ru'),
 			isWorkingDay: true,
+			isDayVisible: true,
 			lineBreakIndex: 0,
 			films: [getEmptyFilm(store)],
 		})

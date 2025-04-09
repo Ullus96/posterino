@@ -1,0 +1,17 @@
+.hidden-days {
+	&__list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	&__item {
+		display: flex;
+		gap: 0.8rem;
+		align-items: center;
+	}
+
+	&__weekday {
+		text-transform: capitalize;
+	}
+}

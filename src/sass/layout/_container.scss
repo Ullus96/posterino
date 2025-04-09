@@ -2,3 +2,15 @@
 	display: flex;
 	justify-content: center;
 }
+
+.container {
+	width: 1236px;
+	max-width: 100%;
+	margin: 0 auto;
+
+	@include desktop-small {
+		& {
+			padding: 0 1.2rem;
+		}
+	}
+}

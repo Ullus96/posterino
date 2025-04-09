@@ -863,9 +863,34 @@ h3 {
   gap: 0.8rem;
 }
 
+.hidden-days__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.hidden-days__item {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+.hidden-days__weekday {
+  text-transform: capitalize;
+}
+
 .content {
   display: flex;
   justify-content: center;
+}
+
+.container {
+  width: 1236px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+@media (max-width: 1123px) {
+  .container {
+    padding: 0 1.2rem;
+  }
 }
 
 .slide-out {

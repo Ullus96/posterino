@@ -1,6 +1,10 @@
 <template>
 	<!-- single day -->
-	<div class="canvas__day" :class="{ editable: $store.state.isEditing }">
+	<div
+		class="canvas__day"
+		:class="{ editable: $store.state.isEditing }"
+		v-if="isDayVisible"
+	>
 		<div class="canvas__date" v-if="!$store.state.isEditing">
 			<h2 class="canvas__day-of-week text-color-secondary-200">
 				{{ dayAndWeekday.weekday }}
@@ -75,10 +79,10 @@
 								</div>
 								<div class="canvas__header-btn-wrapper slide-out__action-item">
 									<v-btn
-										icon="mdi-movie-off-outline"
+										icon="mdi-close-outline"
 										color="color-secondary-400"
 										density="compact"
-										@click="switchWorkingDay"
+										@click="switchDayVisibility"
 									>
 									</v-btn>
 									<v-tooltip location="top" activator="parent"
@@ -294,6 +298,18 @@ export default defineComponent({
 			store.commit('switchWorkingDay', props.dayIndex);
 		}
 
+		const isDayVisible = computed(() => {
+			if (store.state.schedule && store.state.schedule[props.dayIndex]) {
+				return store.state.schedule[props.dayIndex].isDayVisible;
+			} else {
+				return true;
+			}
+		});
+
+		function switchDayVisibility() {
+			store.commit('switchDayVisibility', props.dayIndex);
+		}
+
 		function handleFilmCreation() {
 			store.commit('createFilm', {
 				dayIndex: props.dayIndex,
@@ -332,6 +348,8 @@ export default defineComponent({
 			currentDayFilmsData,
 			isWorkingDay,
 			switchWorkingDay,
+			isDayVisible,
+			switchDayVisibility,
 			dayIndex,
 			handleFilmCreation,
 			handleFilmRemoving,

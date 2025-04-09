@@ -110,6 +110,13 @@ export default createStore<State>({
 			}
 		},
 
+		switchDayVisibility(state, index: number) {
+			if (state.schedule && index >= 0 && index < state.schedule.length) {
+				state.schedule[index].isDayVisible =
+					!state.schedule[index].isDayVisible;
+			}
+		},
+
 		toggleEditing(state) {
 			state.isEditing = !state.isEditing;
 		},
