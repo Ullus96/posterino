@@ -1,5 +1,5 @@
 <template>
-	<div class="slide-out__actions-wrapper" ref="wrapper">
+	<div class="slide-out__actions-wrapper elevation-3" ref="wrapper">
 		<slot />
 	</div>
 </template>

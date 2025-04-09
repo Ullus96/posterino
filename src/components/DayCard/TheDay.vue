@@ -53,30 +53,40 @@
 								>Удалить строку</v-tooltip
 							>
 						</div>
-						<div class="canvas__header-btn-wrapper">
-							<v-btn
-								icon="mdi-movie-off-outline"
-								color="color-secondary-400"
-								density="compact"
-								@click="switchWorkingDay"
-							>
-							</v-btn>
-							<v-tooltip location="top" activator="parent"
-								>Переключение "Нет сеансов"</v-tooltip
-							>
-						</div>
-						<div class="canvas__header-btn-wrapper">
-							<v-btn
-								icon="mdi-movie-off-outline"
-								color="color-secondary-400"
-								density="compact"
-								@click="switchWorkingDay"
-							>
-							</v-btn>
-							<v-tooltip location="top" activator="parent"
-								>Скрыть день</v-tooltip
-							>
-						</div>
+						<SlideOut>
+							<!-- Target element -->
+							<div class="slide-out__target">
+								<v-icon icon="mdi-dots-vertical"></v-icon>
+							</div>
+
+							<!-- Actions slot -->
+							<template #actions>
+								<div class="canvas__header-btn-wrapper slide-out__action-item">
+									<v-btn
+										icon="mdi-movie-off-outline"
+										color="color-secondary-400"
+										density="compact"
+										@click="switchWorkingDay"
+									>
+									</v-btn>
+									<v-tooltip location="top" activator="parent"
+										>Переключение "Нет сеансов"</v-tooltip
+									>
+								</div>
+								<div class="canvas__header-btn-wrapper slide-out__action-item">
+									<v-btn
+										icon="mdi-movie-off-outline"
+										color="color-secondary-400"
+										density="compact"
+										@click="switchWorkingDay"
+									>
+									</v-btn>
+									<v-tooltip location="top" activator="parent"
+										>Скрыть день</v-tooltip
+									>
+								</div>
+							</template>
+						</SlideOut>
 					</div>
 				</div>
 			</div>
@@ -192,6 +202,7 @@ import { useStore } from '@/store/useStore';
 import moment from 'moment';
 import { getEmptyFilm, getMockFilm } from '@/utilities/createFilm';
 import { generateUUID } from '@/utilities/UUID';
+import SlideOut from '@/components/slide-out/SlideOut.vue';
 
 export default defineComponent({
 	props: {
@@ -209,7 +220,7 @@ export default defineComponent({
 		},
 	},
 	emits: ['addEmptyBlock'],
-	components: { TheFilm, NoFilms },
+	components: { TheFilm, NoFilms, SlideOut },
 	setup(props, context) {
 		const store = useStore();
 		const { date } = props.dayData;
