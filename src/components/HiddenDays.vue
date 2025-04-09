@@ -28,25 +28,25 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, Ref, ref, watch } from 'vue';
 import { useStore } from '@/store/useStore';
 import { IDaySchedule } from '@/types/films';
 
 export default defineComponent({
 	setup() {
 		const store = useStore();
-		const days = store.state.schedule;
+		const days = computed(() => store.state.schedule);
 
-		const isSomethingHidden = computed(() => {
-			return days?.some((day) => !day.isDayVisible);
+		let isSomethingHidden = computed(() => {
+			return days.value?.some((day) => !day.isDayVisible);
 		});
 
-		const hiddenDays = computed(() => {
-			return days?.filter((el) => !el.isDayVisible);
+		let hiddenDays = computed(() => {
+			return days.value?.filter((day) => !day.isDayVisible);
 		});
 
 		function findDayIndex(day: IDaySchedule) {
-			const index = days?.findIndex((_day) => _day.date === day.date);
+			const index = days.value?.findIndex((_day) => _day.date === day.date);
 			console.log(index);
 			return index;
 		}

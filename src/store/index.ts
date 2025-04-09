@@ -45,6 +45,7 @@ export interface State {
 		};
 	};
 	isEditing: boolean;
+	isLoadingFinished: boolean;
 	modal: IModalState;
 	hotkeys: Array<IHotkey>;
 }
@@ -73,6 +74,7 @@ export default createStore<State>({
 			},
 		},
 		isEditing: true,
+		isLoadingFinished: false,
 		modal: {
 			isHotkeysModalOpen: false,
 			isSettingsModalOpen: false,
@@ -83,7 +85,10 @@ export default createStore<State>({
 	},
 	mutations: {
 		setSchedule(state, payload: Array<IDaySchedule>) {
-			state.schedule = payload;
+			state.schedule = payload.map((day) => ({
+				...day,
+				date: moment(day.date).locale('ru'),
+			}));
 		},
 
 		setHotkeys(state, payload: Array<IHotkey>) {
@@ -119,6 +124,10 @@ export default createStore<State>({
 
 		toggleEditing(state) {
 			state.isEditing = !state.isEditing;
+		},
+
+		toggleLoadingStatus(state) {
+			state.isLoadingFinished = !state.isLoadingFinished;
 		},
 
 		updateFilm(
