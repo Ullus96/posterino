@@ -6,6 +6,7 @@
 :root {
   --ui-weekday-font-size: 28px;
   --ui-weekday-font-size-sub: 20px;
+  --ui-film-time-font-weight: 300;
   --ui-film-font-size: 18px;
   --ui-film-title-padding: 2px;
   --ui-films-gap: 20px;
@@ -471,7 +472,7 @@ h3 {
 .canvas__time {
   display: flex;
   color: rgb(18, 18, 18);
-  font-weight: 300;
+  font-weight: var(--ui-film-time-font-weight, 300);
 }
 .canvas__time.editable input {
   flex: 1 1 auto;

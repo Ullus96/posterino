@@ -194,7 +194,7 @@
 	&__time {
 		display: flex;
 		color: $color-text-100;
-		font-weight: 300;
+		font-weight: var(--ui-film-time-font-weight, 300);
 
 		&.editable {
 			input {

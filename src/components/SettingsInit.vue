@@ -67,6 +67,12 @@ export default defineComponent({
 						`${value}px`
 					);
 					break;
+				case 'ui.filmTimeFontWeight':
+					document.documentElement.style.setProperty(
+						'--ui-film-time-font-weight',
+						`${value}`
+					);
+					break;
 				case 'ui.filmFontSize':
 					document.documentElement.style.setProperty(
 						'--ui-film-font-size',

@@ -95,7 +95,6 @@
 							updateCSSVariable('ui.weekdayFontSize');
 						"
 					></v-text-field>
-					<!-- Отсюда -->
 
 					<v-text-field
 						class="pr-2 mt-6"
@@ -135,9 +134,15 @@
 						density="compact"
 						persistent-hint
 						hint="Тонкий - 300; Обычный - 400; Жирный - 700 (по ум. 300)"
-						v-model="weekdayFontSize"
+						v-model="filmTimeFontWeight"
+						@update:modelValue="
+							updateStoreSettings({
+								field: 'ui.filmTimeFontWeight',
+								value: filmTimeFontWeight,
+							});
+							updateCSSVariable('ui.filmTimeFontWeight');
+						"
 					></v-select>
-					<!-- Сюда -->
 
 					<v-text-field
 						class="pr-2 mt-6"
@@ -427,6 +432,9 @@ export default defineComponent({
 		);
 
 		// UI - Films
+		const filmTimeFontWeight: Ref<number> = ref(
+			store.state.settings.ui.filmTimeFontWeight
+		);
 		const filmFontSize: Ref<number> = ref(store.state.settings.ui.filmFontSize);
 		const filmTitlePadding: Ref<number> = ref(
 			store.state.settings.ui.filmTitlePadding
@@ -454,6 +462,7 @@ export default defineComponent({
 			'card.defaultPrice',
 			'ui.weekdayFontSize',
 			'ui.weekdaySubFontSize',
+			'ui.filmTimeFontWeight',
 			'ui.filmFontSize',
 			'ui.filmTitlePadding',
 			'ui.filmsGap',
@@ -488,6 +497,12 @@ export default defineComponent({
 						`${weekdaySubFontSize.value}px`
 					);
 					break;
+				case 'ui.filmTimeFontWeight':
+					document.documentElement.style.setProperty(
+						'--ui-film-time-font-weight',
+						`${filmTimeFontWeight.value}`
+					);
+					break;
 				case 'ui.filmFontSize':
 					document.documentElement.style.setProperty(
 						'--ui-film-font-size',
@@ -518,6 +533,7 @@ export default defineComponent({
 
 			{ field: 'ui.weekdayFontSize', value: 28 },
 			{ field: 'ui.weekdaySubFontSize', value: 20 },
+			{ field: 'ui.filmTimeFontWeight', value: 300 },
 			{ field: 'ui.filmFontSize', value: 18 },
 			{ field: 'ui.filmTitlePadding', value: 2 },
 			{ field: 'ui.filmsGap', value: 20 },
@@ -539,6 +555,7 @@ export default defineComponent({
 				if (setting.field.split('.')[0] === 'ui') {
 					weekdayFontSize.value = store.state.settings.ui.weekdayFontSize;
 					weekdaySubFontSize.value = store.state.settings.ui.weekdaySubFontSize;
+					filmTimeFontWeight.value = store.state.settings.ui.filmTimeFontWeight;
 					filmFontSize.value = store.state.settings.ui.filmFontSize;
 					filmTitlePadding.value = store.state.settings.ui.filmTitlePadding;
 					filmsGap.value = store.state.settings.ui.filmsGap;
@@ -569,6 +586,7 @@ export default defineComponent({
 			noSessionsText,
 			weekdayFontSize,
 			weekdaySubFontSize,
+			filmTimeFontWeight,
 			filmFontSize,
 			filmTitlePadding,
 			filmsGap,
