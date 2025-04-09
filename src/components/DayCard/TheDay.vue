@@ -26,42 +26,57 @@
 					placeholder="дд.мм"
 					v-model="dayAndWeekday.day"
 				/>
-				<div class="canvas__icon">
-					<div class="canvas__header-btn-wrapper">
-						<v-btn
-							icon="mdi-plus"
-							color="color-secondary-400"
-							density="compact"
-							@click="handleFilmCreation"
-						>
-						</v-btn>
-						<v-tooltip location="top" activator="parent"
-							>Добавить строку</v-tooltip
-						>
-					</div>
-					<div class="canvas__header-btn-wrapper">
-						<v-btn
-							icon="mdi-minus"
-							color="color-secondary-400"
-							density="compact"
-							@click="handleFilmRemoving"
-						>
-						</v-btn>
-						<v-tooltip location="top" activator="parent"
-							>Удалить строку</v-tooltip
-						>
-					</div>
-					<div class="canvas__header-btn-wrapper">
-						<v-btn
-							icon="mdi-movie-off-outline"
-							color="color-secondary-400"
-							density="compact"
-							@click="switchWorkingDay"
-						>
-						</v-btn>
-						<v-tooltip location="top" activator="parent"
-							>Переключение "Нет сеансов"</v-tooltip
-						>
+
+				<div class="canvas__icons-wrapper">
+					<div class="canvas__icon">
+						<div class="canvas__header-btn-wrapper">
+							<v-btn
+								icon="mdi-plus"
+								color="color-secondary-400"
+								density="compact"
+								@click="handleFilmCreation"
+							>
+							</v-btn>
+							<v-tooltip location="top" activator="parent"
+								>Добавить строку</v-tooltip
+							>
+						</div>
+						<div class="canvas__header-btn-wrapper">
+							<v-btn
+								icon="mdi-minus"
+								color="color-secondary-400"
+								density="compact"
+								@click="handleFilmRemoving"
+							>
+							</v-btn>
+							<v-tooltip location="top" activator="parent"
+								>Удалить строку</v-tooltip
+							>
+						</div>
+						<div class="canvas__header-btn-wrapper">
+							<v-btn
+								icon="mdi-movie-off-outline"
+								color="color-secondary-400"
+								density="compact"
+								@click="switchWorkingDay"
+							>
+							</v-btn>
+							<v-tooltip location="top" activator="parent"
+								>Переключение "Нет сеансов"</v-tooltip
+							>
+						</div>
+						<div class="canvas__header-btn-wrapper">
+							<v-btn
+								icon="mdi-movie-off-outline"
+								color="color-secondary-400"
+								density="compact"
+								@click="switchWorkingDay"
+							>
+							</v-btn>
+							<v-tooltip location="top" activator="parent"
+								>Скрыть день</v-tooltip
+							>
+						</div>
 					</div>
 				</div>
 			</div>
