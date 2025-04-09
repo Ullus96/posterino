@@ -74,7 +74,7 @@
 									>
 									</v-btn>
 									<v-tooltip location="top" activator="parent"
-										>Переключение "Нет сеансов"</v-tooltip
+										>Скрыть день (отобразить сообщение)</v-tooltip
 									>
 								</div>
 								<div class="canvas__header-btn-wrapper slide-out__action-item">
@@ -86,7 +86,7 @@
 									>
 									</v-btn>
 									<v-tooltip location="top" activator="parent"
-										>Скрыть день</v-tooltip
+										>Скрыть день (полностью)</v-tooltip
 									>
 								</div>
 							</template>
