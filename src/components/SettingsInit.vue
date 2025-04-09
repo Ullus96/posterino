@@ -61,6 +61,12 @@ export default defineComponent({
 						`${value}px`
 					);
 					break;
+				case 'ui.weekdaySubFontSize':
+					document.documentElement.style.setProperty(
+						'--ui-weekday-font-size-sub',
+						`${value}px`
+					);
+					break;
 				case 'ui.filmFontSize':
 					document.documentElement.style.setProperty(
 						'--ui-film-font-size',

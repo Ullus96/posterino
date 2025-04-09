@@ -30,9 +30,16 @@ export interface State {
 			noSessionsText: string;
 		};
 		ui: {
+			// UI - Days of week
 			weekdayFontSize: number;
+			weekdaySubFontSize: number;
+
+			// UI - Films
+			filmTimeFontWeight: number;
 			filmFontSize: number;
 			filmsGap: number;
+
+			// UI - Cards
 			filmTitlePadding: number;
 		};
 		socials: {
@@ -55,13 +62,20 @@ export default createStore<State>({
 		schedule: null,
 		settings: {
 			card: {
-				defaultPrice: 150,
+				defaultPrice: 170,
 				noSessionsText: 'В этот день сеансов нет',
 			},
 			ui: {
+				// UI - Days of week
 				weekdayFontSize: 28,
+				weekdaySubFontSize: 20,
+
+				// UI - Films
+				filmTimeFontWeight: 300,
 				filmFontSize: 18,
 				filmTitlePadding: 2,
+
+				// UI - Cards
 				filmsGap: 20,
 			},
 			socials: {

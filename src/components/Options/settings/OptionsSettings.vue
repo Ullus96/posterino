@@ -69,8 +69,9 @@
 
 				<!-- UI -->
 				<v-tabs-window-item value="ui" class="pt-6">
+					<h4>Дни недели</h4>
 					<v-text-field
-						class="pr-2"
+						class="pr-2 mt-6"
 						label="Размер шрифта дня недели"
 						variant="outlined"
 						density="compact"
@@ -94,6 +95,49 @@
 							updateCSSVariable('ui.weekdayFontSize');
 						"
 					></v-text-field>
+					<!-- Отсюда -->
+
+					<v-text-field
+						class="pr-2 mt-6"
+						label="Размер шрифта дня недели (разделенная)"
+						variant="outlined"
+						density="compact"
+						type="number"
+						persistent-hint
+						hint="Заголовок, видный при разделении дня на 2 части (по ум. 20)"
+						v-model="weekdaySubFontSize"
+						:append-icon="'mdi-check-bold'"
+						@click:append="
+							updateStoreSettings({
+								field: 'ui.weekdaySubFontSize',
+								value: weekdaySubFontSize,
+							});
+							updateCSSVariable('ui.weekdaySubFontSize');
+						"
+						@keyup.enter="
+							updateStoreSettings({
+								field: 'ui.weekdaySubFontSize',
+								value: weekdaySubFontSize,
+							});
+							updateCSSVariable('ui.weekdaySubFontSize');
+						"
+					></v-text-field>
+
+					<v-divider class="mb-2 mt-4 mr-10"></v-divider>
+					<h4>Фильмы</h4>
+
+					<v-select
+						class="pr-12 mt-6"
+						label="Толщина шрифта времени сеанса"
+						:items="[300, 400, 700]"
+						type="number"
+						variant="outlined"
+						density="compact"
+						persistent-hint
+						hint="Тонкий - 300; Обычный - 400; Жирный - 700 (по ум. 300)"
+						v-model="weekdayFontSize"
+					></v-select>
+					<!-- Сюда -->
 
 					<v-text-field
 						class="pr-2 mt-6"
@@ -147,6 +191,9 @@
 						"
 					></v-text-field>
 
+					<v-divider class="mb-2 mt-4 mr-10"></v-divider>
+					<h4>Карточки</h4>
+
 					<v-text-field
 						class="pr-2 mt-6"
 						label="Расстояние между карточками"
@@ -178,8 +225,8 @@
 				<!-- Socials -->
 				<v-tabs-window-item value="socials" class="pt-6">
 					<p class="opt__secondary-text pr-2">
-						Если какое-то из полей нужно скрыть, задай ему пустое значение и
-						примени.
+						Если какое-то из полей нужно скрыть, задайте ему пустое значение и
+						примените.
 					</p>
 					<v-divider class="mt-4"></v-divider>
 
@@ -191,7 +238,7 @@
 						density="compact"
 						type="text"
 						persistent-hint
-						hint="Телефон (сделай пустым, чтобы скрыть)"
+						hint="Телефон (сделайте пустым, чтобы скрыть)"
 						v-model="tel"
 						:append-icon="'mdi-check-bold'"
 						@click:append="
@@ -215,7 +262,7 @@
 						density="compact"
 						type="text"
 						persistent-hint
-						hint="Адрес (сделай пустым, чтобы скрыть)"
+						hint="Адрес (сделайте пустым, чтобы скрыть)"
 						v-model="address"
 						:append-icon="'mdi-check-bold'"
 						@click:append="
@@ -240,7 +287,7 @@
 						density="compact"
 						type="text"
 						persistent-hint
-						hint="Ссылка на группу ВК (сделай пустым, чтобы скрыть)"
+						hint="Ссылка на группу ВК (сделайте пустым, чтобы скрыть)"
 						v-model="vk"
 						:append-icon="'mdi-check-bold'"
 						@click:append="
@@ -265,7 +312,7 @@
 						density="compact"
 						type="text"
 						persistent-hint
-						hint="Ссылка на группу ОК (сделай пустым, чтобы скрыть)"
+						hint="Ссылка на группу ОК (сделайте пустым, чтобы скрыть)"
 						v-model="ok"
 						:append-icon="'mdi-check-bold'"
 						@click:append="
@@ -289,7 +336,7 @@
 						density="compact"
 						type="text"
 						persistent-hint
-						hint="Ссылка на сайт, целиком (сделай пустым, чтобы скрыть)"
+						hint="Ссылка на сайт, целиком (сделайте пустым, чтобы скрыть)"
 						v-model="link"
 						:append-icon="'mdi-check-bold'"
 						@click:append="
@@ -362,7 +409,8 @@ export default defineComponent({
 		const tab = ref();
 		const store = useStore();
 
-		// Refs
+		// ==== Refs ====
+		// Cards
 		const defaultPrice: Ref<number> = ref(
 			store.state.settings.card.defaultPrice
 		);
@@ -370,15 +418,24 @@ export default defineComponent({
 			store.state.settings.card.noSessionsText
 		);
 
+		// UI - Days of week
 		const weekdayFontSize: Ref<number> = ref(
 			store.state.settings.ui.weekdayFontSize
 		);
+		const weekdaySubFontSize: Ref<number> = ref(
+			store.state.settings.ui.weekdaySubFontSize
+		);
+
+		// UI - Films
 		const filmFontSize: Ref<number> = ref(store.state.settings.ui.filmFontSize);
 		const filmTitlePadding: Ref<number> = ref(
 			store.state.settings.ui.filmTitlePadding
 		);
+
+		// UI - Cards
 		const filmsGap: Ref<number> = ref(store.state.settings.ui.filmsGap);
 
+		// Socials
 		const tel: Ref<string> = ref(store.state.settings.socials.tel);
 		const address: Ref<string> = ref(store.state.settings.socials.address);
 		const ok: Ref<string> = ref(store.state.settings.socials.ok);
@@ -391,10 +448,12 @@ export default defineComponent({
 				value: newVal,
 			});
 		});
+		// ======
 
 		const shouldBeNumber: Partial<SettingsPath>[] = [
 			'card.defaultPrice',
 			'ui.weekdayFontSize',
+			'ui.weekdaySubFontSize',
 			'ui.filmFontSize',
 			'ui.filmTitlePadding',
 			'ui.filmsGap',
@@ -423,6 +482,12 @@ export default defineComponent({
 						`${weekdayFontSize.value}px`
 					);
 					break;
+				case 'ui.weekdaySubFontSize':
+					document.documentElement.style.setProperty(
+						'--ui-weekday-font-size-sub',
+						`${weekdaySubFontSize.value}px`
+					);
+					break;
 				case 'ui.filmFontSize':
 					document.documentElement.style.setProperty(
 						'--ui-film-font-size',
@@ -448,10 +513,11 @@ export default defineComponent({
 		const resetDialog: Ref<boolean> = ref(false);
 
 		const standartSettings: SettingsPayload[] = [
-			{ field: 'card.defaultPrice', value: 150 },
+			{ field: 'card.defaultPrice', value: 170 },
 			{ field: 'card.noSessionsText', value: 'В этот день сеансов нет' },
 
 			{ field: 'ui.weekdayFontSize', value: 28 },
+			{ field: 'ui.weekdaySubFontSize', value: 20 },
 			{ field: 'ui.filmFontSize', value: 18 },
 			{ field: 'ui.filmTitlePadding', value: 2 },
 			{ field: 'ui.filmsGap', value: 20 },
@@ -472,6 +538,7 @@ export default defineComponent({
 
 				if (setting.field.split('.')[0] === 'ui') {
 					weekdayFontSize.value = store.state.settings.ui.weekdayFontSize;
+					weekdaySubFontSize.value = store.state.settings.ui.weekdaySubFontSize;
 					filmFontSize.value = store.state.settings.ui.filmFontSize;
 					filmTitlePadding.value = store.state.settings.ui.filmTitlePadding;
 					filmsGap.value = store.state.settings.ui.filmsGap;
@@ -501,6 +568,7 @@ export default defineComponent({
 			defaultPrice,
 			noSessionsText,
 			weekdayFontSize,
+			weekdaySubFontSize,
 			filmFontSize,
 			filmTitlePadding,
 			filmsGap,

@@ -5,6 +5,7 @@
 
 :root {
   --ui-weekday-font-size: 28px;
+  --ui-weekday-font-size-sub: 20px;
   --ui-film-font-size: 18px;
   --ui-film-title-padding: 2px;
   --ui-films-gap: 20px;
@@ -392,7 +393,7 @@ h3 {
   align-items: flex-end;
 }
 .canvas__day-of-week--continue {
-  font-size: 20px;
+  font-size: var(--ui-weekday-font-size-sub, 20px);
   font-weight: 700;
   line-height: 120%;
 }
