@@ -88,6 +88,27 @@
 					<v-tooltip activator="parent">Очистить расписание</v-tooltip>
 				</v-list-item>
 			</v-list>
+
+			<v-divider width="80%"></v-divider>
+			<v-list nav>
+				<v-list-item>
+					<v-btn
+						variant="text"
+						icon="mdi-table-arrow-up"
+						:color="
+							showScheduleUploaderDialog
+								? 'color-primary-500'
+								: 'color-contrast'
+						"
+						aria-label="Загрузить расписание из .csv файла"
+						@click="showScheduleUploaderDialog = !showScheduleUploaderDialog"
+					>
+					</v-btn>
+					<v-tooltip activator="parent"
+						>Загрузить расписание из .csv файла</v-tooltip
+					>
+				</v-list-item>
+			</v-list>
 		</div>
 		<div class="nav__bottom_part">
 			<v-list nav>
@@ -137,6 +158,12 @@
 	<v-dialog v-model="showTutorialDialog" max-width="600">
 		<TutorialDialog @close="showTutorialDialog = false" />
 	</v-dialog>
+
+	<v-dialog v-model="showScheduleUploaderDialog" max-width="600">
+		<csv-schedule-uploader
+			@close="showScheduleUploaderDialog = false"
+		></csv-schedule-uploader>
+	</v-dialog>
 </template>
 
 <script lang="ts">
@@ -148,6 +175,7 @@ import { setNewWeeklySchedule } from '@/utilities/setNewWeeklySchedule';
 import html2canvas from 'html2canvas';
 import ScreenshotModal from '@/components/Modals/screenshot/ScreenshotModal.vue';
 import TutorialDialog from './Modals/TutorialDialog.vue';
+import CsvScheduleUploader from './CsvScheduleUploader.vue';
 
 export default defineComponent({
 	components: {
@@ -155,6 +183,7 @@ export default defineComponent({
 		OptionsSettings,
 		ScreenshotModal,
 		TutorialDialog,
+		CsvScheduleUploader,
 	},
 	setup() {
 		const store = useStore();
@@ -221,6 +250,8 @@ export default defineComponent({
 		// Tutorial
 		const showTutorialDialog: Ref<boolean> = ref(false);
 
+		const showScheduleUploaderDialog: Ref<boolean> = ref(false);
+
 		return {
 			isEditing,
 			showClearingDialog,
@@ -230,6 +261,7 @@ export default defineComponent({
 			imageURL,
 			handleScreenshotButtonClick,
 			showTutorialDialog,
+			showScheduleUploaderDialog,
 		};
 	},
 });

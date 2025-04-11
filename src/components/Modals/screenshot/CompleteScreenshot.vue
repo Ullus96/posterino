@@ -7,7 +7,7 @@
 				variant="elevated"
 				size="x-large"
 				prepend-icon="mdi-download"
-				color="color-primary-700"
+				color="color-secondary-400"
 				:href="imageURL"
 				target="_blank"
 				:download="'schedule-' + new Date().toISOString().slice(0, 10) + '.png'"
