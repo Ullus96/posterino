@@ -1,0 +1,11 @@
+.schedule {
+	&__text-desc {
+		color: $color-text-400;
+		font-size: $ui-font-size-m;
+	}
+
+	&__test-text {
+		background-color: rgba($color-text-900, 0.3);
+		font-family: 'Courier New', Courier, monospace;
+	}
+}

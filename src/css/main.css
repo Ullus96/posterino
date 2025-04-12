@@ -879,6 +879,15 @@ h3 {
   text-transform: capitalize;
 }
 
+.schedule__text-desc {
+  color: rgb(57, 57, 57);
+  font-size: 16px;
+}
+.schedule__test-text {
+  background-color: rgba(165, 165, 165, 0.3);
+  font-family: "Courier New", Courier, monospace;
+}
+
 .content {
   display: flex;
   justify-content: center;
