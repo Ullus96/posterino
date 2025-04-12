@@ -88,14 +88,60 @@
 							hide-details
 							:density="'compact'"
 						></v-checkbox>
-
-						<button @click="confirm" class="px-4 py-2 mt-4">
-							подтвердить загрузку
-						</button>
 					</template>
 
 					<template v-slot:item.4>
-						<v-card title="Step Четыре" flat>...</v-card>
+						<h4>Сгруппировать время сеансов по фильму?</h4>
+						<p class="schedule__text-desc mt-2">
+							Вариант <b>"Оставить"</b>, каждый сеанс будет иметь отдельную
+							строчку.
+						</p>
+						<v-table class="mt-2">
+							<tbody>
+								<tr>
+									<td>10:10</td>
+									<td>Фильм "А"</td>
+								</tr>
+								<tr>
+									<td>12:40</td>
+									<td>Фильм "Б"</td>
+								</tr>
+								<tr>
+									<td>15:55</td>
+									<td>Фильм "А"</td>
+								</tr>
+							</tbody>
+						</v-table>
+
+						<p class="schedule__text-desc mt-4">
+							Вариант <b>"Сгруппировать"</b>, время разных сеансов будет
+							сгруппировано по фильму.
+						</p>
+						<v-table class="mt-2">
+							<tbody>
+								<tr>
+									<td>10:10<br />15:55</td>
+									<td>Фильм "А"</td>
+								</tr>
+								<tr>
+									<td>12:40</td>
+									<td>Фильм "Б"</td>
+								</tr>
+							</tbody>
+						</v-table>
+
+						<div class="d-flex ga-4 justify-center mt-6">
+							<v-btn
+								:variant="'flat'"
+								@click="confirm(false)"
+								text="Оставить"
+							/>
+							<v-btn
+								:variant="'flat'"
+								@click="confirm(true)"
+								text="Сгруппировать"
+							/>
+						</div>
 					</template>
 
 					<template v-slot:actions>
@@ -107,10 +153,15 @@
 								text="← Назад"
 							/>
 							<v-btn
+								v-show="step < 4"
 								:variant="'flat'"
 								:disabled="!isStepValid"
 								@click="step++"
-								:text="step + 1 == 5 ? `Завершить` : `Шаг ${step + 1} →`"
+								:text="
+									step + 1 == 5
+										? `Выберите один из вариантов`
+										: `Шаг ${step + 1} →`
+								"
 								color="color-secondary-400"
 							/>
 						</div>
@@ -137,13 +188,12 @@ import { generateUUID } from '@/utilities/UUID';
 import { useStore } from '@/store/useStore';
 import { IDaySchedule, ISingleFilm, ITimeSlot } from '@/types/films';
 import { computed } from 'vue';
-import { direction } from 'html2canvas/dist/types/css/property-descriptors/direction';
 
 export default defineComponent({
 	components: {},
 	props: {},
 	emits: ['close'],
-	setup() {
+	setup(props, context) {
 		const step: Ref<number> = ref(1);
 
 		const store = useStore();
@@ -351,7 +401,7 @@ export default defineComponent({
 			schedule.value.sort((a, b) => a.date.diff(b.date));
 		}
 
-		const confirm = () => {
+		function confirm(shouldGroup: boolean) {
 			const withPCard = schedule.value.map((day) => ({
 				...day,
 				films: day.films.map((film) => ({
@@ -360,16 +410,47 @@ export default defineComponent({
 				})),
 			}));
 
-			console.log(withPCard);
+			store.commit(
+				'setSchedule',
+				shouldGroup ? groupByFilm(withPCard) : withPCard
+			);
+			context.emit('close');
+		}
 
-			store.commit('setSchedule', withPCard);
-		};
+		function groupByFilm(schedule: IDaySchedule[]): IDaySchedule[] {
+			return schedule.map((day) => {
+				const filmMap: Record<string, ISingleFilm> = {};
+
+				day.films.forEach((film) => {
+					if (!filmMap[film.title]) {
+						filmMap[film.title] = {
+							...film,
+							timeSlots: [...film.timeSlots],
+						};
+					} else {
+						filmMap[film.title].timeSlots.push(...film.timeSlots);
+					}
+				});
+
+				const groupedFilms = Object.values(filmMap).map((film) => ({
+					...film,
+					timeSlots: film.timeSlots.sort((a, b) => {
+						const timeA = (a.hours || 0) * 60 + (a.minutes || 0);
+						const timeB = (b.hours || 0) * 60 + (b.minutes || 0);
+						return timeA - timeB;
+					}),
+				}));
+
+				return {
+					...day,
+					films: groupedFilms,
+				};
+			});
+		}
 
 		const isStepValid = computed(() => {
 			if (step.value === 1) return fileUploaded.value;
-			// if (step.value === 2) return true;
-			// if (step.value === 3) return false;
-			// if (step.value === 4) return false;
+			if (step.value === 4) return false;
 
 			return true;
 		});
